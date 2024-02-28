@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { ReactNode, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import './App.css';
+import Home from './Components/Home';
+import TeamMember from './Components/Team_Member';
+import NavBar from './Components/NavBarComponent/NavBar';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <BackgroundSetter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home title='Team THOR' />} />
+          <Route path="/team-members" element={<TeamMember />} />
+        </Routes>
+      </BackgroundSetter>
+    </Router>
   );
+};
+
+type BackgroundSetterProps = {
+  children: ReactNode;
 }
+
+const BackgroundSetter: React.FC<BackgroundSetterProps> = ({ children }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Change the background based on the route
+    switch (location.pathname) {
+      case '/':
+        document.body.style.backgroundColor = '#f0f0f0'; // Example background color for home
+        break;
+      case '/team-members':
+        document.body.style.backgroundColor = '#b0c4de'; // Example background color for team-members
+        break;
+      // Add more cases for other paths as needed
+      default:
+        document.body.style.backgroundColor = 'white'; // Default background color
+    }
+  }, [location]);
+
+  return <>{children}</>;
+};
 
 export default App;
