@@ -38,7 +38,7 @@ const BackgroundSetter: React.FC<BackgroundSetterProps> = ({ children }) => {
         break;
       // Add more cases for other paths as needed
       default:
-        document.body.style.backgroundColor = 'white'; // Default background color
+        document.body.style.backgroundColor = 'black'; // Default background color
     }
   }, [location]);
 
