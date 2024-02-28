@@ -6,7 +6,7 @@ import TeamMember from './Components/Team_Member';
 import NavBar from './Components/NavBarComponent/NavBar';
 import './App.css';
 
-const App = () => {
+function App() {
   return (
     <Router>
       <BackgroundSetter>
@@ -18,13 +18,13 @@ const App = () => {
       </BackgroundSetter>
     </Router>
   );
-};
+}
 
 type BackgroundSetterProps = {
   children: ReactNode;
 }
 
-const BackgroundSetter: React.FC<BackgroundSetterProps> = ({ children }) => {
+function BackgroundSetter({ children }: BackgroundSetterProps) {
   const location = useLocation();
 
   useEffect(() => {
@@ -43,6 +43,6 @@ const BackgroundSetter: React.FC<BackgroundSetterProps> = ({ children }) => {
   }, [location]);
 
   return <>{children}</>;
-};
+}
 
 export default App;
