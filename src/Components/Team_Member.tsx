@@ -16,7 +16,7 @@ const TeamMember = () => {
 
     return (
         <div>
-            <h4> Patrick, Lupe, Cristian, Ultra</h4>
+            <h4> Patrick, Lupe, Cristian, Mandee, Ultra</h4>
             <h4 key={patient?.id}>{patient?.f_name} {patient?.l_name} {patient?.address}</h4>
         </div>
     );
