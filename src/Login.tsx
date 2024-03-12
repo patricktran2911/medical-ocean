@@ -27,9 +27,12 @@ function Login() {
   };
 
   return (
-    <div className='login'>
-       {!LoginSucess? (
-        <form onSubmit ={Submit}>
+    <div>
+      {LoginSucess ? (
+        <App/>
+      ): (
+        <div className='login'>
+          <form onSubmit ={Submit}>
         <div className='loginBox'>
           <div className='loginHeader'> Login </div>
           <div className='input'>
@@ -41,8 +44,7 @@ function Login() {
           </div>
         </div>
       </form>
-      ) : (
-        <App/>  
+        </div>
       )}
     </div>
   );
