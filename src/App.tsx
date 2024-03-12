@@ -8,15 +8,17 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <BackgroundSetter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home title='Team THOR' />} />
-          <Route path="/team-members" element={<TeamMember />} />
+    <div className='router'>
+      <Router>
+       <BackgroundSetter>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home title='Team THOR' />} />
+            <Route path="/team-members" element={<TeamMember />} />
         </Routes>
-      </BackgroundSetter>
-    </Router>
+        </BackgroundSetter>
+      </Router>
+    </div>
   );
 }
 
