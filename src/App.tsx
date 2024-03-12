@@ -11,11 +11,13 @@ function App() {
     <div className='router'>
       <Router>
        <BackgroundSetter>
+        <div>
           <NavBar />
           <Routes>
             <Route path="/" element={<Home title='Team THOR' />} />
             <Route path="/team-members" element={<TeamMember />} />
         </Routes>
+        </div>
         </BackgroundSetter>
       </Router>
     </div>
