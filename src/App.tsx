@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import './App.css';
 import Home from './Components/Home';
 import TeamMember from './Components/Team_Member';
+import Dashboard from './Components/Dashboard';
+import Medicines from './Components/Medicines';
+import Doctors from './Components/Doctors';
 import NavBar from './Components/NavBarComponent/NavBar';
 import './App.css';
 
@@ -14,6 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home title='Team THOR' />} />
           <Route path="/team-members" element={<TeamMember />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Medicines" element={<Medicines />} />
+          <Route path="/Doctors" element={<Doctors />} />
         </Routes>
       </BackgroundSetter>
     </Router>
@@ -36,6 +42,15 @@ function BackgroundSetter({ children }: BackgroundSetterProps) {
       case '/team-members':
         document.body.style.backgroundColor = '#b0c4de'; // Example background color for team-members
         break;
+      case '/Dashboard':
+        document.body.style.backgroundColor = '#dc143c'; // Example background color for Dashboard
+        break;
+      case '/Medicines':
+          document.body.style.backgroundColor = '#c8a2c8'; // Example background color for Dashboard
+          break;
+      case '/Doctors':
+          document.body.style.backgroundColor = '#89cff0'; // Example background color for Dashboard
+          break;
       // Add more cases for other paths as needed
       default:
         document.body.style.backgroundColor = 'black'; // Default background color
