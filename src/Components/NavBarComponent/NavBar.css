@@ -1,7 +1,24 @@
 .navbar {
     display: flex;
+    float: left;
     justify-content: left;
     gap: 20px;
+    background-color:#242526;
+}
+a {
+    color: white;
+    padding: 14px 16px;
+}
+a:link {
+    text-decoration: none;
+}
+  
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    background-color: black;
+}
 }
 
 .homeButton {
