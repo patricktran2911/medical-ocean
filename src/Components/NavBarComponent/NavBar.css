@@ -19,3 +19,14 @@ a:visited {
 a:hover {
     background-color: black;
 }
+}
+
+.homeButton {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    box-sizing: content-box;
+    box-shadow: inset;
+}
+
+.homeButton:hover {
+    color: red;
+}
