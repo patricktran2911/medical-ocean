@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Patient, getPatient } from '../api/PatientAPI';
+import { Patient, getAllPatients } from '../api/PatientAPI';
+import { Stack } from '@mui/material';
 
 const TeamMember = () => {
-    const [patient, setPatient] = useState<Patient>(); 
+    const [patients, setPatient] = useState<Patient[]>([]); 
 
     useEffect(() => {
         fetchPatients();
     }, []); 
 
     const fetchPatients = async () => {
-        await getPatient(1)
-            .then(patient => setPatient(patient))
+        await getAllPatients()
+            .then(patients => setPatient(patients))
             .catch(error => console.error('Fail', error));
     };
 
     return (
-        <div>
+        <Stack direction={ 'column' } spacing={2}>
             <h4> Patrick, Lupe, Cristian, Mandee, Ultra</h4>
-            <h4 key={patient?.id}>{patient?.f_name} {patient?.l_name} {patient?.address}</h4>
-        </div>
+            {patients.map(patient => (
+                <h4 key={patient?.id}>{patient?.f_name} {patient?.l_name} {patient?.address}
+                 
+                 </h4>
+            ))}
+        </Stack>
     );
 };
 
