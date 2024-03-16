@@ -19,9 +19,9 @@ const TeamMember = () => {
         <Stack direction={ 'column' } spacing={2}>
             <h4> Patrick, Lupe, Cristian, Mandee, Ultra</h4>
             {patients.map(patient => (
-                <h4 key={patient?.id}>{patient?.f_name} {patient?.l_name} {patient?.address}
-                 
-                 </h4>
+                <div key={patient?.id}>
+                    <h4>{patient?.f_name} {patient?.l_name} {patient?.address}</h4>
+                </div>
             ))}
         </Stack>
     );
