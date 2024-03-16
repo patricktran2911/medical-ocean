@@ -21,6 +21,11 @@ const TeamMember = () => {
             {patients.map(patient => (
                 <div key={patient?.id}>
                     <h4>{patient?.f_name} {patient?.l_name} {patient?.address}</h4>
+                    <ul>
+                        { Array.isArray(patient.emergency_contact) && patient.emergency_contact?.map(contact => (
+                        <li key= {contact.id}>{contact.f_name} {contact.l_name}</li>
+                    ))}
+                    </ul>
                 </div>
             ))}
         </Stack>

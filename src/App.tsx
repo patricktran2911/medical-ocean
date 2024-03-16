@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
+import { Stack } from '@mui/system';
 import Home from './Components/Home';
 import TeamMember from './Components/Team_Member';
 import Dashboard from './Components/Dashboard';
@@ -14,7 +15,7 @@ function App() {
     <div className='router'>
       <Router>
        <BackgroundSetter>
-        <div>
+        <Stack direction={'column'}>
           <NavBar />
           <Routes>
             <Route path="/" element={<Home title='Team THOR' />} />
@@ -23,7 +24,7 @@ function App() {
             <Route path="/Medicines" element={<Medicines />} />
             <Route path="/Doctors" element={<Doctors />} />
         </Routes>
-        </div>
+        </Stack>
         </BackgroundSetter>
       </Router>
     </div>
