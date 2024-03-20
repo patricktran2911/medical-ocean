@@ -30,10 +30,12 @@ function Login() {
 
   return (
     <div>
-      <img className='image' src={logo} alt="logo"/>
+
       {LoginSucess ? (
         <App/>
       ): (
+        <div>
+          <img className='image' src={logo} alt="logo"/>
         <div className='login'>
           <form onSubmit ={Submit}>
         <div className='loginBox'>
@@ -48,6 +50,7 @@ function Login() {
           <div className ='LoginError'>{ErrorMsg}</div>
         </div>
       </form>
+        </div>
         </div>
       )}
     </div>
