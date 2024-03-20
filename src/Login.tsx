@@ -24,7 +24,7 @@ function Login() {
       setLogin(true);
       setErrorMsg('');
     } else {
-      setErrorMsg('Incorrecct username or passoword. Try again.'); // later use to send an error msg for worng username or password
+      setErrorMsg('Incorrect username or password. Try again.'); // later use to send an error msg for worng username or password
     }
   };
 
