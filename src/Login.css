@@ -5,7 +5,7 @@
   }
   
   .loginBox{
-    margin-top: 8rem;
+    margin-top: 2rem;
     width: 350px;
     height: 400px;
     background-color: rgb(60, 30, 197);
@@ -45,4 +45,17 @@
     width: 50%;
     height: 40px;
     border-radius: 6px;
+  }
+
+  .LoginError{
+    padding: 20px;
+    color: red;
+  }
+
+  .image{
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: auto;
+
   }
