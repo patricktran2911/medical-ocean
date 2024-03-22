@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseInterface";
+import { formatDateToString } from "../Utility/dateUtility";
 import { QueryData } from "@supabase/supabase-js";
 
 export interface Patient {
@@ -14,111 +15,49 @@ export interface Patient {
     rh_factor: string | null;
     address: string;
     phone_number: string;
-    emergency_contact: EmergencyContact | any | null;
-    medical_histor?: MedicalHistory[] | null;
-    insurance: Insurance | any | null;
-    family_medical_history: FamilyMedicalHistory[] | null;
-    preferred_language: string;
-    occupation: string;
-    ethnicity: string;
-}
-
-export interface EmergencyContact {
-    id: number;
-    f_name: string;
-    l_name: string;
-    relationship: string;
-    phone_number: string;
-}
-
-export interface FamilyMedicalHistory {
-    id: number;
-    medical_conditions?: string;
-    allergies?: string;
-}
-
-export interface Insurance {
-    id: number;
-    insurance_provider: string;
-    policy_number: string;
-    group_number: string;
-    primary_care_physician?: string;
-}
-
-export interface MedicalHistory {
-    id: number;
-    medical_conditions?: string;
-    allergies?: string;
-    current_medications?: string;
+    preferred_language: string | null;
+    occupation: string | null;
+    ethnicity: string | null;
 }
 
 export async function getAllPatients(): Promise<Patient[]> {
     const {data, error} = await supabase
     .from("patient")
     .select(`
-        id,
-        f_name,
-        m_name,
-        l_name,
-        dob,
-        marital_status,
-        blood_group,
-        rh_factor,
-        address,
-        phone_number,
-        emergency_contact: emergency_contact_id ( id, f_name, l_name, relationship, phone_number ),
-        gender,
-        email,
-        preferred_language,
-        occupation,
-        ethnicity,
-        family_medical_history: family_medical_history_id ( id, medical_conditions, allergies ),
-        insurance: insurance_id (id, insurance_provider, policy_number, group_number, primary_care_physician),
-        medical_history: medical_history_id ( id, medical_conditions, allergies, current_medications)
+        *
     `);
     
     if (error) {
         throw new Error(error.message);
     }
 
-    return data
+    return data.map(patient => {
+        var result = patient
+        result.dob = formatDateToString(patient.dob)
+        return result
+    })
 }
 
 export async function getPatient(id: number): Promise<Patient> {
     const {data, error} = await supabase
     .from("patient")
     .select(`
-        id,
-        f_name,
-        m_name,
-        l_name,
-        dob,
-        marital_status,
-        blood_group,
-        rh_factor,
-        address,
-        phone_number,
-        emergency_contact: emergency_contact_id ( id, f_name, l_name, relationship, phone_number ),
-        gender,
-        email,
-        preferred_language,
-        occupation,
-        ethnicity,
-        family_medical_history: family_medical_history_id ( id, medical_conditions, allergies ),
-        insurance: insurance_id (id, insurance_provider, policy_number, group_number, primary_care_physician),
-        medical_history: medical_history_id ( id, medical_conditions, allergies, current_medications)
+        *
     `)
     .eq("id", id)
     .single();
     if (error) throw new Error(error.message);
+    if (data && data.dob) {
+        data.dob = formatDateToString(data.dob);
+    }
     return data;
 }
 
-export async function createPatient(f_name: string, l_name: string, dob: string, address: string, phone_number: string, m_name?: string): Promise<Patient> {
+export async function createPatient(f_name: string, l_name: string, dob: string, address: string, phone_number: string, gender: string, m_name?: string): Promise<Patient> {
     const {data, error} = await supabase
     .from("patient")
     .insert([
-        {f_name, m_name, l_name, dob, address, phone_number}
+        {f_name, m_name, l_name, dob, address, phone_number, gender}
     ])
     .select()
     .single();
@@ -126,3 +65,5 @@ export async function createPatient(f_name: string, l_name: string, dob: string,
     if (error) throw new Error(error.message);
     return data as Patient
 }
+
+// export async function updatePatient(patient_id: number)

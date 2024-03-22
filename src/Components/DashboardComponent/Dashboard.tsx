@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Stack } from "@mui/material";
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
-import { Patient, getAllPatients, getPatient } from "../../api/PatientAPI";
+import { Patient, getAllPatients } from "../../api/PatientAPI";
 import { Appointment, getAllAppointments } from "../../api/AppointmentAPI";
 
 function Dashboard() {
@@ -9,14 +9,9 @@ function Dashboard() {
     const [appointments, setAppointments] = useState<Appointment[]>([]);
 
     useEffect(() => {
-        fetchPatient();
-        fetchAppointments();
+        fetchPatient()
+        fetchAppointments()
     }, []);
-
-    useEffect(() => {
-        console.log("Patients:", patients);
-        console.log("Appointments:", appointments);
-    }, [patients, appointments]);
 
     const fetchPatient = async () => {
         const patients = await getAllPatients();
