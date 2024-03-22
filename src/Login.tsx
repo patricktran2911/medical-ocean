@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import App from "./App";
-import logo from "./images/logo.png";
+import logo from "./Assets/Images/logo.png"
 
 function Login() {
   const [Username, setUsername] = useState('');
