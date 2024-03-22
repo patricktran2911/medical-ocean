@@ -1,9 +1,11 @@
 .navbar {
     display: flex;
-    float: left;
-    justify-content: left;
+    float: right;
+    justify-content: right;
     gap: 20px;
     background-color:#242526;
+    padding: 0;
+    box-sizing: border-box;
 }
 a {
     color: white;
