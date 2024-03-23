@@ -8,7 +8,7 @@ export interface FamilyMedicalHistory {
     patient: Patient
 }
 
-export async function getEmergencyContact(patient_id: number): Promise<FamilyMedicalHistory[]> {
+export async function getFamilyMedicalContact(patient_id: number): Promise<FamilyMedicalHistory[]> {
     const {data, error} = await supabase
     .from("family_medical_history")
     .select(`

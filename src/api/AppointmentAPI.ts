@@ -1,13 +1,12 @@
 import { supabase } from "./supabaseInterface";
 import { Patient, getPatient } from "./PatientAPI";
-import { formatDateToString } from "../Utility/dateUtility";
 
 export interface Appointment {
     id: number;
     patient: Patient;
     title: string;
     description: string | null;
-    time: string;
+    time: Date;
 }
 
 export async function getAllAppointments(): Promise<Appointment[]> {
@@ -26,7 +25,7 @@ export async function getAllAppointments(): Promise<Appointment[]> {
             patient: appointment.patient,
             title: appointment.title,
             description: appointment.description,
-            time: formatDateToString(appointment.time)
+            time: appointment.time
         }
     })
 }

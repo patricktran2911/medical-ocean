@@ -10,7 +10,7 @@ export interface Insurance {
     patient: Patient
 }
 
-export async function getEmergencyContact(patient_id: number): Promise<Insurance[]> {
+export async function getInsurance(patient_id: number): Promise<Insurance[]> {
     const {data, error} = await supabase
     .from("insurance")
     .select(`

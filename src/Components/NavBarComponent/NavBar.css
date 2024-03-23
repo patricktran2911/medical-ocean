@@ -1,7 +1,5 @@
 .navbar {
-    display: flex;
-    float: right;
-    justify-content: right;
+    justify-content: center;
     gap: 20px;
     background-color:#242526;
     padding: 0;
