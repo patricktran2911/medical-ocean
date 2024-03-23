@@ -21,7 +21,6 @@ export function PatientTable() {
             <Table>
                 <TableHead className="tableHeader">
                     <TableRow>
-                        <TableCell style={{color: 'whitesmoke'}}>ID</TableCell>
                         <TableCell style={{color: 'whitesmoke'}}>Patient Name</TableCell>
                         <TableCell style={{color: 'whitesmoke'}}>Date Of Birth</TableCell>
                         <TableCell style={{color: 'whitesmoke'}}>Phone Number</TableCell>
@@ -31,7 +30,6 @@ export function PatientTable() {
                 <TableBody>
                     {patients.map((patient) => (
                         <TableRow key={patient.id}>
-                            <TableCell>{patient.id}</TableCell>
                             <TableCell>{`${patient.f_name} ${patient.l_name}`}</TableCell>
                             <TableCell>{patient.dob}</TableCell>
                             <TableCell>{patient.phone_number}</TableCell>
