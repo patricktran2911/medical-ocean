@@ -30,9 +30,14 @@ export async function getAllPatients(): Promise<Patient[]> {
         throw new Error(error.message);
     }
 
+    console.log("data", data)
+
     return data.map(patient => {
         var result = patient
-        result.dob = formatDateToString(patient.dob)
+        const dateOfBirth = new Date(patient.dob)
+
+        result.dob = dateOfBirth.toLocaleDateString();
+        console.log("dob", result.dob)
         return result
     })
 }
@@ -47,7 +52,9 @@ export async function getPatient(id: number): Promise<Patient> {
     .single();
     if (error) throw new Error(error.message);
     if (data && data.dob) {
-        data.dob = formatDateToString(data.dob);
+        const dateOfBirth = new Date(data.dob)
+
+        data.dob = dateOfBirth.toLocaleDateString();
     }
     return data
 }

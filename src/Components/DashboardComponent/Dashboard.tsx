@@ -7,6 +7,7 @@ import "./Dashboard.css"
 function Dashboard() {
     return (
     <Stack 
+    justifyContent={"stretch"}
     direction={"row"} 
     spacing={2} 
     paddingTop={2} 

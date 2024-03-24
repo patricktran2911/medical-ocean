@@ -14,7 +14,7 @@ const TableContainerStyle = styled(TableContainer) (({theme}) => ({
     width: '100%',
     height: '100%',
     background: 'white',
-    borderRadius: '8px'
+    borderRadius: '8px',
 }))
 
 const TableHeadStyle = styled(TableHead)({
