@@ -1,7 +1,7 @@
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
 import { Patient, getAllPatients } from "../../../api/PatientAPI";
 import { useState, useEffect } from "react";
-import './PatientTable.css'
+import {styled} from "@mui/material"
 
 export function PatientTable() {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -16,17 +16,34 @@ export function PatientTable() {
         setPatients(patients);
     };
 
+    const TableCellCustom = styled(TableCell)({
+        color: 'whitesmoke',
+        ":hover": {
+            color: 'blue'
+        }
+    })
+    const TableContainerStyle = styled(TableContainer) (({theme}) => ({
+        width: '100%',
+        height: '100%',
+        background: 'white',
+        borderRadius: '8px'
+    }))
+
+    const TableHeadStyle = styled(TableHead)({
+        background: 'black'
+    })
+
     return (
-        <TableContainer className="pTable" component={Paper}>
+        <TableContainerStyle>
             <Table>
-                <TableHead className="tableHeader">
+                <TableHeadStyle >
                     <TableRow>
-                        <TableCell style={{color: 'whitesmoke'}}>Patient Name</TableCell>
-                        <TableCell style={{color: 'whitesmoke'}}>Date Of Birth</TableCell>
-                        <TableCell style={{color: 'whitesmoke'}}>Phone Number</TableCell>
-                        <TableCell style={{color: 'whitesmoke'}}>Email</TableCell>
+                        <TableCellCustom>Patient Name</TableCellCustom>
+                        <TableCellCustom>Date Of Birth</TableCellCustom>
+                        <TableCellCustom>Phone Number</TableCellCustom>
+                        <TableCellCustom>Email</TableCellCustom>
                     </TableRow>
-                </TableHead>
+                </TableHeadStyle>
                 <TableBody>
                     {patients.map((patient) => (
                         <TableRow key={patient.id}>
@@ -38,6 +55,6 @@ export function PatientTable() {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainerStyle>
     )
 }

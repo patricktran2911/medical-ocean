@@ -2,6 +2,7 @@ import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { PatientTable } from "./PatientTable/PatientDashboardTable";
 import { AppointmentTable } from "./AppointmentTable/AppointmentDashboardTable";
+import "./Dashboard.css"
 
 function Dashboard() {
     return (
@@ -16,8 +17,9 @@ function Dashboard() {
         alignItems={'center'} 
         spacing={'8px'} 
         width={'100%'}
+        height={'100%'}
         >
-            <Typography> Patients </Typography>
+            <Typography className="title"> Patients </Typography>
             <PatientTable/>
         </Stack>
 
@@ -26,8 +28,9 @@ function Dashboard() {
         alignItems={'center'} 
         spacing={'8px'} 
         width={'100%'}
+        height={'100%'}
         >
-            <Typography> Appointments </Typography>
+            <Typography className="title"> Appointments </Typography>
             <AppointmentTable/>
         </Stack>
 

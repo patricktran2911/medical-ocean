@@ -6,7 +6,7 @@ export interface Appointment {
     patient: Patient;
     title: string;
     description: string | null;
-    time: Date;
+    time: string;
 }
 
 export async function getAllAppointments(): Promise<Appointment[]> {

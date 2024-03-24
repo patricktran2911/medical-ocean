@@ -1,7 +1,25 @@
 import { Appointment, getAllAppointments } from "../../../api/AppointmentAPI";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useState, useEffect } from "react";
+import {styled} from '@mui/material'
 import "./AppointmentTable.css"
+
+const TableCellCustom = styled(TableCell)({
+    color: 'whitesmoke',
+    ":hover": {
+        color: 'blue'
+    }
+})
+const TableContainerStyle = styled(TableContainer) (({theme}) => ({
+    width: '100%',
+    height: '100%',
+    background: 'white',
+    borderRadius: '8px'
+}))
+
+const TableHeadStyle = styled(TableHead)({
+    background: 'black'
+})
 
 export function AppointmentTable() {
     const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -23,15 +41,15 @@ export function AppointmentTable() {
     };
 
     return (
-        <TableContainer className="aTable" component={Paper}>
+        <TableContainerStyle>
             <Table>
-                <TableHead className="aTableHeader">
+                <TableHeadStyle>
                     <TableRow>
-                        <TableCell className="smallTableHeaderCell">Title</TableCell>
-                        <TableCell className="smallTableHeaderCell">Time</TableCell>
-                        <TableCell className="smallTableHeaderCell">Description</TableCell>
+                        <TableCellCustom>Title</TableCellCustom>
+                        <TableCellCustom>Time</TableCellCustom>
+                        <TableCellCustom>Description</TableCellCustom>
                     </TableRow>
-                </TableHead>
+                </TableHeadStyle>
                 <TableBody>
                     {appointments.map((appointment) => {
                         const appointmentDate = new Date(appointment.time)
@@ -44,27 +62,6 @@ export function AppointmentTable() {
                     )})}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainerStyle>
     )
 }
-
-{/* <Grid className="aTable" container spacing={8}>
-            {appointments.map(appointment => {
-                const appointmentDate = new Date(appointment.time)
-            return (
-            <Grid key={appointment.id}>
-                <Paper elevation={1}>
-                    <Typography variant="h6" align="center">
-                        {appointment.title}
-                    </Typography>
-                    <Typography variant="body1" align="center">
-                        Date: {appointmentDate.toLocaleDateString()}
-                    </Typography>
-                    <Typography variant="body2" align="center">
-                        Time {appointmentDate.toLocaleTimeString()}
-                    </Typography>
-                </Paper>
-            </Grid>
-            )
-        })}
-        </Grid> */}

@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
-import { Stack } from '@mui/system';
+import { Stack } from '@mui/material';
 import Home from './Components/Home';
 import TeamMember from './Components/Team_Member';
 import Dashboard from './Components/DashboardComponent/Dashboard';
@@ -42,7 +42,7 @@ function BackgroundSetter({ children }: BackgroundSetterProps) {
     // Change the background based on the route
     switch (location.pathname) {
       default:
-        document.body.style.backgroundColor = 'whitesmoke'; // Default background color
+        document.body.style.backgroundColor = ''; // Default background color
     }
   }, [location]);
 
