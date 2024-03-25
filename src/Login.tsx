@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import App from "./App";
 import logo from "./Assets/Images/appLogo.png"
-import { TextField } from '@mui/material';
+import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 
 function Login() {
   const [Username, setUsername] = useState('');
@@ -30,7 +30,49 @@ function Login() {
   };
 
   return (
-    <div>
+    <Container maxWidth="xs" className={'login'}>
+    {!LoginSucess ? (
+      <div>
+        <img className={'image'} src={logo} alt="logo" />
+        <div className={'loginBox'}>
+          <Typography variant="h4" className={'loginHeader'}>
+            Login
+          </Typography>
+          <form onSubmit={Submit} className={'input'}>
+            <TextField
+              className={'username'}
+              variant="outlined"
+              label="Username"
+              placeholder="Enter Username"
+              name='user'
+              onChange={usernameChange}
+            />
+            <TextField
+              className={'password'}
+              variant="outlined"
+              label="Password"
+              placeholder="Enter password"
+              type="password"
+              onChange={passwordChange}
+              fullWidth
+            />
+            <Button type="submit" variant="contained" color="primary" className={'enter'}>
+              Login
+            </Button>
+          </form>
+          {ErrorMsg && <Typography variant="body1" className={'LoginError'}>{ErrorMsg}</Typography>}
+        </div>
+      </div>
+    ) : (
+      <App /> 
+    )}
+  </Container>
+);
+}
+
+export default Login;
+/* 
+ <div>
       {LoginSucess ? (
         <App/>
       ): (
@@ -55,6 +97,5 @@ function Login() {
       )}
     </div>
   );
-}
+*/
 
-export default Login;
