@@ -30,8 +30,11 @@ function Login() {
   };
 
   return (
+    <div>
+      {LoginSucess ? (
+        <App/>
+        ): (
     <Container maxWidth="xs" className={'login'}>
-    {!LoginSucess ? (
       <div>
         <img className={'image'} src={logo} alt="logo" />
         <div className={'loginBox'}>
@@ -41,7 +44,6 @@ function Login() {
           <form onSubmit={Submit} className={'input'}>
             <TextField
               className={'username'}
-              variant="outlined"
               label="Username"
               placeholder="Enter Username"
               name='user'
@@ -49,25 +51,22 @@ function Login() {
             />
             <TextField
               className={'password'}
-              variant="outlined"
               label="Password"
               placeholder="Enter password"
               type="password"
               onChange={passwordChange}
-              fullWidth
             />
             <Button type="submit" variant="contained" color="primary" className={'enter'}>
-              Login
+              SIGN IN
             </Button>
           </form>
           {ErrorMsg && <Typography variant="body1" className={'LoginError'}>{ErrorMsg}</Typography>}
         </div>
       </div>
-    ) : (
-      <App /> 
+    </Container>
     )}
-  </Container>
-);
+  </div>
+  );
 }
 
 export default Login;
