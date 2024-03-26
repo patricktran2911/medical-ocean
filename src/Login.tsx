@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import App from "./App";
 import logo from "./Assets/Images/appLogo.png"
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, Container, TextField, Typography } from '@mui/material';
 
 function Login() {
   const [Username, setUsername] = useState('');
@@ -70,31 +70,3 @@ function Login() {
 }
 
 export default Login;
-/* 
- <div>
-      {LoginSucess ? (
-        <App/>
-      ): (
-        <div>
-          <img className='image' src={logo} alt="logo"/>
-        <div className='login'>
-          <form onSubmit ={Submit}>
-        <div className='loginBox'>
-          <div className='loginHeader'> Login </div>
-          <div className='input'>
-            <input className='username' placeholder='Enter username' value={Username} onChange={usernameChange}/>
-            <input className='password' placeholder='Enter Password' type='password' value={Password} onChange={passwordChange}/>
-         </div>
-          <div style = {{display:"flex", justifyContent: "center"}}>
-            <button className='enter'> Login </button>
-          </div>
-          <div className ='LoginError'>{ErrorMsg}</div>
-        </div>
-      </form>
-        </div>
-        </div>
-      )}
-    </div>
-  );
-*/
-
