@@ -21,6 +21,11 @@ const TableHeadStyle = styled(TableHead)({
     background: 'black'
 })
 
+const TableBodyCellNoAppointmentStyled = styled(TableCell)({
+    font: 'caption',
+    fontWeight: "bold"
+})
+
 export function AppointmentTable() {
     const [appointments, setAppointments] = useState<Appointment[]>([]);
 
@@ -51,9 +56,13 @@ export function AppointmentTable() {
                     </TableRow>
                 </TableHeadStyle>
                 <TableBody>
-                    {appointments.map((appointment) => {
+                    {appointments.length === 0 ? (
+                        <TableRow >
+                        <TableBodyCellNoAppointmentStyled>No Appointment Today</TableBodyCellNoAppointmentStyled>
+                        </TableRow>
+                    ) 
+                    : appointments.map((appointment) => {
                         const appointmentDate = new Date(appointment.time)
-
                         return (<TableRow key={appointment.id}>
                             <TableCell>{appointment.title}</TableCell>
                             <TableCell>{appointmentDate.toLocaleTimeString()}</TableCell>

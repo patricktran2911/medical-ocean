@@ -1,7 +1,7 @@
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
 import { Patient, getAllPatients } from "../../../api/PatientAPI";
 import { useState, useEffect } from "react";
-import {styled} from "@mui/material"
+import { styled } from "@mui/material"
 
 export function PatientTable() {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -22,6 +22,7 @@ export function PatientTable() {
             color: 'blue'
         }
     })
+    
     const TableContainerStyle = styled(TableContainer) (({theme}) => ({
         width: '100%',
         height: '100%',
