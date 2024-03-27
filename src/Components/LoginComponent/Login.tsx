@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
-import App from "./App";
-import logo from "./Assets/Images/appLogo.png"
+import App from "../../App";
+import logo from "../../Assets/Images/appLogo.png"
 import { Button, Container, TextField, Typography } from '@mui/material';
 
 function Login() {
