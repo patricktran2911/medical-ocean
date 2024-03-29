@@ -1,7 +1,7 @@
 import React from "react";
-function Medicines() {
+function Patients() {
     return (
-        <h1>Medicines</h1>
+        <h1>Patients</h1>
     );
 }
-export default Medicines;
+export default Patients;
