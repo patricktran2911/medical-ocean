@@ -1,15 +1,32 @@
-.aTable {
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
+#appointment .table.container {
+    background-color: white;
+    border-radius: 8px;
+    max-height: 400px;
 }
 
-.aTableHeader{
-    height: 100%;
+#appointment.table.head {
     background-color: black;
 }
 
-.smallTableHeaderCell{
+#appointment .table.head.cell {
     color: whitesmoke;
-    font-size: large;
+    white-space: nowrap;
+    border-right: '1px solid #ffffff';
+    max-width: 200px;
+}
+
+#appointment .table.head.cell:hover {
+    color: blue;
+}
+
+#appointment .table.body.cell {
+    color: black;
+    white-space: nowrap;
+    max-width: 200px;
+    max-height: 100px;
+}
+
+#appointment .table.body.cell.empty {
+    font: caption;
+    font-weight: bold;
 }

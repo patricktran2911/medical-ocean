@@ -1,15 +1,16 @@
 import { supabase } from "./supabaseInterface";
 import { Patient } from "./PatientAPI";
+import { UUID } from "crypto";
 
 export interface MedicalHistory {
-    id: number;
+    id: UUID;
     medical_conditions: string |null;
     allergies: string | null;
     current_medications: string | null;
     patient: Patient
 }
 
-export async function getMedicalHistory(patient_id: number): Promise<MedicalHistory[]> {
+export async function getMedicalHistory(patient_id: string): Promise<MedicalHistory[]> {
     const {data, error} = await supabase
     .from("medical_history")
     .select(`
