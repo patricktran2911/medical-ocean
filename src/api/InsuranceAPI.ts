@@ -1,8 +1,9 @@
 import { supabase } from "./supabaseInterface";
 import { Patient } from "./PatientAPI";
+import { UUID } from "crypto";
 
 export interface Insurance {
-    id: number;
+    id: UUID;
     insurance_provider: string;
     policy_number: string;
     group_number: string;
@@ -10,7 +11,7 @@ export interface Insurance {
     patient: Patient
 }
 
-export async function getInsurance(patient_id: number): Promise<Insurance[]> {
+export async function getInsurance(patient_id: string): Promise<Insurance[]> {
     const {data, error} = await supabase
     .from("insurance")
     .select(`

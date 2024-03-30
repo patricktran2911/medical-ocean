@@ -1,8 +1,9 @@
 import { supabase } from "./supabaseInterface";
 import { Patient, getPatient } from "./PatientAPI";
+import { UUID } from "crypto";
 
 export interface Appointment {
-    id: number;
+    id: UUID;
     patient: Patient;
     title: string;
     description: string | null;

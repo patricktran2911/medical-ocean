@@ -1,30 +1,52 @@
 import { Appointment, getAllAppointments } from "../../../api/AppointmentAPI";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { SxProps, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme } from '@mui/material';
 import { useState, useEffect } from "react";
-import {styled} from '@mui/material'
-import "./AppointmentTable.css"
 
-const TableCellCustom = styled(TableCell)({
+const useTableContainerStyle: SxProps<Theme> = {
+    backgroundColor: 'white',
+    borderRadius: '16px',
+    maxHeight: '400px',
+    WebkitBoxShadow: '-1px 5px 10px 1px #000000'
+}
+
+const useTableHeadStyle: SxProps<Theme> = {
+    backgroundColor: 'black'
+}
+
+const useTableHeadCellStyle: SxProps<Theme> = {
     color: 'whitesmoke',
-    ":hover": {
+    whiteSpace: 'nowrap',
+    borderRight: '1px solid #ffffff',
+    maxWidth: '200px',
+
+    ':hover': {
         color: 'blue'
+    },
+
+    ':last-child': {
+        borderRight: '0px'
     }
-})
-const TableContainerStyle = styled(TableContainer) (({theme}) => ({
-    width: '100%',
-    height: '100%',
-    background: 'white',
-    borderRadius: '8px',
-}))
+}
 
-const TableHeadStyle = styled(TableHead)({
-    background: 'black'
-})
+const useTableBodyCellStyle: SxProps<Theme> = {
+    color: 'black',
+    backgroundColor: 'white',
+    whiteSpace: 'nowrap',
+    maxWidth: '200px',
+    borderRight: '1px solid #ffffff',
+    maxHeight: '100px'
+}
 
-const TableBodyCellNoAppointmentStyled = styled(TableCell)({
+const useTableBodyCellEmptyStyle: SxProps<Theme> = {
+    color: 'black',
     font: 'caption',
-    fontWeight: "bold"
-})
+    fontWeight: 'bold',
+    backgroundColor: 'white',
+    whiteSpace: 'nowrap',
+    maxWidth: '200px',
+    borderRight: '1px solid #ffffff',
+    maxHeight: '100px'
+}
 
 export function AppointmentTable() {
     const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -46,31 +68,59 @@ export function AppointmentTable() {
     };
 
     return (
-        <TableContainerStyle>
+        <TableContainer 
+        sx={useTableContainerStyle}>
             <Table>
-                <TableHeadStyle>
+                <TableHead 
+                sx={useTableHeadStyle}>
                     <TableRow>
-                        <TableCellCustom>Title</TableCellCustom>
-                        <TableCellCustom>Time</TableCellCustom>
-                        <TableCellCustom>Description</TableCellCustom>
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Title
+                        </TableCell>
+
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Time
+                        </TableCell>
+
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Description
+                        </TableCell>
                     </TableRow>
-                </TableHeadStyle>
+                </TableHead>
                 <TableBody>
                     {appointments.length === 0 ? (
                         <TableRow >
-                        <TableBodyCellNoAppointmentStyled>No Appointment Today</TableBodyCellNoAppointmentStyled>
+                            <TableCell 
+                            sx={useTableBodyCellEmptyStyle}>
+                                No Appointment Today
+                            </TableCell>
                         </TableRow>
                     ) 
                     : appointments.map((appointment) => {
                         const appointmentDate = new Date(appointment.time)
-                        return (<TableRow key={appointment.id}>
-                            <TableCell>{appointment.title}</TableCell>
-                            <TableCell>{appointmentDate.toLocaleTimeString()}</TableCell>
-                            <TableCell>{appointment.description}</TableCell>
+                        return (
+                        <TableRow key={appointment.id}>
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {appointment.title}
+                            </TableCell>
+
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {appointmentDate.toLocaleTimeString()}
+                            </TableCell>
+
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {appointment.description}
+                            </TableCell>
                         </TableRow>
                     )})}
                 </TableBody>
             </Table>
-        </TableContainerStyle>
+        </TableContainer>
     )
 }

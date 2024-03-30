@@ -1,7 +1,6 @@
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, SxProps, Theme } from "@mui/material";
 import { Patient, getAllPatients } from "../../../api/PatientAPI";
 import { useState, useEffect } from "react";
-import { styled } from "@mui/material"
 
 export function PatientTable() {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -16,46 +15,93 @@ export function PatientTable() {
         setPatients(patients);
     };
 
-    const TableCellCustom = styled(TableCell)({
-        color: 'whitesmoke',
-        ":hover": {
-            color: 'blue'
-        }
-    })
-    
-    const TableContainerStyle = styled(TableContainer) (({theme}) => ({
-        width: '100%',
-        height: '100%',
-        background: 'white',
-        borderRadius: '8px'
-    }))
+    const useTableContainerStyle: SxProps<Theme> = {
+        backgroundColor: 'black',
+        borderRadius: '16px',
+        maxHeight: '400px',
+        overflowY: 'auto',
+        WebkitBoxShadow: '-1px 5px 10px 1px #000000'
+    }
 
-    const TableHeadStyle = styled(TableHead)({
-        background: 'black'
-    })
+    const useTableHeadStyle: SxProps<Theme> = {
+        backgroundColor: 'black'
+    }
+
+    const useTableHeadCellStyle: SxProps<Theme> = {
+        color: 'whitesmoke',
+        whiteSpace: 'nowrap',
+        borderRight: '1px solid #ffffff',
+        maxWidth: '200px',
+        ':hover': {
+            color: 'blue'
+        },
+
+        ':last-child': {
+            borderRight: '0px'
+        }
+    }
+
+    const useTableBodyCellStyle: SxProps<Theme> = {
+        color: 'black',
+        backgroundColor: 'white',
+        whiteSpace: 'nowrap',
+        maxWidth: '200px',
+        borderRight: '1px solid #ffffff',
+        maxHeight: '100px'
+    }
 
     return (
-        <TableContainerStyle>
+        <TableContainer 
+        sx={useTableContainerStyle} 
+        >
             <Table>
-                <TableHeadStyle >
+                <TableHead 
+                sx={useTableHeadStyle}>
                     <TableRow>
-                        <TableCellCustom>Patient Name</TableCellCustom>
-                        <TableCellCustom>Date Of Birth</TableCellCustom>
-                        <TableCellCustom>Phone Number</TableCellCustom>
-                        <TableCellCustom>Email</TableCellCustom>
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Patient Name
+                        </TableCell>
+
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Date Of Birth
+                        </TableCell>
+
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Phone Number
+                        </TableCell>
+
+                        <TableCell 
+                        sx={useTableHeadCellStyle}>
+                            Email
+                        </TableCell>
                     </TableRow>
-                </TableHeadStyle>
+                </TableHead>
                 <TableBody>
                     {patients.map((patient) => (
                         <TableRow key={patient.id}>
-                            <TableCell>{`${patient.f_name} ${patient.l_name}`}</TableCell>
-                            <TableCell>{patient.dob}</TableCell>
-                            <TableCell>{patient.phone_number}</TableCell>
-                            <TableCell>{patient.email}</TableCell>
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {`${patient.f_name} ${patient.l_name}`}
+                            </TableCell>
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {patient.dob}
+                            </TableCell>
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {patient.phone_number}
+                            </TableCell>
+                            <TableCell 
+                            sx={useTableBodyCellStyle}>
+                                {patient.email}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-        </TableContainerStyle>
+        </TableContainer>
     )
 }
