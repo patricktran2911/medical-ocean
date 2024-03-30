@@ -1,13 +1,12 @@
 import { Appointment, getAllAppointments } from "../../../api/AppointmentAPI";
-import { Paper, SxProps, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme, Typography } from '@mui/material';
+import { SxProps, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme } from '@mui/material';
 import { useState, useEffect } from "react";
-import {styled} from '@mui/material'
-import "./AppointmentTable.css"
 
 const useTableContainerStyle: SxProps<Theme> = {
     backgroundColor: 'white',
     borderRadius: '16px',
-    maxHeight: '400px'
+    maxHeight: '400px',
+    WebkitBoxShadow: '-1px 5px 10px 1px #000000'
 }
 
 const useTableHeadStyle: SxProps<Theme> = {
@@ -19,8 +18,13 @@ const useTableHeadCellStyle: SxProps<Theme> = {
     whiteSpace: 'nowrap',
     borderRight: '1px solid #ffffff',
     maxWidth: '200px',
+
     ':hover': {
         color: 'blue'
+    },
+
+    ':last-child': {
+        borderRight: '0px'
     }
 }
 

@@ -16,9 +16,11 @@ export function PatientTable() {
     };
 
     const useTableContainerStyle: SxProps<Theme> = {
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         borderRadius: '16px',
-        maxHeight: '400px'
+        maxHeight: '400px',
+        overflowY: 'auto',
+        WebkitBoxShadow: '-1px 5px 10px 1px #000000'
     }
 
     const useTableHeadStyle: SxProps<Theme> = {
@@ -32,6 +34,10 @@ export function PatientTable() {
         maxWidth: '200px',
         ':hover': {
             color: 'blue'
+        },
+
+        ':last-child': {
+            borderRight: '0px'
         }
     }
 
