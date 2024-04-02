@@ -6,7 +6,7 @@ function HomeTitle({ title }: { title: string}) {
     );
 }
 
-export default function Home({ title }: {title: string}) {
+export default function Appointments({ title }: {title: string}) {
     return (
         <>
             <h1>Medical Ocean</h1>
