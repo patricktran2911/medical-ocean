@@ -13,7 +13,11 @@ const useTitleStyle: SxProps<Theme> = {
     paddingBottom: '8px',
     paddingLeft: '16px',
     paddingRight: '16px',
-    WebkitBoxShadow: '-1px 2px 4px 1px #000000'
+    WebkitBoxShadow: '-1px 2px 4px 1px #000000',
+    ':hover': {
+        color: 'red',
+        background: 'linear-gradient(120deg, #020024 0%, #40559f 35%, #00d4ff 100%)'
+    }
 }
 
 function Dashboard() {
