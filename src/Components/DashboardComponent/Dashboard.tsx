@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Stack, SxProps, Theme, Typography } from "@mui/material";
 import { PatientTable } from "./PatientTable/PatientDashboardTable";
 import { AppointmentTable } from "./AppointmentTable/AppointmentDashboardTable";
-import "./Dashboard.css"
 
 const useTitleStyle: SxProps<Theme> = {
     color: 'white',
@@ -27,8 +26,8 @@ function Dashboard() {
     direction={{ xl: 'row', lg: 'column'}} 
     spacing={2} 
     paddingTop={2} 
-    paddingLeft={32} 
-    paddingRight={32}>
+    paddingLeft={8} 
+    paddingRight={8}>
         <Stack 
         direction={"column"}
         alignItems={'center'} 
