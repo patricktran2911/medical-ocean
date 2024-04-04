@@ -2,6 +2,41 @@ import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, SxPro
 import { Patient, getAllPatients } from "../../../api/PatientAPI";
 import { useState, useEffect } from "react";
 
+const useTableContainerStyle: SxProps<Theme> = {
+    backgroundColor: 'black',
+    borderRadius: '16px',
+    maxHeight: '400px',
+    overflowY: 'auto',
+    WebkitBoxShadow: '-1px 5px 10px 1px #000000'
+}
+
+const useTableHeadStyle: SxProps<Theme> = {
+    background: 'linear-gradient(45deg, #020024 0%, #40559f 35%, #00d4ff 100%)',
+}
+
+const useTableHeadCellStyle: SxProps<Theme> = {
+    color: 'whitesmoke',
+    whiteSpace: 'nowrap',
+    borderRight: '1px solid #ffffff',
+    maxWidth: '200px',
+    ':hover': {
+        color: 'red'
+    },
+
+    ':last-child': {
+        borderRight: '0px'
+    }
+}
+
+const useTableBodyCellStyle: SxProps<Theme> = {
+    color: 'black',
+    backgroundColor: 'white',
+    whiteSpace: 'nowrap',
+    maxWidth: '200px',
+    borderRight: '1px solid #ffffff',
+    maxHeight: '100px'
+}
+
 export function PatientTable() {
     const [patients, setPatients] = useState<Patient[]>([]);
 
@@ -15,40 +50,7 @@ export function PatientTable() {
         setPatients(patients);
     };
 
-    const useTableContainerStyle: SxProps<Theme> = {
-        backgroundColor: 'black',
-        borderRadius: '16px',
-        maxHeight: '400px',
-        overflowY: 'auto',
-        WebkitBoxShadow: '-1px 5px 10px 1px #000000'
-    }
-
-    const useTableHeadStyle: SxProps<Theme> = {
-        backgroundColor: 'black'
-    }
-
-    const useTableHeadCellStyle: SxProps<Theme> = {
-        color: 'whitesmoke',
-        whiteSpace: 'nowrap',
-        borderRight: '1px solid #ffffff',
-        maxWidth: '200px',
-        ':hover': {
-            color: 'blue'
-        },
-
-        ':last-child': {
-            borderRight: '0px'
-        }
-    }
-
-    const useTableBodyCellStyle: SxProps<Theme> = {
-        color: 'black',
-        backgroundColor: 'white',
-        whiteSpace: 'nowrap',
-        maxWidth: '200px',
-        borderRight: '1px solid #ffffff',
-        maxHeight: '100px'
-    }
+    
 
     return (
         <TableContainer 

@@ -10,7 +10,7 @@ const useTableContainerStyle: SxProps<Theme> = {
 }
 
 const useTableHeadStyle: SxProps<Theme> = {
-    backgroundColor: 'black'
+    background: 'linear-gradient(45deg, #020024 0%, #40559f 35%, #00d4ff 100%)'
 }
 
 const useTableHeadCellStyle: SxProps<Theme> = {
@@ -20,7 +20,7 @@ const useTableHeadCellStyle: SxProps<Theme> = {
     maxWidth: '200px',
 
     ':hover': {
-        color: 'blue'
+        color: 'red'
     },
 
     ':last-child': {

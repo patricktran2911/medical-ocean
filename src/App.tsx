@@ -14,7 +14,7 @@ function App() {
   return (
     <div className='router'>
       <Router>
-        <Stack direction={'column'} useFlexGap={true}>
+        <Stack direction={'row'} useFlexGap={true}>
           <NavBar />
           <Routes>
             <Route path="/Appointments" element={<Appointments title='Team THOR' />} />
