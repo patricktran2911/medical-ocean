@@ -5,12 +5,14 @@ import { Stack } from '@mui/material';
 import Appointments from './Components/Appointments';
 import TeamMember from './Components/Team_Member';
 import Dashboard from './Components/DashboardComponent/Dashboard';
-import Patients from './Components/Medicines';
+import Patients from './Components/Patients';
 import MedicalStaff from './Components/MedicalStaff';
 import NavBar from './Components/NavBarComponent/NavBar';
 import './App.css';
+import { supabase } from './api/supabaseInterface';
 
 function App() {
+
   return (
     <div className='router'>
       <Router>
