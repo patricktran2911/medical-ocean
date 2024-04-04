@@ -5,7 +5,10 @@ import { Drawer, List, Toolbar} from '@mui/material';
 import './NavBar.css';
 import { color } from '@mui/system';
 import { grey } from '@mui/material/colors';
+
+=======
 import logo from "../../Assets/Images/Icon120.webp"
+
 
 
 function NavBar() {
@@ -13,12 +16,14 @@ function NavBar() {
     return (
         <Drawer
             variant = "permanent"
-            
+
             sx = {{
                 width: 200,
                 flexShrink: 0,
                 "& .MuiDrawer-paper": {
-                    width: 224,
+
+                    width: 200,
+
                     boxSizing: "border-box",
                     borderRight: "0px",
                     backgroundColor: "black"
