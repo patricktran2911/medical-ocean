@@ -5,6 +5,7 @@ import { Drawer, List, Toolbar} from '@mui/material';
 import './NavBar.css';
 import { color } from '@mui/system';
 import { grey } from '@mui/material/colors';
+import logo from "../../Assets/Images/Icon120.webp"
 
 
 function NavBar() {
@@ -12,11 +13,12 @@ function NavBar() {
     return (
         <Drawer
             variant = "permanent"
+            
             sx = {{
                 width: 200,
                 flexShrink: 0,
                 "& .MuiDrawer-paper": {
-                    width: 200,
+                    width: 224,
                     boxSizing: "border-box",
                     borderRight: "0px",
                     backgroundColor: "black"
@@ -30,6 +32,9 @@ function NavBar() {
                         direction = "column"
                         justifyContent = "center"
                     >
+                        <div className={'loginDrawer'}>
+                            <img className={'image'} src={logo} alt="logo" />
+                        </div>
                         <Link className='homeButton' to="/Dashboard">Dashboard</Link>
                         <Link className='homeButton' to="/Appointments">Appointments</Link>
                         <Link className='homeButton' to="/Patients">Patients</Link>
