@@ -1,22 +1,65 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import './Login.css';
-import App from "../../App";
+import { AuthContext } from "../../App";
 import logo from "../../Assets/Images/Icon152.webp"
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, SxProps, TextField, Typography } from '@mui/material';
 import { supabase } from '../../api/supabaseInterface';
-import { Staff, getStaffWithId, getAllStaff } from '../../api/StaffAPI';
-import { error } from 'console';
-import { getAllPatients } from '../../api/PatientAPI';
+import { getStaffWithId } from '../../api/StaffAPI';
+import { Theme } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
-const CurrentStaffUser = createContext<Staff | undefined>(undefined)
+const ContainerStyle: SxProps<Theme> = {
+  alignItems: 'center',
+  backgroundColor: 'white',
+  position: 'center',
+  borderRadius: '32px',
+  paddingTop: '50px',
+  paddingBottom: '50px',
+  paddingLeft: '30px',
+  paddingRight: '30px',
+  maxWidth: '350px'
+}
+
+const TitleStyle: SxProps<Theme> = {
+  font: '',
+  fontSize: 'h2',
+  alignSelf: 'center'
+}
+
+const ImageStyle: SxProps<Theme> = {
+  width: '100px',
+  height: '100px',
+  alignSelf: 'center'
+}
+
+const FormStyle: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  alignContent: 'center',
+}
+
+const TextFieldStyle: SxProps<Theme> = {
+  width: '350px',
+  height: '90px'
+}
+
+const SubmitButtonStyle: SxProps<Theme> = {
+  width: '150px',
+  height: '50px'
+}
+
 
 function Login() {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string>(''); // error msg handler for later
-  const [currentUser, setCurrentUser] = useState<Staff>();
   const [isError, setError] = useState(false);
 
+  const useAuth = useContext(AuthContext)
 
   const usernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -40,7 +83,8 @@ function Login() {
       setErrorMsg('Incorrect username or password. Try again.')
     } else if (authUser.data) {
       const currentStaff = await getStaffWithId(authUser.data.user.id)
-      setCurrentUser(currentStaff)
+      useAuth?.setCurrentUser(currentStaff)
+      navigate('/dashboard')
     }
   };
 
@@ -49,48 +93,50 @@ function Login() {
   }
 
   return (
-    <CurrentStaffUser.Provider value={currentUser}>
-      {currentUser 
-      ? ( <App/> )
-      : (
-      <Container maxWidth="xs" className={'login'}>
-        <div>
-          <img className={'image'} src={logo} alt="logo" />
-          <div className={'loginBox'}>
-            <Typography variant="h4" className={'loginHeader'}>
-              Login
-            </Typography>
-            <form 
-              onSubmit={Submit} 
-              className={'input'}>
-              <TextField
-                onChangeCapture={handleOnChange}
-                className={'username'}
-                label="Username"
-                placeholder="Enter Username"
-                name='user'
-                onChange={usernameChange}
-                error={isError}
-              />
-              <TextField
-                onChangeCapture={handleOnChange}
-                className={'password'}
-                label="Password"
-                placeholder="Enter password"
-                type="password"
-                onChange={passwordChange}
-                error={isError}
-              />
-              <Button type="submit" variant="contained" color="primary" className={'enter'}>
-                SIGN IN
-              </Button>
-            </form>
-            {errorMsg && <Typography variant="body1" className={'LoginError'}>{errorMsg}</Typography>}
-          </div>
-        </div>
-      </Container>
-      )}
-    </CurrentStaffUser.Provider>
+    <Box sx={{width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <Stack 
+      direction={'column'} 
+      spacing='20px' 
+      sx={ContainerStyle}>
+        <Box 
+        component='img' 
+        src={logo} 
+        alt="logo"
+        sx={ImageStyle} />
+          <Typography 
+          variant="h4" 
+          sx={TitleStyle}>
+            Login
+          </Typography>
+          <Box 
+          component="form" 
+          onSubmit={Submit}
+          sx={FormStyle}>
+          <TextField
+            onChangeCapture={handleOnChange}
+            sx={TextFieldStyle}
+            label="Username"
+            placeholder="Enter Username"
+            name='user'
+            onChange={usernameChange}
+            error={isError}
+          />
+          <TextField
+            onChangeCapture={handleOnChange}
+            sx={TextFieldStyle}
+            label="Password"
+            placeholder="Enter password"
+            type="password"
+            onChange={passwordChange}
+            error={isError}
+          />
+          <Button type="submit" variant="contained" color="primary" sx={SubmitButtonStyle}>
+            SIGN IN
+          </Button>
+          </Box>
+          {errorMsg && <Typography variant="body1" color={'red'} >{errorMsg}</Typography>}
+      </Stack>
+    </Box>
   );
 }
 

@@ -10,7 +10,7 @@ const useTableContainerStyle: SxProps<Theme> = {
 }
 
 const useTableHeadStyle: SxProps<Theme> = {
-    background: 'linear-gradient(45deg, #020024 0%, #40559f 35%, #00d4ff 100%)'
+    background: 'linear-gradient(45deg, #2c3e50 0%, #4ca1af 100%)'
 }
 
 const useTableHeadCellStyle: SxProps<Theme> = {

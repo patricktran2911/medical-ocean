@@ -1,16 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 import { Drawer, List, Toolbar} from '@mui/material';
 import './NavBar.css';
 import { color } from '@mui/system';
 import { grey } from '@mui/material/colors';
 import logo from "../../Assets/Images/Icon120.webp"
 
-
-
 function NavBar() {
-
     return (
         <Drawer
             variant = "permanent"
@@ -28,25 +25,30 @@ function NavBar() {
                 }
             }}
         >
-            <List disablePadding>
+            <List>
                 <Toolbar>
                     <Stack
                         sx={{width: "100%"}}
                         direction = "column"
                         justifyContent = "center"
                     >
-                        <div className={'loginDrawer'}>
-                            <img className={'image'} src={logo} alt="logo" />
-                        </div>
-                        <Link className='homeButton' to="/Dashboard">Dashboard</Link>
-                        <Link className='homeButton' to="/Appointments">Appointments</Link>
-                        <Link className='homeButton' to="/Patients">Patients</Link>
-                        <Link className='homeButton' to="/MedicalStaff">Medical Staff</Link>
+                        <Box 
+                        component="img" 
+                        src={logo}/>
+                        <Link className='homeButton' to="/Dashboard">
+                            Dashboard
+                        </Link>
+                        <Link className='homeButton' to="/Appointments">
+                            Appointments
+                        </Link>
+                        <Link className='homeButton' to="/Patients">
+                            Patients
+                        </Link>
+                        <Link className='homeButton' to="/MedicalStaff">
+                            Medical Staff
+                        </Link>
                     </Stack>
                 </Toolbar>
-               
-                
-
             </List>
         </Drawer>    
     )

@@ -7,11 +7,12 @@ const useTableContainerStyle: SxProps<Theme> = {
     borderRadius: '16px',
     maxHeight: '400px',
     overflowY: 'auto',
-    WebkitBoxShadow: '-1px 5px 10px 1px #000000'
+    WebkitBoxShadow: '-1px 5px 10px 1px #000000',
+    scrollbarWidth: 'none'
 }
 
 const useTableHeadStyle: SxProps<Theme> = {
-    background: 'linear-gradient(45deg, #020024 0%, #40559f 35%, #00d4ff 100%)',
+    background: 'linear-gradient(45deg, #2c3e50 0%, #4ca1af 100%)',
 }
 
 const useTableHeadCellStyle: SxProps<Theme> = {

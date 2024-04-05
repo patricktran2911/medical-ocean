@@ -1,33 +1,40 @@
-import React, { ReactNode, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import './App.css';
+import React, { createContext, useEffect, useState } from 'react';
+import { Routes, Route, useNavigate} from 'react-router-dom';
 import { Stack } from '@mui/material';
-import Appointments from './Components/Appointments';
-import TeamMember from './Components/Team_Member';
-import Dashboard from './Components/DashboardComponent/Dashboard';
-import Patients from './Components/Patients';
-import MedicalStaff from './Components/MedicalStaff';
 import NavBar from './Components/NavBarComponent/NavBar';
-import './App.css';
-import { supabase } from './api/supabaseInterface';
+import { MainRoutes } from './Utility/routes';
+import { Staff } from './api/StaffAPI';
+
+interface AuthContextType {
+  currentUser: Staff | null;
+  isAuthenticated: boolean;
+  setCurrentUser: (user: Staff | null) => void;
+}
+
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 function App() {
+  const [currentUser, setCurrentUser] = useState<Staff | null>(null)
+  const isAuthenticated: boolean = !!currentUser
+  const navigate = useNavigate()
+
+  useEffect( () => {
+    if (isAuthenticated === false) {
+      navigate("/login")
+    }
+    console.log(currentUser)
+    console.log(isAuthenticated)
+  }, [currentUser])
 
   return (
-    <div className='router'>
-      <Router>
-        <Stack direction={'row'} useFlexGap={true}>
-          <NavBar />
+    <AuthContext.Provider value={{ currentUser, isAuthenticated, setCurrentUser}}>
+      <Stack direction={'row'} useFlexGap={true}>
+          {isAuthenticated && currentUser && <NavBar />}
           <Routes>
-            <Route path="/Appointments" element={<Appointments title='Team THOR' />} />
-            <Route path="/team-members" element={<TeamMember />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
-            <Route path="/Medicines" element={<Patients />} />
-            <Route path="/Doctors" element={<MedicalStaff />} />
+            <Route path='*' element={<MainRoutes/>}/>
           </Routes>
-        </Stack>
-      </Router>
-    </div>
+      </Stack>
+    </AuthContext.Provider>
   );
 }
 

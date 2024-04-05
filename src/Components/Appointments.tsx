@@ -6,11 +6,11 @@ function HomeTitle({ title }: { title: string}) {
     );
 }
 
-export default function Appointments({ title }: {title: string}) {
+export default function Appointments() {
     return (
         <>
             <h1>Medical Ocean</h1>
-            <HomeTitle title={title}/>
+            <HomeTitle title='Team THOR'/>
         </>
     )
 };

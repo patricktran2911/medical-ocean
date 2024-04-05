@@ -6,6 +6,7 @@ const supabaseAPIKey: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ
 
 export const supabase = createClient(supabaseUrl, supabaseAPIKey);
 
+
 function subscribeAppointmentTableChange(onChange: (appointments: Appointment[]) => void) {
     supabase
         .channel('schema-db-changes')
