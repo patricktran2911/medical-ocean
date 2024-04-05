@@ -23,9 +23,7 @@ export interface Patient {
 export async function getAllPatients(): Promise<Patient[]> {
     const {data, error} = await supabase
     .from("patient")
-    .select(`
-        *
-    `);
+    .select();
     
     if (error) {
         throw new Error(error.message);
