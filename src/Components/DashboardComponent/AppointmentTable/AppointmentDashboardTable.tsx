@@ -17,7 +17,7 @@ const useTableHeadCellStyle: SxProps<Theme> = {
     color: 'whitesmoke',
     whiteSpace: 'nowrap',
     borderRight: '1px solid #ffffff',
-    maxWidth: '200px',
+    width: '200px',
 
     ':hover': {
         color: 'red'
