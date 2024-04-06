@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "../Components/DashboardComponent/Dashboard";
 import Appointments from "../Components/Appointments";
-import Patients from "../Components/Patients";
+import {Patients} from "../Components/PatientComposite/Patients";
 import MedicalStaff from "../Components/MedicalStaff";
 import TeamMember from "../Components/Team_Member";
 import Login from "../Components/LoginComponent/Login";

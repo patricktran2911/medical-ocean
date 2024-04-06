@@ -10,6 +10,7 @@ export interface Patient {
     gender: string;
     email: string | null;
     dob: string;
+    age: string;
     blood_group: string | null;
     marital_status: string | null;
     rh_factor: string | null;
@@ -18,6 +19,7 @@ export interface Patient {
     preferred_language: string | null;
     occupation: string | null;
     ethnicity: string | null;
+    created_date: Date;
 }
 
 export async function getAllPatients(): Promise<Patient[]> {
@@ -28,8 +30,6 @@ export async function getAllPatients(): Promise<Patient[]> {
     if (error) {
         throw new Error(error.message);
     }
-
-    console.log("patients", data)
 
     return data.map(patient => {
         var result = patient

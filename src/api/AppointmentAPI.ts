@@ -3,8 +3,8 @@ import { Patient, getPatient } from "./PatientAPI";
 import { UUID } from "crypto";
 
 export interface Appointment {
-    id: UUID;
-    patient: Patient;
+    id: string;
+    patient_id: string;
     title: string;
     description: string | null;
     time: string;
@@ -14,21 +14,25 @@ export async function getAllAppointments(): Promise<Appointment[]> {
     const {data, error} = await supabase
     .from("appointments")
     .select(`
-        *,
-        patient(*)
+        *
     `)
 
     if (error) throw new Error(error.message);
 
-    return data.map(appointment => {
-        return {
-            id: appointment.id,
-            patient: appointment.patient,
-            title: appointment.title,
-            description: appointment.description,
-            time: appointment.time
-        }
-    })
+    return data
+}
+
+export async function getPatientAppointments(patient_id: string): Promise<Appointment[]> {
+    const {data, error} = await supabase
+    .from('appointments')
+    .select(`
+        *
+    `)
+    .eq('patient_id', patient_id)
+
+    if (error) throw new Error(error.message)
+
+    return data
 }
 
 export async function createAppointment(patient_id: number, time: Date, title: string, description: string | null) {
