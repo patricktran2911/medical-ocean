@@ -23,6 +23,9 @@ const useTableHeadStyle: SxProps<Theme> = {
     width: "100%",
     background: "linear-gradient(45deg, #2c3e50 0%, #4ca1af 100%)",
     backgroundSize: "fixed",
+    position: "sticky",
+    top: "0",
+    zIndex: "9999",
 };
 
 const useTableBodyRowStyle: SxProps<Theme> = {
@@ -74,7 +77,7 @@ export function PatientTable({
 
     return (
         <TableContainer sx={mergeContainerStyle}>
-            <Table>
+            <Table sx={{ borderCollapse: "unset" }}>
                 <TableHead sx={useTableHeadStyle}>
                     <TableRow>
                         <TableCell sx={useTableHeadCellStyle}>

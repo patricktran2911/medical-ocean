@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { supabase } from "./supabaseInterface";
 
 export interface PatientVisitor {
@@ -8,7 +9,7 @@ export interface PatientVisitor {
 }
 
 export enum VisitorType {
-    walk_in = "Walk in",
+    walk_in = "walk in",
     appointment = "appointment",
     emergency = "emergency"
 }
@@ -25,16 +26,24 @@ export async function getAllPatientVisitor(): Promise<PatientVisitor[]> {
     return data ?? []
 }
 
-export async function getTodayPatientVisitor(time: Date): Promise<PatientVisitor[]> {
-    let startDate = new Date(time.getDate())
+export async function getPatientVisitors(time: Date): Promise<PatientVisitor[]> {
+    let startDate = new Date(time)
     startDate.setHours(0,0,0,0)
-    let endDate = new Date(startDate.getDate() + 1)
+    let endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 1);
+
+    let startDateString = format(startDate, "yyyy-MM-dd HH:mm:ss")
+    let endDateString = format(endDate, "yyyy-MM-dd HH:mm:ss")
     
     const {data, error} = await supabase
     .from('patient_visitors')
     .select()
-    .gte('time', startDate)
-    .lte('time', endDate)
+    .gte('time', startDateString)
+    .lte('time', endDateString)
+    .order('time', {ascending: true})
+
+    console.log(startDateString)
+    console.log("data", data)
 
     if (error) {
         console.error(error)

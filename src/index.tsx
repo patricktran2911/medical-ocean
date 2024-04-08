@@ -3,8 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { Box, Container, SxProps, Theme, keyframes } from "@mui/material";
-import background from "./Assets/Images/background.png";
+import { Box, SxProps, Theme, ThemeProvider, createTheme } from "@mui/material";
 
 const RootContainerStyle: SxProps<Theme> = {
     margin: "0",
@@ -16,14 +15,22 @@ const RootContainerStyle: SxProps<Theme> = {
     height: "100vh",
 };
 
+const theme = createTheme({
+    typography: {
+        fontFamily: "montserrat",
+    },
+});
+
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
     <React.StrictMode>
-        <Box sx={RootContainerStyle}>
-            <Router>
-                <App />
-            </Router>
-        </Box>
+        <ThemeProvider theme={theme}>
+            <Box sx={RootContainerStyle}>
+                <Router>
+                    <App />
+                </Router>
+            </Box>
+        </ThemeProvider>
     </React.StrictMode>
 );

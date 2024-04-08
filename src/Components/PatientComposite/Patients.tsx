@@ -5,6 +5,11 @@ import { Theme } from "@emotion/react";
 import { PatientTable } from "../ReusableComponent/PatientTable";
 import { PatientInformation } from "./PatientInformationComponent/PatientInformationComponent";
 import { Appointment, getPatientAppointments } from "../../api/AppointmentAPI";
+import {
+    EmergencyContact,
+    getEmergencyContact,
+} from "../../api/EmergencyContactAPI";
+import { Insurance, getInsurance } from "../../api/InsuranceAPI";
 
 const BoxStyle: SxProps<Theme> = {
     width: "100%",
@@ -18,13 +23,15 @@ const PatientTableStyle: SxProps<Theme> = {
     overflowX: "auto",
     WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     scrollbarWidth: "none",
-    width: "48%",
+    width: "58%",
     height: "98%",
 };
 
 interface PatientInfo {
     patient: Patient;
     nextAppointment?: Appointment;
+    insurance?: Insurance;
+    emergencyContact?: EmergencyContact;
 }
 
 export function Patients() {
@@ -40,6 +47,8 @@ export function Patients() {
         const patients = await getAllPatients();
         const promises = patients.map(async (patient) => {
             const appointments = await getPatientAppointments(patient.id);
+            const emergencyContact = await getEmergencyContact(patient.id);
+            const insurance = await getInsurance(patient.id);
             const upcomingAppointments = appointments.filter((appointment) => {
                 let today = Date.now();
                 let appointmentDate = new Date(appointment.time).getTime();
@@ -50,6 +59,11 @@ export function Patients() {
                 nextAppointment:
                     upcomingAppointments.length > 0
                         ? upcomingAppointments[0]
+                        : undefined,
+                insurance: insurance.length > 0 ? insurance[0] : undefined,
+                emergencyContact:
+                    emergencyContact.length > 0
+                        ? emergencyContact[0]
                         : undefined,
             };
         });
@@ -86,6 +100,8 @@ export function Patients() {
                     <PatientInformation
                         patient={selectedPatientInfo.patient}
                         nextAppointment={selectedPatientInfo.nextAppointment}
+                        insurance={selectedPatientInfo.insurance}
+                        emergencyContact={selectedPatientInfo.emergencyContact}
                     />
                 )}
             </Stack>

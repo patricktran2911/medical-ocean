@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import NavBar from "./Components/NavBarComponent/NavBar";
-import { MainRoutes } from "./Utility/routes";
+import { MainRoutes, PatientRoutes } from "./Utility/routes";
 import { Staff } from "./api/StaffAPI";
 
 interface AuthContextType {

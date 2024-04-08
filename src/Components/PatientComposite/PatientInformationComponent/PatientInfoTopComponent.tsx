@@ -39,10 +39,10 @@ export default function PatientInfoTopContent({
     }
     return (
         <Stack
-            direction={"row"}
+            direction={{ xl: "row", lg: "column" }}
             spacing="30px"
             alignItems={"center"}
-            justifyContent={"space-between"}
+            justifyContent={nextAppointment ? "space-between" : "flex-start"}
         >
             <Avatar
                 src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
@@ -71,7 +71,7 @@ export default function PatientInfoTopContent({
                         spacing={"16px"}
                         alignItems={"center"}
                     >
-                        <Typography variant="h4" fontWeight={"bold"}>
+                        <Typography variant="h5" fontWeight={"bold"}>
                             {nextAppointmentString}
                         </Typography>
 

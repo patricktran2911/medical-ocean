@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Stack, SxProps, Theme } from "@mui/material";
-import { AppointmentTable } from "./AppointmentTable/AppointmentDashboardTable";
+import { Box, Button, Container, Stack, SxProps, Theme } from "@mui/material";
+import { AppointmentTable } from "./AppointmentDashboardTable";
+import { TodayVisitorTable } from "./TodayVisitorTable";
 
 const useTitleStyle: SxProps<Theme> = {
     color: "white",
@@ -18,37 +19,25 @@ const useTitleStyle: SxProps<Theme> = {
     },
 };
 
+const ContainerSxProps: SxProps<Theme> = {
+    width: "100%",
+    height: "100%",
+};
+
 function Dashboard() {
     return (
-        <Stack
-            justifyContent={"stretch"}
-            direction={{ xl: "row", lg: "column" }}
-            spacing={2}
-            paddingTop={2}
-            paddingLeft={8}
-            paddingRight={8}
-        >
+        <Box sx={ContainerSxProps}>
             <Stack
-                direction={"column"}
-                alignItems={"center"}
-                spacing={"8px"}
-                width={"100%"}
-                height={"100%"}
+                direction={{ xl: "row", lg: "column" }}
+                padding={8}
+                spacing={10}
+                alignContent={"space-between"}
             >
-                <Button sx={useTitleStyle}> Patients </Button>
-            </Stack>
+                <TodayVisitorTable />
 
-            <Stack
-                direction={"column"}
-                alignItems={"center"}
-                spacing={"8px"}
-                width={"100%"}
-                height={"100%"}
-            >
-                <Button sx={useTitleStyle}> Appointments </Button>
                 <AppointmentTable />
             </Stack>
-        </Stack>
+        </Box>
     );
 }
 
