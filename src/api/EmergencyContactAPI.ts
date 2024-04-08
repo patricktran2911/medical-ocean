@@ -1,22 +1,19 @@
 import { supabase } from "./supabaseInterface";
-import { Patient } from "./PatientAPI";
-import { UUID } from "crypto";
 
 export interface EmergencyContact {
-    id: UUID;
+    id: string;
     f_name: string;
     l_name: string;
     relationship: string;
     phone_number: string;
-    patient: Patient
+    patient_id: string
 }
 
 export async function getEmergencyContact(patient_id: string): Promise<EmergencyContact[]> {
     const {data, error} = await supabase
     .from("emergency_contact")
     .select(`
-        *,
-        patient(*)
+        *
     `)
     .eq('patient_id', patient_id)
 

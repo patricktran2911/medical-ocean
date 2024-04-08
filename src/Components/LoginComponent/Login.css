@@ -1,12 +1,11 @@
-.login{
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  
-  }
-  
-  .loginBox{
+}
+
+.loginBox {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,53 +15,46 @@
     background-color: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 10px;
-  
-  }
-  
-  .loginHeader{
+}
+
+.loginHeader {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: xx-large;
     font-weight: bolder;
+}
 
-  }
-  
-  .input{
-    padding: 20px;
-  }
-  
-  .username{
-    width: 100%;
-    height: 80px;
-    border-radius:  6px;
-    border-width: 1;
-    margin-bottom: 20px;
-    
-  }
-  
-  .password{
+.username {
     width: 100%;
     height: 80px;
     border-radius: 6px;
     border-width: 1;
-  }
-  
-  .enter{
+    margin-bottom: 20px;
+}
+
+.password {
+    width: 100%;
+    height: 80px;
+    border-radius: 6px;
+    border-width: 1;
+}
+
+.enter {
     width: 100%;
     height: 40px;
     border-radius: 6px;
-  }
+}
 
-  .LoginError{
+.LoginError {
     padding: 20px;
     color: red;
-  }
+}
 
-  .image{
+.image {
     width: 200px;
     height: 200px;
     display: block;
     margin: auto;
-  }
-
+    padding-top: 16px;
+}

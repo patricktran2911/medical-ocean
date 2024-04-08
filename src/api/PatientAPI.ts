@@ -1,15 +1,14 @@
 import { supabase } from "./supabaseInterface";
-import { formatDateToString } from "../Utility/dateUtility";
-import { UUID } from "crypto";
 
 export interface Patient {
-    id: UUID;
+    id: string;
     f_name: string;
     m_name: string | null;
     l_name: string;
     gender: string;
     email: string | null;
     dob: string;
+    age: string;
     blood_group: string | null;
     marital_status: string | null;
     rh_factor: string | null;
@@ -18,6 +17,8 @@ export interface Patient {
     preferred_language: string | null;
     occupation: string | null;
     ethnicity: string | null;
+    special_allergies: string[] | null;
+    created_date: Date;
 }
 
 export async function getAllPatients(): Promise<Patient[]> {
@@ -28,8 +29,6 @@ export async function getAllPatients(): Promise<Patient[]> {
     if (error) {
         throw new Error(error.message);
     }
-
-    console.log("patients", data)
 
     return data.map(patient => {
         var result = patient
@@ -53,7 +52,6 @@ export async function getPatient(id: string): Promise<Patient> {
         const dateOfBirth = new Date(data.dob)
 
         data.dob = dateOfBirth.toLocaleDateString();
-        console.log("dob", data.dob)
     }
     return data
 }

@@ -26,6 +26,7 @@ export async function getStaffWithId(id: string): Promise<Staff> {
     const {data, error} = await supabase
     .from('staff')
     .select('*')
+    .eq('id', id)
     .single()
 
     if (error) {
