@@ -12,7 +12,6 @@ const ContainerStyle: SxProps<Theme> = {
 };
 
 export function PatientInsuranceInfo({ insurance }: PatientInsuranceInfoProps) {
-    console.log("Insurance", insurance);
     return (
         <Box sx={ContainerStyle}>
             <Typography variant="h5" fontWeight={"bold"} color={"white"}>

@@ -49,17 +49,16 @@ export async function checkStaffWorkingStatus(
         .from("staff_working_status")
         .select(`*`)
         .order("time", { ascending: false })
-        .eq("staff_id", id)
-        .single();
+        .eq("staff_id", id);
 
-    if (error) {
+    if (error || data.length === 0) {
         return null;
     }
 
-    return data;
+    return data[0];
 }
 
-export async function staffCheckIn(id: string): Promise<Staff> {
+export async function staffCheckIn(id: string): Promise<StaffWorkingStatus> {
     const { data, error } = await supabase
         .from("staff_working_status")
         .insert([
@@ -69,15 +68,15 @@ export async function staffCheckIn(id: string): Promise<Staff> {
                 is_working: true,
             },
         ])
-        .select()
-        .single();
+        .order("time", { ascending: false })
+        .select();
 
     if (error) throw new Error(error.message);
 
-    return data;
+    return data[0];
 }
 
-export async function staffCheckout(id: string): Promise<Staff> {
+export async function staffCheckout(id: string) {
     const { data, error } = await supabase
         .from("staff_working_status")
         .update({
@@ -85,10 +84,7 @@ export async function staffCheckout(id: string): Promise<Staff> {
         })
         .order("time", { ascending: false })
         .eq("staff_id", id)
-        .select()
-        .single();
+        .select();
 
     if (error) throw new Error(error.message);
-
-    return data;
 }

@@ -44,7 +44,6 @@ export function TodayVisitorTable() {
             };
         });
         const result = await Promise.all(promises);
-        console.log(result);
         setVisitors(result);
     }
 

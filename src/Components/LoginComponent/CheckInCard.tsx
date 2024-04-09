@@ -27,7 +27,9 @@ export function CheckInCard({ id, onSuccess, onCancel }: CheckInCardProps) {
     }, []);
 
     async function handleCheckIn() {
-        const staff = await staffCheckIn(id);
+        const status = await staffCheckIn(id);
+        const staff = await getStaffWithId(status.staff_id);
+
         onSuccess(staff);
     }
 
