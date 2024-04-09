@@ -8,6 +8,7 @@ export default function Appointments() {
     return (
         <>
             <h1>Medical Ocean</h1>
+
             <HomeTitle title="Team THOR" />
         </>
     );

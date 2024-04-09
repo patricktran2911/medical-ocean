@@ -19,6 +19,11 @@ const theme = createTheme({
     typography: {
         fontFamily: "montserrat",
     },
+    transitions: {
+        duration: {
+            shortest: 150,
+        },
+    },
 });
 
 const container = document.getElementById("root");

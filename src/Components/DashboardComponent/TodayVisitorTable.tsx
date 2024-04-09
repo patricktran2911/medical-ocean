@@ -25,17 +25,8 @@ interface VisitorTableVM {
     patient: Patient;
 }
 
-const CounterBoxStyle: SxProps<Theme> = {
-    width: "100%",
-    borderRadius: 23,
-    justifyContent: "right",
-    alignContent: "right",
-    paddingRight: "16px",
-};
-
 export function TodayVisitorTable() {
     const [visitors, setVisitors] = useState<VisitorTableVM[]>([]);
-    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
         fetchRequireData();
@@ -60,9 +51,10 @@ export function TodayVisitorTable() {
     const BoxCardStyle: SxProps<Theme> = {
         backgroundColor: "white",
         borderRadius: "32px",
-        width: "25%",
+        width: "100%",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
         transition: "width 0.3s ease-in-out",
+        minWidth: "350px",
     };
 
     const useTableContainerStyle: SxProps<Theme> = {
