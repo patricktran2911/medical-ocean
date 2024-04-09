@@ -5,15 +5,21 @@ import logo from "../../Assets/Images/Icon152.webp";
 import {
     Box,
     Button,
+    Modal,
     Stack,
     SxProps,
     TextField,
     Typography,
 } from "@mui/material";
 import { supabase } from "../../api/supabaseInterface";
-import { getStaffWithId } from "../../api/StaffAPI";
+import {
+    Staff,
+    checkStaffWorkingStatus,
+    getStaffWithId,
+} from "../../api/StaffAPI";
 import { Theme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
+import { CheckInCard } from "./CheckInCard";
 
 const ContainerStyle: SxProps<Theme> = {
     display: "flex",
@@ -64,6 +70,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState<string>(""); // error msg handler for later
     const [isError, setError] = useState(false);
+    const [isOpenCheckIn, setIsOpenCheckIn] = useState(false);
 
     const useAuth = useContext(AuthContext);
 
@@ -88,14 +95,35 @@ function Login() {
             setError(true);
             setErrorMsg("Incorrect username or password. Try again.");
         } else if (authUser.data) {
-            const currentStaff = await getStaffWithId(authUser.data.user.id);
-            useAuth?.setCurrentUser(currentStaff);
-            navigate("/dashboard");
+            checkWorkingStatus(authUser.data.user.id);
         }
     };
 
     function handleOnChange(): void {
         setError(false);
+    }
+
+    function onSuccess(staff: Staff) {
+        useAuth?.setCurrentUser(staff);
+        navigate("/dashboard");
+    }
+
+    function onCancel() {
+        useAuth?.setCurrentUser(null);
+        setIsOpenCheckIn(false);
+    }
+
+    async function checkWorkingStatus(id: string) {
+        const result = await checkStaffWorkingStatus(id);
+        if (result?.is_working === true) {
+            const currentStaff = await getStaffWithId(id);
+            useAuth?.setCurrentUser(currentStaff);
+            navigate("/dashboard");
+        } else {
+            const currentStaff = await getStaffWithId(id);
+            useAuth?.setCurrentUser(currentStaff);
+            setIsOpenCheckIn(true);
+        }
     }
 
     return (
@@ -147,6 +175,24 @@ function Login() {
                     </Typography>
                 )}
             </Stack>
+
+            <Modal
+                open={isOpenCheckIn}
+                sx={{
+                    zIndex: 2,
+                    display: "flex",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    justifyItems: "center",
+                    alignItems: "center",
+                }}
+            >
+                <CheckInCard
+                    id={useAuth?.currentUser?.id ?? ""}
+                    onSuccess={onSuccess}
+                    onCancel={onCancel}
+                />
+            </Modal>
         </Box>
     );
 }

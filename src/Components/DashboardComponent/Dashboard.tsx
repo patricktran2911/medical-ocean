@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Button, Container, Stack, SxProps, Theme } from "@mui/material";
+import {
+    Box,
+    Button,
+    Container,
+    Grid,
+    Stack,
+    SxProps,
+    Theme,
+} from "@mui/material";
 import { AppointmentTable } from "./AppointmentDashboardTable";
 import { TodayVisitorTable } from "./TodayVisitorTable";
 
@@ -27,16 +35,23 @@ const ContainerSxProps: SxProps<Theme> = {
 function Dashboard() {
     return (
         <Box sx={ContainerSxProps}>
-            <Stack
-                direction={{ xl: "row", lg: "column" }}
-                padding={8}
-                spacing={10}
-                alignContent={"space-between"}
+            <Grid
+                container
+                sx={{
+                    width: "100%",
+                    height: "100%",
+                    padding: "50px",
+                    justifyContent: "space-evenly",
+                }}
+                direction={{ xs: "column", lg: "row" }}
             >
-                <TodayVisitorTable />
-
-                <AppointmentTable />
-            </Stack>
+                <Grid item xs={3}>
+                    <TodayVisitorTable />
+                </Grid>
+                <Grid item xs={3}>
+                    <AppointmentTable />
+                </Grid>
+            </Grid>
         </Box>
     );
 }

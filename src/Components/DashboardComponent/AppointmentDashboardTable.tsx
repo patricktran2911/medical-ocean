@@ -56,7 +56,8 @@ export function AppointmentTable() {
     const BoxCardStyle: SxProps<Theme> = {
         backgroundColor: "white",
         borderRadius: "32px",
-        width: "25%",
+        width: "100%",
+        minWidth: "350px",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     };
 
