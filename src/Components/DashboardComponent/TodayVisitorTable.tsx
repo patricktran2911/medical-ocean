@@ -38,20 +38,13 @@ export function TodayVisitorTable() {
 
     subscribeRTTable(
         DatabaseRTTable.patientVisitor,
-        undefined,
         handleInsert,
-        undefined
+        handleInsert,
+        handleInsert
     );
 
-    async function handleInsert(newPatientVisitor: PatientVisitor) {
-        const patient = await getPatient(newPatientVisitor.patient_id);
-        setVisitors((prev) => [
-            ...prev,
-            {
-                visitor: newPatientVisitor,
-                patient: patient,
-            },
-        ]);
+    async function handleInsert(_: any) {
+        fetchRequireData();
     }
 
     async function fetchRequireData() {
