@@ -7,6 +7,7 @@ import {
     TableCell,
     SxProps,
     Theme,
+    TableContainerProps,
 } from "@mui/material";
 import { Patient } from "../../api/PatientAPI";
 

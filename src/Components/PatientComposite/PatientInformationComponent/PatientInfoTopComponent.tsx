@@ -39,7 +39,7 @@ export default function PatientInfoTopContent({
     }
     return (
         <Stack
-            direction={{ xl: "row", lg: "column" }}
+            direction="row"
             spacing="30px"
             alignItems={"center"}
             justifyContent={nextAppointment ? "space-between" : "flex-start"}

@@ -1,4 +1,3 @@
-import { UUID } from "crypto";
 import { supabase } from "./supabaseInterface";
 
 export interface Staff {
@@ -56,6 +55,18 @@ export async function checkStaffWorkingStatus(
     }
 
     return data[0];
+}
+
+export async function getStaffIsWorkingToday(): Promise<StaffWorkingStatus[]> {
+    const { data, error } = await supabase
+        .from("staff_working_status")
+        .select(`*`)
+        .order("time", { ascending: true })
+        .eq("is_working", true);
+
+    if (error) throw new Error(error.message);
+
+    return data;
 }
 
 export async function staffCheckIn(id: string): Promise<StaffWorkingStatus> {

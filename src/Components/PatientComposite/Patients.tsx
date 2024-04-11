@@ -12,19 +12,22 @@ import {
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
 
 const BoxStyle: SxProps<Theme> = {
+    display: "flex",
     width: "100%",
     height: "100%",
+    overflow: "auto",
 };
 
 const PatientTableStyle: SxProps<Theme> = {
     backgroundColor: "white",
     borderRadius: "16px",
-    overflowY: "auto",
-    overflowX: "auto",
+    overflow: "auto",
     WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     scrollbarWidth: "none",
-    width: "58%",
+    minWidth: "800px",
+    minHeight: "800px",
     height: "98%",
+    whiteSpace: "nowrap",
 };
 
 interface PatientInfo {
@@ -84,8 +87,9 @@ export function Patients() {
     return (
         <Box sx={BoxStyle}>
             <Stack
-                direction="row"
+                direction={{ xs: "column", lg: "row" }}
                 justifyContent={"space-between"}
+                spacing={"50px"}
                 sx={{ width: "98%", height: "98%", margin: "20px" }}
             >
                 <PatientTable

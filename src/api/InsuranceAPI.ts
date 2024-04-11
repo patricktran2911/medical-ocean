@@ -15,11 +15,7 @@ export interface Insurance {
 export async function getInsurance(patient_id: string): Promise<Insurance[]> {
     const { data, error } = await supabase
         .from("insurance")
-        .select(
-            `
-        *
-    `
-        )
+        .select(`*`)
         .eq("patient_id", patient_id);
 
     if (error) throw new Error(error.message);

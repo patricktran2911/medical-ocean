@@ -48,3 +48,14 @@ export async function getPatientVisitors(
 
     return data ?? [];
 }
+
+export async function createPatientVisitor(
+    patient_id: string,
+    type: VisitorType
+) {
+    await supabase.from("patient_visitors").insert({
+        patient_id: patient_id,
+        time: new Date(),
+        type: type,
+    });
+}

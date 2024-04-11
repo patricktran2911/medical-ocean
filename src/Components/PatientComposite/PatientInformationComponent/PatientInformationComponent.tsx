@@ -18,10 +18,9 @@ interface PatientInformationProps {
 }
 
 const ContainerStyle: SxProps<Theme> = {
-    width: "38%",
-    height: "98%",
     backgroundColor: "lightcyan",
     borderRadius: "32px",
+    whiteSpace: "nowrap",
     WebkitBoxShadow: "-1px 5px 10px 1px #000000",
 };
 

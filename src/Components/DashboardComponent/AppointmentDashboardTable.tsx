@@ -15,6 +15,10 @@ import {
 import { useState, useEffect } from "react";
 import { Patient, getPatient } from "../../api/PatientAPI";
 import { format } from "date-fns";
+import {
+    DatabaseRTTable,
+    subscribeRTTable,
+} from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
 interface AppointmentUI {
     appointment: Appointment;
@@ -27,6 +31,45 @@ export function AppointmentTable() {
     useEffect(() => {
         fetchAppointments();
     }, []);
+
+    subscribeRTTable(
+        DatabaseRTTable.appointments,
+        handleRTDelete,
+        handleRTInsert,
+        handleRTUpdate
+    );
+
+    function handleRTUpdate(new_appointment: Appointment) {
+        setAppointments(
+            appointments.map((vm) =>
+                vm.appointment.id === new_appointment.id
+                    ? { appointment: new_appointment, patient: vm.patient }
+                    : vm
+            )
+        );
+    }
+
+    function handleRTDelete(appointment_id: string) {
+        setAppointments(
+            appointments.filter(
+                (appointment) => appointment.appointment.id !== appointment_id
+            )
+        );
+    }
+
+    async function handleRTInsert(appointment: Appointment) {
+        var newAppointmentUI: AppointmentUI;
+        const patient = await getPatient(appointment.patient_id);
+        newAppointmentUI = {
+            appointment: appointment,
+            patient: patient,
+        };
+        setAppointments(
+            [...appointments, newAppointmentUI].sort((a, b) =>
+                a.appointment.time < b.appointment.time ? 1 : -1
+            )
+        );
+    }
 
     const fetchAppointments = async () => {
         var appointments = await getAllAppointments();
@@ -58,6 +101,7 @@ export function AppointmentTable() {
         borderRadius: "32px",
         width: "100%",
         minWidth: "350px",
+        whiteSpace: "nowrap",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     };
 

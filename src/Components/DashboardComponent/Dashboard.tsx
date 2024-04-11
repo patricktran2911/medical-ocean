@@ -10,26 +10,13 @@ import {
 } from "@mui/material";
 import { AppointmentTable } from "./AppointmentDashboardTable";
 import { TodayVisitorTable } from "./TodayVisitorTable";
-
-const useTitleStyle: SxProps<Theme> = {
-    color: "white",
-    fontFamily: "sans-serif",
-    fontWeight: "bold",
-    background: "linear-gradient(45deg, #2c3e50 0%, #4ca1af 100%)",
-    paddingTop: "8px",
-    paddingBottom: "8px",
-    paddingLeft: "16px",
-    paddingRight: "16px",
-    WebkitBoxShadow: "-1px 2px 4px 1px #000000",
-    ":hover": {
-        color: "red",
-        background: "linear-gradient(270deg, #2c3e50 0%, #4ca1af 100%)",
-    },
-};
+import { StaffWorkingDashboardTable } from "./StaffWorkingDashboardTable";
 
 const ContainerSxProps: SxProps<Theme> = {
     width: "100%",
+    minWidth: "1700px",
     height: "100%",
+    whiteSpace: "nowrap",
 };
 
 function Dashboard() {
@@ -43,13 +30,17 @@ function Dashboard() {
                     padding: "50px",
                     justifyContent: "space-evenly",
                 }}
-                direction={{ xs: "column", lg: "row" }}
+                direction={"row"}
+                spacing={"100px"}
             >
                 <Grid item xs={3}>
                     <TodayVisitorTable />
                 </Grid>
                 <Grid item xs={3}>
                     <AppointmentTable />
+                </Grid>
+                <Grid item xs={3}>
+                    <StaffWorkingDashboardTable />
                 </Grid>
             </Grid>
         </Box>

@@ -1,12 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-    PatientVisitor,
-    getPatientVisitors,
-} from "../../api/PatientVisitorAPI";
-import { Patient, getPatient } from "../../api/PatientAPI";
 import {
     Box,
-    Divider,
     Stack,
     SxProps,
     Table,
@@ -18,65 +11,70 @@ import {
     Theme,
     Typography,
 } from "@mui/material";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
+import {
+    Staff,
+    StaffWorkingStatus,
+    getStaffIsWorkingToday,
+    getStaffWithId,
+} from "../../api/StaffAPI";
 import {
     DatabaseRTTable,
     subscribeRTTable,
 } from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
-interface VisitorTableVM {
-    visitor: PatientVisitor;
-    patient: Patient;
+interface vm {
+    listOfStaffWorking: StaffWorkingInterface[];
 }
 
-export function TodayVisitorTable() {
-    const [visitors, setVisitors] = useState<VisitorTableVM[]>([]);
+interface StaffWorkingInterface {
+    info: Staff;
+    status: StaffWorkingStatus;
+}
+
+export function StaffWorkingDashboardTable() {
+    const [vm, setVM] = useState<vm>({ listOfStaffWorking: [] });
 
     useEffect(() => {
         fetchRequireData();
     }, []);
 
     subscribeRTTable(
-        DatabaseRTTable.patientVisitor,
+        DatabaseRTTable.staffWorkingStatus,
         undefined,
-        handleInsert,
-        undefined
+        handleOnChange,
+        handleOnChange
     );
 
-    async function handleInsert(newPatientVisitor: PatientVisitor) {
-        const patient = await getPatient(newPatientVisitor.patient_id);
-        setVisitors((prev) => [
-            ...prev,
-            {
-                visitor: newPatientVisitor,
-                patient: patient,
-            },
-        ]);
+    function handleOnChange(_: StaffWorkingStatus) {
+        fetchRequireData();
     }
 
-    async function fetchRequireData() {
-        var today = new Date();
-
-        const visitors = await getPatientVisitors(today);
-        const promises = visitors.map(async (visitor) => {
-            const patient = await getPatient(visitor.patient_id);
+    const fetchRequireData = async () => {
+        const staffStatuses = await getStaffIsWorkingToday();
+        const promises = staffStatuses.map(async (status) => {
+            const staff = await getStaffWithId(status.staff_id);
             return {
-                visitor: visitor,
-                patient: patient,
+                info: staff,
+                status: status,
             };
         });
-        const result = await Promise.all(promises);
-        setVisitors(result);
-    }
+
+        const result = await Promise.all(promises).then((values) => {
+            return values;
+        });
+
+        setVM({ listOfStaffWorking: result });
+    };
 
     const BoxCardStyle: SxProps<Theme> = {
         backgroundColor: "white",
         borderRadius: "32px",
         width: "100%",
-        WebkitBoxShadow: "-1px 5px 10px 1px #000000",
-        transition: "width 0.3s ease-in-out",
         minWidth: "350px",
         whiteSpace: "nowrap",
+        WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     };
 
     const useTableContainerStyle: SxProps<Theme> = {
@@ -86,12 +84,6 @@ export function TodayVisitorTable() {
         overflowX: "auto",
         scrollbarWidth: "none",
         height: "300px",
-    };
-
-    const useTableHeadStyle: SxProps<Theme> = {
-        top: "0",
-        position: "sticky",
-        backgroundColor: "white",
     };
 
     return (
@@ -115,7 +107,7 @@ export function TodayVisitorTable() {
                         color={"white"}
                         padding={"16px"}
                     >
-                        {visitors.length >= 0 ? "Visitor:" : "Visitors:"}
+                        Staff available:
                     </Typography>
 
                     <Typography
@@ -124,32 +116,34 @@ export function TodayVisitorTable() {
                         color={"white"}
                         padding={"16px"}
                     >
-                        {visitors.length}
+                        {vm.listOfStaffWorking.length}
                     </Typography>
                 </Stack>
                 <TableContainer sx={useTableContainerStyle}>
                     <Table>
-                        <TableHead sx={useTableHeadStyle}>
+                        <TableHead>
                             <TableRow>
                                 <TableCell
+                                    key={"Staff name"}
                                     sx={{
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
                                     <Typography fontWeight={"bold"}>
-                                        Patient Name
+                                        Staff name
                                     </Typography>
                                 </TableCell>
                                 <TableCell
+                                    key={"Staff title"}
                                     sx={{
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
                                     <Typography fontWeight={"bold"}>
-                                        Type
+                                        Title
                                     </Typography>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell key={"Check time"}>
                                     <Typography fontWeight={"bold"}>
                                         Time
                                     </Typography>
@@ -158,34 +152,43 @@ export function TodayVisitorTable() {
                         </TableHead>
 
                         <TableBody>
-                            {visitors.map((visitor) => {
+                            {vm.listOfStaffWorking.map((staffWorking) => {
+                                const staffName = `${staffWorking.info.f_name} ${staffWorking.info.l_name}`;
+
                                 return (
                                     <TableRow>
                                         <TableCell
+                                            key={staffName}
+                                            sx={{
+                                                borderRight:
+                                                    "1px solid lightgray",
+                                            }}
+                                        >
+                                            <Typography>{staffName}</Typography>
+                                        </TableCell>
+                                        <TableCell
+                                            key={
+                                                staffName +
+                                                staffWorking.info.title
+                                            }
                                             sx={{
                                                 borderRight:
                                                     "1px solid lightgray",
                                             }}
                                         >
                                             <Typography>
-                                                {visitor.patient.f_name}{" "}
-                                                {visitor.patient.l_name}
+                                                {staffWorking.info.title}
                                             </Typography>
                                         </TableCell>
                                         <TableCell
-                                            sx={{
-                                                borderRight:
-                                                    "1px solid lightgray",
-                                            }}
+                                            key={
+                                                staffName +
+                                                staffWorking.status.time
+                                            }
                                         >
                                             <Typography>
-                                                {visitor.visitor.type}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography>
                                                 {format(
-                                                    visitor.visitor.time,
+                                                    staffWorking.status.time,
                                                     "hh:mma"
                                                 )}
                                             </Typography>
