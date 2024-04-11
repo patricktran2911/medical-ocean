@@ -30,7 +30,7 @@ async function getMonthlyNumberOfPatients(
             (monthlyPatient) => {
                 var date = parseISO(monthlyPatient.date);
                 date.setDate(1);
-                let monthString = format(date, "MMMM").toLowerCase();
+                let monthString = format(date, "MMM");
                 return {
                     month: monthString,
                     count: monthlyPatient.new_patients ?? 0,
