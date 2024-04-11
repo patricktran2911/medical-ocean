@@ -30,7 +30,6 @@ function Dashboard() {
                     padding: "50px",
                     justifyContent: "space-evenly",
                 }}
-                direction={"row"}
                 spacing={"100px"}
             >
                 <Grid item xs={3}>

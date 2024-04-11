@@ -32,7 +32,10 @@ function App() {
         <AuthContext.Provider
             value={{ currentUser, isAuthenticated, setCurrentUser }}
         >
-            <Stack direction={"row"} sx={{ width: "100vw", height: "100vh" }}>
+            <Stack
+                direction={"row"}
+                sx={{ width: "100%", height: "100%", overflow: "auto" }}
+            >
                 {isAuthenticated && currentUser && <NavBar />}
                 <Routes>
                     <Route path="*" element={<MainRoutes />} />
