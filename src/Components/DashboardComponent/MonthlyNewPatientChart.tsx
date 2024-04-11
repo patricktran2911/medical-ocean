@@ -126,10 +126,11 @@ export default function MonthlyNewPatientsChart() {
                     colors={["#438695"]}
                     margin={{ top: 50, bottom: 100, left: 70, right: 70 }}
                     sx={{
-                        sx: {
-                            [`.${axisClasses.left} .${axisClasses.label}`]: {
-                                transform: "translate(-20px, 0)",
-                            },
+                        [`& .${axisClasses.left} .${axisClasses.label}`]: {
+                            transform: ["translateX(-10px)"],
+                        },
+                        [`& .${axisClasses.bottom} .${axisClasses.label}`]: {
+                            transform: ["translateY(10px)"],
                         },
                     }}
                 />
