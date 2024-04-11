@@ -39,36 +39,16 @@ export function AppointmentTable() {
         handleRTUpdate
     );
 
-    function handleRTUpdate(new_appointment: Appointment) {
-        setAppointments(
-            appointments.map((vm) =>
-                vm.appointment.id === new_appointment.id
-                    ? { appointment: new_appointment, patient: vm.patient }
-                    : vm
-            )
-        );
+    function handleRTUpdate(_: Appointment) {
+        fetchAppointments();
     }
 
-    function handleRTDelete(appointment_id: string) {
-        setAppointments(
-            appointments.filter(
-                (appointment) => appointment.appointment.id !== appointment_id
-            )
-        );
+    function handleRTDelete(_: string) {
+        fetchAppointments();
     }
 
-    async function handleRTInsert(appointment: Appointment) {
-        var newAppointmentUI: AppointmentUI;
-        const patient = await getPatient(appointment.patient_id);
-        newAppointmentUI = {
-            appointment: appointment,
-            patient: patient,
-        };
-        setAppointments(
-            [...appointments, newAppointmentUI].sort((a, b) =>
-                a.appointment.time < b.appointment.time ? 1 : -1
-            )
-        );
+    async function handleRTInsert(_: Appointment) {
+        fetchAppointments();
     }
 
     const fetchAppointments = async () => {

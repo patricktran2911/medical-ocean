@@ -1,6 +1,4 @@
 import { supabase } from "./supabaseInterface";
-import { Patient } from "./PatientAPI";
-import { UUID } from "crypto";
 
 export interface Insurance {
     id: string;

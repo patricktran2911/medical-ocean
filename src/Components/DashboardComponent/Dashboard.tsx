@@ -1,16 +1,9 @@
 import React from "react";
-import {
-    Box,
-    Button,
-    Container,
-    Grid,
-    Stack,
-    SxProps,
-    Theme,
-} from "@mui/material";
+import { Box, Grid, SxProps, Theme } from "@mui/material";
 import { AppointmentTable } from "./AppointmentDashboardTable";
 import { TodayVisitorTable } from "./TodayVisitorTable";
 import { StaffWorkingDashboardTable } from "./StaffWorkingDashboardTable";
+import MonthlyNewPatientsChart from "./MonthlyNewPatientChart";
 
 const ContainerSxProps: SxProps<Theme> = {
     width: "100%",
@@ -20,6 +13,7 @@ const ContainerSxProps: SxProps<Theme> = {
 };
 
 function Dashboard() {
+    console.log(new Date());
     return (
         <Box sx={ContainerSxProps}>
             <Grid
@@ -40,6 +34,9 @@ function Dashboard() {
                 </Grid>
                 <Grid item xs={3}>
                     <StaffWorkingDashboardTable />
+                </Grid>
+                <Grid item xs={6}>
+                    <MonthlyNewPatientsChart />
                 </Grid>
             </Grid>
         </Box>

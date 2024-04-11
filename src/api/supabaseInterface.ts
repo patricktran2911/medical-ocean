@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js";
-import { Appointment, getAllAppointments } from "./AppointmentAPI";
 
 const supabaseUrl: string = "https://jjnuklkikeyiewupvvbw.supabase.co";
 const supabaseAPIKey: string =
