@@ -35,7 +35,7 @@ function Dashboard() {
                 <Grid item xs={3}>
                     <StaffWorkingDashboardTable />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                     <MonthlyNewPatientsChart />
                 </Grid>
             </Grid>

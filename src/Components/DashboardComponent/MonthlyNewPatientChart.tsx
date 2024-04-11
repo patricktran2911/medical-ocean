@@ -46,7 +46,7 @@ const useContainerStyle: SxProps<Theme> = {
     width: "100%",
     height: "100%",
     maxHeight: "700px",
-    maxWidth: "1000px",
+    maxWidth: "1500px",
     background: "white",
     borderRadius: "32px",
     whiteSpace: "nowrap",
