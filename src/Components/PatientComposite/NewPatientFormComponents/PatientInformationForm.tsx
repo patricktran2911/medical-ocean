@@ -69,6 +69,10 @@ export function NewPatientInformationForm({
     }, []);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setErrors((prev) => ({
+            ...prev,
+            [e.target.id]: false,
+        }));
         setNewPatient((prev) => ({
             ...prev,
             [e.target.id]: e.target.value,

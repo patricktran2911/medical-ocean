@@ -6,6 +6,7 @@ import { Box, Button, Stack, SxProps, Theme, Typography } from "@mui/material";
 import { NewPatientInformationForm } from "./PatientInformationForm";
 import { AnimatePresence, motion } from "framer-motion";
 import { NewPatientECI } from "./NewPatientECI";
+import { useNavigate } from "react-router-dom";
 
 const useContainerBoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -31,6 +32,7 @@ const useFormContainerStyle: SxProps<Theme> = {
 };
 
 export function AddingNewPatient() {
+    const navigate = useNavigate();
     const [step, setStep] = useState<{ index: number; data: any }>({
         index: 0,
         data: null,
@@ -55,7 +57,7 @@ export function AddingNewPatient() {
                     <NewPatientECI
                         patient_id={data}
                         onSuccess={(patient_id) => {
-                            setStep({ index: 2, data: patient_id });
+                            navigate("/patients");
                         }}
                         onTapBack={() => {
                             setStep({ index: 0, data: null });

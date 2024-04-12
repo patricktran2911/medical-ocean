@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { Box, SxProps, Theme, ThemeProvider, createTheme } from "@mui/material";
-import { AnimatePresence } from "framer-motion";
 
 const RootContainerStyle: SxProps<Theme> = {
     margin: "0",
@@ -32,13 +31,11 @@ const root = createRoot(container!);
 root.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            <AnimatePresence>
-                <Box sx={RootContainerStyle}>
-                    <Router>
-                        <App />
-                    </Router>
-                </Box>
-            </AnimatePresence>
+            <Box sx={RootContainerStyle}>
+                <Router>
+                    <App />
+                </Router>
+            </Box>
         </ThemeProvider>
     </React.StrictMode>
 );

@@ -74,6 +74,10 @@ export function NewPatientECI({
     }, []);
 
     function handleChangeEmergency(e: React.ChangeEvent<HTMLInputElement>) {
+        setErrors((prev) => ({
+            ...prev,
+            [e.target.id]: false,
+        }));
         setEmergencyContact((prev) => ({
             ...prev,
             [e.target.id]: e.target.value,
@@ -81,6 +85,10 @@ export function NewPatientECI({
     }
 
     function handleChangeInsurance(e: React.ChangeEvent<HTMLInputElement>) {
+        setErrors((prev) => ({
+            ...prev,
+            [e.target.id]: false,
+        }));
         setInsurance((prev) => ({
             ...prev,
             [e.target.id]: e.target.value,
@@ -98,6 +106,7 @@ export function NewPatientECI({
         );
 
         const newInsurance = await createInsurance(insurance, patient_id);
+        onSuccess(patient_id);
     }
 
     function checkError(): boolean {
@@ -231,7 +240,7 @@ export function NewPatientECI({
                     <TextField
                         id="group_name"
                         variant="standard"
-                        onChange={handleChangeEmergency}
+                        onChange={handleChangeInsurance}
                         fullWidth
                         error={errors.group_name}
                         sx={TextFieldStyleProps}
@@ -247,7 +256,7 @@ export function NewPatientECI({
                     <TextField
                         id="insurance_provider"
                         variant="standard"
-                        onChange={handleChangeEmergency}
+                        onChange={handleChangeInsurance}
                         fullWidth
                         error={errors.insurance_provider}
                         sx={TextFieldStyleProps}
@@ -261,7 +270,7 @@ export function NewPatientECI({
                     <TextField
                         id="policy_number"
                         variant="standard"
-                        onChange={handleChangeEmergency}
+                        onChange={handleChangeInsurance}
                         fullWidth
                         error={errors.policy_number}
                         sx={TextFieldStyleProps}
@@ -275,7 +284,7 @@ export function NewPatientECI({
                     <TextField
                         id="group_number"
                         variant="standard"
-                        onChange={handleChangeEmergency}
+                        onChange={handleChangeInsurance}
                         fullWidth
                         error={errors.group_number}
                         sx={TextFieldStyleProps}
@@ -287,7 +296,7 @@ export function NewPatientECI({
                     <TextField
                         id="primary_physician"
                         variant="standard"
-                        onChange={handleChangeEmergency}
+                        onChange={handleChangeInsurance}
                         fullWidth
                         sx={TextFieldStyleProps}
                     />
