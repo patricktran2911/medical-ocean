@@ -18,7 +18,7 @@ export interface Patient {
     preferred_language: string | null;
     occupation: string | null;
     ethnicity: string | null;
-    special_allergies: string[] | null;
+    special_allergies: string | null;
     created_date: Date;
 }
 

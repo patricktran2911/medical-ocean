@@ -6,6 +6,7 @@ import { Patients } from "../Components/PatientComposite/Patients";
 import MedicalStaff from "../Components/MedicalStaff";
 import TeamMember from "../Components/Team_Member";
 import Login from "../Components/LoginComponent/Login";
+import { AddingNewPatientForm } from "../Components/PatientComposite/NewPatientForm";
 
 export const MainRoutes = () => (
     <Routes>
@@ -13,7 +14,7 @@ export const MainRoutes = () => (
         <Route path="/login" element={<Login />} />
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/team-members" element={<TeamMember />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<AddingNewPatientForm />} />
         <Route path="/patients" element={<Patients />}>
             <Route path="*" element={<PatientRoutes />} />
         </Route>
@@ -23,6 +24,9 @@ export const MainRoutes = () => (
 
 export const PatientRoutes = () => (
     <Routes>
-        <Route path="/patient/new_patient_form" element={<MedicalStaff />} />
+        <Route
+            path="/patient/new_patient_form"
+            element={<AddingNewPatientForm />}
+        />
     </Routes>
 );
