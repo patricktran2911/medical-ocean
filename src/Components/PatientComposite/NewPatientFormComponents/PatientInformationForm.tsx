@@ -179,7 +179,7 @@ export function NewPatientInformationForm({
                         sx={TextFieldStyleProps}
                     />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Typography color={errors.dob ? "red" : "black"}>
                         Date of birth*
                     </Typography>
@@ -203,7 +203,7 @@ export function NewPatientInformationForm({
                         />
                     </LocalizationProvider>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                     <Typography color={errors.address ? "red" : "black"}>
                         Address*
                     </Typography>
@@ -213,6 +213,16 @@ export function NewPatientInformationForm({
                         onChange={handleChange}
                         fullWidth
                         error={errors.address}
+                        sx={TextFieldStyleProps}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <Typography color={"black"}>Email</Typography>
+                    <TextField
+                        id="email"
+                        variant="standard"
+                        onChange={handleChange}
+                        fullWidth
                         sx={TextFieldStyleProps}
                     />
                 </Grid>
@@ -229,7 +239,7 @@ export function NewPatientInformationForm({
                         sx={TextFieldStyleProps}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <Stack
                         direction={"row"}
                         justifyContent={"center"}
@@ -260,7 +270,7 @@ export function NewPatientInformationForm({
                         </Select>
                     </Stack>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Stack
                         direction={"row"}
                         justifyContent={"center"}
