@@ -7,6 +7,7 @@ import { NewPatientInformationForm } from "./PatientInformationForm";
 import { AnimatePresence, motion } from "framer-motion";
 import { NewPatientECI } from "./NewPatientECI";
 import { useNavigate } from "react-router-dom";
+import DefaultMotion from "../../../Utility/DefaultMotion";
 
 const useContainerBoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -70,12 +71,8 @@ export function AddingNewPatient() {
         <Box sx={useContainerBoxStyle}>
             <AnimatePresence>
                 <Box sx={useFormContainerStyle}>
-                    <motion.div
+                    <DefaultMotion
                         key={step.index}
-                        initial={{ opacity: 0, x: 100 }}
-                        animate={{ opacity: 1, x: 0.5 }}
-                        exit={{ opacity: 0, x: -100 }}
-                        transition={{ duration: 1 }}
                         style={{
                             display: "flex",
                             justifyContent: "center",
@@ -86,7 +83,7 @@ export function AddingNewPatient() {
                         }}
                     >
                         <StepContent index={step.index} data={step.data} />
-                    </motion.div>
+                    </DefaultMotion>
                 </Box>
             </AnimatePresence>
         </Box>

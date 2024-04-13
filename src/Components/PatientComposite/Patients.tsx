@@ -11,6 +11,7 @@ import {
 } from "../../api/EmergencyContactAPI";
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
 import { motion } from "framer-motion";
+import DefaultMotion from "../../Utility/DefaultMotion";
 
 const BoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -101,12 +102,8 @@ export function Patients() {
                     sx={PatientTableStyle}
                 />
 
-                <motion.div
+                <DefaultMotion
                     key={selectedPatientInfo?.patient.id}
-                    initial={{ opacity: 0, x: 100 }}
-                    animate={{ opacity: 1, x: 0.5 }}
-                    exit={{ opacity: 0, x: -100 }}
-                    transition={{ duration: 1 }}
                     style={{
                         display: "flex",
                         justifyContent: "center",
@@ -128,7 +125,7 @@ export function Patients() {
                             }
                         />
                     )}
-                </motion.div>
+                </DefaultMotion>
             </Stack>
         </Box>
     );

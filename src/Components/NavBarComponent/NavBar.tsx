@@ -101,6 +101,7 @@ function NavBar() {
                             border: "none",
                             boxShadow: "none",
                         }}
+                        disableGutters
                     >
                         <AccordionSummary
                             expandIcon={

@@ -2,6 +2,7 @@ import { Avatar, Box, Stack, SxProps, Theme, Typography } from "@mui/material";
 import { Appointment } from "../../../api/AppointmentAPI";
 import { Patient } from "../../../api/PatientAPI";
 import { format } from "date-fns";
+import { teal } from "@mui/material/colors";
 
 const PatientNameStyle: SxProps<Theme> = {
     whiteSpace: "nowrap",
@@ -45,9 +46,18 @@ export default function PatientInfoTopContent({
             justifyContent={nextAppointment ? "space-between" : "flex-start"}
         >
             <Avatar
-                src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-                sx={{ width: "150px", height: "150px" }}
-            />
+                src=""
+                sx={{
+                    bgcolor: teal[500],
+                    width: "150px",
+                    height: "150px",
+                    fontFamily: "monsterat",
+                    fontSize: "30px",
+                    fontWeight: "bold",
+                }}
+            >
+                {patient.f_name}
+            </Avatar>
             <Stack direction={"column"} spacing={"8px"}>
                 <Typography
                     variant="h3"
