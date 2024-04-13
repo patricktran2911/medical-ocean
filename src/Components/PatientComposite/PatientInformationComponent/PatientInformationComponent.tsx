@@ -8,6 +8,7 @@ import { EmergencyContact } from "../../../api/EmergencyContactAPI";
 import { PatientContactInfo } from "./PatientContactInfoComponent";
 import { Insurance } from "../../../api/InsuranceAPI";
 import { PatientInsuranceInfo } from "./PatientInsuranceInfoComponent";
+import { Height } from "@mui/icons-material";
 
 interface PatientInformationProps {
     patient: Patient;
@@ -18,6 +19,8 @@ interface PatientInformationProps {
 }
 
 const ContainerStyle: SxProps<Theme> = {
+    width: "100%",
+    height: "100%",
     backgroundColor: "lightcyan",
     borderRadius: "32px",
     whiteSpace: "nowrap",

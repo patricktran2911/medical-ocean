@@ -10,6 +10,7 @@ import {
     getEmergencyContact,
 } from "../../api/EmergencyContactAPI";
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
+import { motion } from "framer-motion";
 
 const BoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -100,14 +101,34 @@ export function Patients() {
                     sx={PatientTableStyle}
                 />
 
-                {selectedPatientInfo && (
-                    <PatientInformation
-                        patient={selectedPatientInfo.patient}
-                        nextAppointment={selectedPatientInfo.nextAppointment}
-                        insurance={selectedPatientInfo.insurance}
-                        emergencyContact={selectedPatientInfo.emergencyContact}
-                    />
-                )}
+                <motion.div
+                    key={selectedPatientInfo?.patient.id}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0.5 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 1 }}
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                        width: "98%",
+                        height: "98%",
+                    }}
+                >
+                    {selectedPatientInfo && (
+                        <PatientInformation
+                            patient={selectedPatientInfo.patient}
+                            nextAppointment={
+                                selectedPatientInfo.nextAppointment
+                            }
+                            insurance={selectedPatientInfo.insurance}
+                            emergencyContact={
+                                selectedPatientInfo.emergencyContact
+                            }
+                        />
+                    )}
+                </motion.div>
             </Stack>
         </Box>
     );
