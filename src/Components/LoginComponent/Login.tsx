@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./Login.css";
 import { AuthContext } from "../../App";
-import logo from "../../Assets/Images/Icon152.webp";
+import logo from "../../Assets/Images/Icon152.png";
 import {
     Box,
     Button,

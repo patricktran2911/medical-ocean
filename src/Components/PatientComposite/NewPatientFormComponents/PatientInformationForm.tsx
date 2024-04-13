@@ -14,7 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useRef, useState, useEffect } from "react";
 import { NewPatient, createPatient } from "../../../api/PatientAPI";
 import { Theme } from "@emotion/react";
-import logo from "../../../Assets/Images/Icon120.webp";
+import logo from "../../../Assets/Images/Icon120.png";
 
 interface ErrorStates {
     f_name: boolean;
