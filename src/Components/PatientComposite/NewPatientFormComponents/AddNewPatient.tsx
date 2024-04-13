@@ -12,6 +12,7 @@ const useContainerBoxStyle: SxProps<Theme> = {
     display: "flex",
     overflow: "auto",
     width: "100%",
+    minWidth: "1500px",
     minHeight: "1000px",
     height: "100%",
     padding: "25px",
@@ -26,7 +27,7 @@ const useFormContainerStyle: SxProps<Theme> = {
     width: "90%",
     height: "90%",
     padding: "50px",
-    maxHeight: "900px",
+    maxHeight: "950px",
     backgroundColor: "white",
     borderRadius: "32px",
 };
@@ -37,10 +38,6 @@ export function AddingNewPatient() {
         index: 0,
         data: null,
     });
-
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-    }
 
     function StepContent({ index, data }: { index: number; data: any }) {
         switch (index) {

@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useRef, useState, useEffect } from "react";
 import { NewPatient, createPatient } from "../../../api/PatientAPI";
 import { Theme } from "@emotion/react";
+import logo from "../../../Assets/Images/Icon120.webp";
 
 interface ErrorStates {
     f_name: boolean;
@@ -127,9 +128,16 @@ export function NewPatientInformationForm({
                 height: "100%",
             }}
         >
-            <Typography variant="h2" fontWeight={"bold"} alignSelf={"center"}>
-                PATIENT INFORMATION
-            </Typography>
+            <Stack direction={"row"} spacing={10}>
+                <Box
+                    component={"img"}
+                    src={logo}
+                    sx={{ width: 100, height: 100 }}
+                />
+                <Typography variant="h2" fontWeight={"bold"} alignSelf={"end"}>
+                    PATIENT INFORMATION
+                </Typography>
+            </Stack>
             <br />
             <Grid container columnSpacing={10} rowSpacing={10}>
                 <Grid item xs={4}>
