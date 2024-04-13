@@ -18,7 +18,7 @@ export interface Patient {
     preferred_language: string | null;
     occupation: string | null;
     ethnicity: string | null;
-    special_allergies: string[] | null;
+    special_allergies: string | null;
     created_date: Date;
 }
 
@@ -57,26 +57,43 @@ export async function getPatient(id: string): Promise<Patient> {
     return data;
 }
 
-export async function createPatient(
-    f_name: string,
-    l_name: string,
-    dob: string,
-    address: string,
-    phone_number: string,
-    gender: string,
-    m_name: string | null
-): Promise<Patient> {
+export type NewPatient = {
+    f_name: string;
+    m_name: string | null;
+    l_name: string;
+    gender: string;
+    email: string | null;
+    dob: string;
+    blood_group: string | null;
+    marital_status: string | null;
+    rh_factor: string | null;
+    address: string;
+    phone_number: string;
+    preferred_language: string | null;
+    occupation: string | null;
+    ethnicity: string | null;
+    special_allergies: string | null;
+};
+export async function createPatient(newPatient: NewPatient): Promise<Patient> {
     const { data, error } = await supabase
         .from("patient")
         .insert([
             {
-                f_name: f_name,
-                m_name: m_name,
-                l_name: l_name,
-                dob: dob,
-                address: address,
-                phone_number: phone_number,
-                gender: gender,
+                f_name: newPatient.f_name,
+                m_name: newPatient.m_name,
+                l_name: newPatient.l_name,
+                gender: newPatient.gender,
+                email: newPatient.email,
+                dob: newPatient.dob,
+                blood_group: newPatient.blood_group,
+                marital_status: newPatient.marital_status,
+                rh_factor: newPatient.rh_factor,
+                address: newPatient.address,
+                phone_number: newPatient.phone_number,
+                preferred_language: newPatient.preferred_language,
+                occupation: newPatient.occupation,
+                ethnicity: newPatient.ethnicity,
+                special_allergies: newPatient.special_allergies,
             },
         ])
         .select()

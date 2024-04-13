@@ -70,6 +70,14 @@ export async function getStaffIsWorkingToday(): Promise<StaffWorkingStatus[]> {
 }
 
 export async function staffCheckIn(id: string): Promise<StaffWorkingStatus> {
+    await supabase
+        .from("staff_working_status")
+        .update({
+            is_working: false,
+        })
+        .eq("staff_id", id)
+        .eq("is_working", true);
+
     const { data, error } = await supabase
         .from("staff_working_status")
         .insert([

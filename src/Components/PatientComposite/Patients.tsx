@@ -10,6 +10,8 @@ import {
     getEmergencyContact,
 } from "../../api/EmergencyContactAPI";
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
+import { motion } from "framer-motion";
+import DefaultMotion from "../../Utility/DefaultMotion";
 
 const BoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -100,14 +102,30 @@ export function Patients() {
                     sx={PatientTableStyle}
                 />
 
-                {selectedPatientInfo && (
-                    <PatientInformation
-                        patient={selectedPatientInfo.patient}
-                        nextAppointment={selectedPatientInfo.nextAppointment}
-                        insurance={selectedPatientInfo.insurance}
-                        emergencyContact={selectedPatientInfo.emergencyContact}
-                    />
-                )}
+                <DefaultMotion
+                    key={selectedPatientInfo?.patient.id}
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                        width: "98%",
+                        height: "98%",
+                    }}
+                >
+                    {selectedPatientInfo && (
+                        <PatientInformation
+                            patient={selectedPatientInfo.patient}
+                            nextAppointment={
+                                selectedPatientInfo.nextAppointment
+                            }
+                            insurance={selectedPatientInfo.insurance}
+                            emergencyContact={
+                                selectedPatientInfo.emergencyContact
+                            }
+                        />
+                    )}
+                </DefaultMotion>
             </Stack>
         </Box>
     );

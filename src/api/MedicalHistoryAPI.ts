@@ -4,9 +4,8 @@ import { Patient } from "./PatientAPI";
 export interface MedicalHistory {
     id: string;
     medical_conditions: string | null;
-    allergies: string | null;
     current_medications: string | null;
-    patient: Patient;
+    patient_id: string;
 }
 
 export async function getMedicalHistory(
@@ -16,8 +15,7 @@ export async function getMedicalHistory(
         .from("medical_history")
         .select(
             `
-        *,
-        patient(*)
+        *
     `
         )
         .eq("patient_id", patient_id);

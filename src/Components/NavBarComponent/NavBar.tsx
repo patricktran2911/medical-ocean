@@ -8,12 +8,15 @@ import {
     Link,
     Box,
     Theme,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
 } from "@mui/material";
 import { Drawer, List, Toolbar } from "@mui/material";
 import { AuthContext } from "../../App";
 import { staffCheckout } from "../../api/StaffAPI";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import { Image } from "@mui/icons-material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -91,19 +94,61 @@ function NavBar() {
                             Appointments
                         </Typography>
                     </Link>
-                    <Link
-                        component={"button"}
-                        sx={LinkStyleSxProps}
-                        onClick={() => handleNavigation("/patients")}
+
+                    <Accordion
+                        sx={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            boxShadow: "none",
+                        }}
+                        disableGutters
                     >
-                        <Typography variant="h6" fontWeight={500}>
-                            Patients
-                        </Typography>
-                    </Link>
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="secondary"
+                                    fontSize="large"
+                                />
+                            }
+                            sx={{ padding: "0", margin: "0", height: "50px" }}
+                        >
+                            <Typography
+                                variant="h6"
+                                fontWeight={500}
+                                sx={LinkStyleSxProps}
+                            >
+                                Patients
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Link
+                                component={"button"}
+                                sx={LinkStyleSxProps}
+                                onClick={() =>
+                                    handleNavigation("/patients/all-patients")
+                                }
+                            >
+                                <Typography variant="h6" fontWeight={500}>
+                                    All Patients
+                                </Typography>
+                            </Link>
+                            <Link
+                                component={"button"}
+                                sx={LinkStyleSxProps}
+                                onClick={() =>
+                                    navigate("/patients/new-patient-form")
+                                }
+                            >
+                                <Typography variant="h6" fontWeight={500}>
+                                    Create New Patient
+                                </Typography>
+                            </Link>
+                        </AccordionDetails>
+                    </Accordion>
                     <Link
                         component={"button"}
                         sx={LinkStyleSxProps}
-                        onClick={() => handleNavigation("/medical_staffs")}
+                        onClick={() => handleNavigation("/medical-staffs")}
                     >
                         <Typography variant="h6" fontWeight={500}>
                             Medical Staff
