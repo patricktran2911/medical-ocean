@@ -227,7 +227,7 @@ export function NewPatientInformationForm({
                     />
                 </Grid>
                 <Grid item xs={5}>
-                    <Typography color={errors.f_name ? "red" : "black"}>
+                    <Typography color={errors.phone_number ? "red" : "black"}>
                         Phone Number*
                     </Typography>
                     <TextField

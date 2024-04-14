@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import "./Login.css";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../../App";
 import logo from "../../Assets/Images/Icon152.png";
 import {
@@ -64,6 +63,8 @@ const SubmitButtonStyle: SxProps<Theme> = {
 };
 
 function Login() {
+    const firstRef = useRef<HTMLInputElement>(null);
+
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
@@ -81,6 +82,10 @@ function Login() {
     const passwordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
+
+    useEffect(() => {
+        firstRef.current?.focus();
+    }, []);
 
     const Submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -143,6 +148,7 @@ function Login() {
                 </Typography>
                 <Box component="form" onSubmit={Submit} sx={FormStyle}>
                     <TextField
+                        ref={firstRef}
                         onChangeCapture={handleOnChange}
                         sx={TextFieldStyle}
                         label="Username"

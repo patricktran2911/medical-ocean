@@ -1,4 +1,3 @@
-import { SxProps, Theme } from "@mui/material";
 import { MotionStyle, motion } from "framer-motion";
 
 export default function DefaultMotion({
