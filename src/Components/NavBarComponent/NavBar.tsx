@@ -143,6 +143,17 @@ function NavBar() {
                                     Create New Patient
                                 </Typography>
                             </Link>
+                            <Link
+                                component={"button"}
+                                sx={LinkStyleSxProps}
+                                onClick={() =>
+                                    navigate("/patients/Search-for-patients")
+                                }
+                            >
+                                <Typography variant="h6" fontWeight={500}>
+                                    Search for Patient
+                                </Typography>
+                            </Link>
                         </AccordionDetails>
                     </Accordion>
                     <Link
