@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Patient, getAllPatients } from "../../api/PatientAPI";
-import { Box, Stack, SxProps } from "@mui/material";
+import { Box, Button, Stack, SxProps } from "@mui/material";
 import { Theme } from "@emotion/react";
 import { PatientTable } from "../ReusableComponent/PatientTable";
 import { PatientInformation } from "./PatientInformationComponent/PatientInformationComponent";

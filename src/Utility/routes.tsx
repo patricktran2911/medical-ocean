@@ -7,7 +7,6 @@ import MedicalStaff from "../Components/MedicalStaff";
 import TeamMember from "../Components/Team_Member";
 import Login from "../Components/LoginComponent/Login";
 import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormComponents/AddNewPatient";
-import { Searchforpatients } from "../Components/PatientComposite/Searchforpatients";
 
 // export const MainRoutes = () => (
 //     <Routes>
@@ -48,6 +47,5 @@ export const PatientRoutes = () => (
     <Routes>
         <Route path="all-patients" element={<Patients />} />
         <Route path="new-patient-form" element={<AddingNewPatient />} />
-        <Route path="Search-for-patients" element={<Searchforpatients />} />
     </Routes>
 );

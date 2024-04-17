@@ -8,8 +8,11 @@ import {
     SxProps,
     Theme,
     TableContainerProps,
+    Autocomplete,
+    TextField,
 } from "@mui/material";
 import { Patient } from "../../api/PatientAPI";
+import { useEffect, useState } from "react";
 
 const useTableContainerStyle: SxProps<Theme> = {
     backgroundColor: "white",
@@ -74,8 +77,11 @@ export function PatientTable({
     onSelect,
     sx = undefined,
 }: PatientTableProps) {
+    const [result, setResult] = useState<Patient[]>(patients);
     var mergeContainerStyle: SxProps<Theme> = sx ? sx : useTableContainerStyle;
-
+    useEffect(() => {
+        setResult(patients);
+    }, [patients]);
     return (
         <TableContainer sx={mergeContainerStyle}>
             <Table sx={{ borderCollapse: "unset" }}>
@@ -96,8 +102,33 @@ export function PatientTable({
                         <TableCell sx={useTableHeadCellStyle}>Email</TableCell>
                     </TableRow>
                 </TableHead>
+                <Autocomplete
+                    sx={{ width: 300 }}
+                    options={patients.map(
+                        (patient) => `${patient.f_name} ${patient.l_name}`
+                    )}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Patient" />
+                    )}
+                    value={null}
+                    onChange={(e, value) => {
+                        setResult(
+                            patients.filter((patient) => {
+                                if (value === null) {
+                                    return true;
+                                }
+                                if (
+                                    `${patient.f_name} ${patient.l_name}` ===
+                                    value
+                                ) {
+                                    return true;
+                                }
+                            })
+                        );
+                    }}
+                />
                 <TableBody>
-                    {patients.map((patient) => (
+                    {result.map((patient) => (
                         <TableRow
                             sx={useTableBodyRowStyle}
                             key={patient.id}
