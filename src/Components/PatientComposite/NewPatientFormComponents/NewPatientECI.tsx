@@ -6,7 +6,6 @@ import {
     TextField,
     Theme,
     Divider,
-    Button,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -14,6 +13,7 @@ import {
     createEmergencyContact,
 } from "../../../api/EmergencyContactAPI";
 import { CreateInsurance, createInsurance } from "../../../api/InsuranceAPI";
+import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
 
 const TextFieldStyleProps: SxProps<Theme> = {
     "& .MuiInputBase-root": {
@@ -310,17 +310,19 @@ export function NewPatientECI({
                     paddingTop: 10,
                 }}
             >
-                <Button
+                <ReusableButton
+                    text="Back"
                     variant="contained"
                     size="large"
                     color="error"
                     onClick={onTapBack}
-                >
-                    <Typography>Back</Typography>
-                </Button>
-                <Button variant="contained" size="large" onClick={handleSubmit}>
-                    <Typography>Next</Typography>
-                </Button>
+                />
+                <ReusableButton
+                    text="Next"
+                    variant="contained"
+                    size="large"
+                    onClick={handleSubmit}
+                />
             </Box>
         </Box>
     );

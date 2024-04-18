@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "../Components/DashboardComposite/Dashboard";
-import Appointments from "../Components/Appointments";
+import Appointments from "../Components/AppointmentsComposite/Appointments";
 import { Patients } from "../Components/PatientComposite/Patients";
-import MedicalStaff from "../Components/MedicalStaff";
 import TeamMember from "../Components/Team_Member";
 import Login from "../Components/LoginComponent/Login";
 import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormComponents/AddNewPatient";
+import Staffs from "../Components/Staffs";
 
 export const MainRoutes = () => (
     <Routes>
@@ -19,7 +19,7 @@ export const MainRoutes = () => (
         <Route path="patients">
             <Route path="*" element={<PatientRoutes />} />
         </Route>
-        <Route path="medical-staffs" element={<MedicalStaff />} />
+        <Route path="staffs" element={<Staffs />} />
     </Routes>
 );
 
