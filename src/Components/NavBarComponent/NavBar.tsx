@@ -89,23 +89,12 @@ function NavBar() {
                     >
                         <Typography sx={LinkStyleSxProps}>Dashboard</Typography>
                     </Link>
-                    <Link
-                        component={"button"}
-                        sx={{ textDecoration: "none" }}
-                        onClick={() => handleNavigation("/appointments")}
-                    >
-                        <Typography sx={LinkStyleSxProps}>
-                            Appointments
-                        </Typography>
-                    </Link>
-
                     <Accordion
                         sx={{
                             backgroundColor: "transparent",
                             border: "none",
                             boxShadow: "none",
                         }}
-                        disableGutters
                     >
                         <AccordionSummary
                             expandIcon={
@@ -114,7 +103,57 @@ function NavBar() {
                                     fontSize="large"
                                 />
                             }
-                            sx={{ padding: "0", margin: "0", height: "50px" }}
+                            sx={{ padding: "0", margin: "0" }}
+                        >
+                            <Typography sx={LinkStyleSxProps}>
+                                Appointment
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Link
+                                component={"button"}
+                                sx={{ textDecoration: "none" }}
+                                onClick={() =>
+                                    handleNavigation(
+                                        "/appointment/all-appointments"
+                                    )
+                                }
+                            >
+                                <Typography sx={AccordionStyleSxProps}>
+                                    • All Appointments
+                                </Typography>
+                            </Link>
+                            <Link
+                                component={"button"}
+                                sx={{ textDecoration: "none" }}
+                                onClick={() =>
+                                    navigate(
+                                        "/appointment/create-new-appointment"
+                                    )
+                                }
+                            >
+                                <Typography sx={AccordionStyleSxProps}>
+                                    • Create New Appointment
+                                </Typography>
+                            </Link>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion
+                        sx={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            boxShadow: "none",
+                        }}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="secondary"
+                                    fontSize="large"
+                                />
+                            }
+                            sx={{ padding: "0", margin: "0" }}
                         >
                             <Typography sx={LinkStyleSxProps}>
                                 Patients

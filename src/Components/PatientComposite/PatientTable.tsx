@@ -26,7 +26,7 @@ export function PatientTable({ patients, onSelect, sx }: PatientTableProps) {
 
     return (
         <TableContainer sx={mergeContainerStyle}>
-            <Table sx={{ borderCollapse: "unset" }}>
+            <Table sx={TableStyleSx.table}>
                 <TableHead sx={TableStyleSx.head}>
                     <TableRow sx={TableStyleSx.headRow}>
                         <TableCell sx={TableStyleSx.headCell}>

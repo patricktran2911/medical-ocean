@@ -14,7 +14,7 @@ interface IViewModel {
     staff?: Staff;
 }
 
-export default function Appointments() {
+export default function AllAppointments() {
     const [IViewModel, setIVM] = useState<IViewModel>({
         rows: [],
         staff: undefined,
