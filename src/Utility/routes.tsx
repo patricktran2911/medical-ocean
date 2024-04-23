@@ -8,6 +8,7 @@ import Login from "../Components/LoginComponent/Login";
 import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormComponents/AddNewPatient";
 import Staffs from "../Components/Staffs";
 import AllAppointments from "../Components/AppointmentsComposite/AllAppointment";
+import LabReport from "../Components/LabReportComposite/LabReport";
 
 export const MainRoutes = () => (
     <Routes>
@@ -34,7 +35,9 @@ export const AppointmentRoutes = () => (
 
 export const PatientRoutes = () => (
     <Routes>
-        <Route path="all-patients" element={<Patients />} />
+        <Route path="all-patients/" element={<Patients />} />
+        <Route path="all-patients/:patientId" element={<Patients />} />
         <Route path="new-patient-form" element={<AddingNewPatient />} />
+        <Route path="lab-reports/:patientId" element={<LabReport />} />
     </Routes>
 );

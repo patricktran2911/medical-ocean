@@ -7,7 +7,7 @@ export const TableStyleSx: Record<string, SxProps<Theme>> = {
         overflowY: "auto",
         overflowX: "auto",
         WebkitBoxShadow: theme.defaultBoxShadow,
-        scrollbarWidth: "none",
+        scrollbarWidth: "thin",
     }),
     table: {
         borderCollapse: "unset",
@@ -22,7 +22,7 @@ export const TableStyleSx: Record<string, SxProps<Theme>> = {
         zIndex: "1",
     }),
     headRow: {
-        height: "40px",
+        height: "80px",
     },
     headCell: (theme) => ({
         fontSize: theme.typography.h5,
@@ -42,13 +42,12 @@ export const TableStyleSx: Record<string, SxProps<Theme>> = {
     bodyRow: {
         py: "0.5rem",
         backgroundColor: "white",
-
-        ":hover": {
-            scale: "1.015",
-        },
     },
     bodyCell: (theme) => ({
-        fontSize: theme.typography.h6,
+        whiteSpace: "nowrap",
+
+        fontSize: theme.typography.subtitle1,
+        fontWeight: theme.typography.fontWeightMedium,
         ":hover": {
             color: "red",
         },

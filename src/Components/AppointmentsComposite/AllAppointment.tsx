@@ -7,7 +7,7 @@ import { getPatient } from "../../api/PatientAPI";
 import { Box, Paper, Stack } from "@mui/material";
 import { Staff, getStaffWithId } from "../../api/StaffAPI";
 import DefaultMotion from "../../Utility/DefaultMotion";
-import ALStaffInformation from "./AppointmentListComponent/ALStaffInfomation";
+import ALStaffInformation from "./AppointmentListComponent/ALInfomation";
 
 interface IViewModel {
     rows: IAppointmentRowProps[];
@@ -83,37 +83,45 @@ export default function AllAppointments() {
                     }}
                     sx={{
                         height: "100%",
-                        width: "60%",
+                        width: "50%",
+                        minHeight: "800px",
                     }}
                 />
                 <Box
                     sx={{
                         width: "30%",
                         height: "100%",
+                        minHeight: "1200px",
                     }}
                 >
-                    <DefaultMotion key={selectedRow?.appointment.id}>
-                        <Box
-                            sx={(theme) => ({
-                                display: "flex",
-                                width: "100%",
-                                height: "100%",
-                                bgcolor: "white",
-                                borderRadius: "32px",
-                                WebkitBoxShadow: theme.defaultBoxShadow,
-                            })}
-                        >
-                            {staff && (
+                    {staff && selectedRow && (
+                        <DefaultMotion key={selectedRow?.appointment.id}>
+                            <Box
+                                sx={(theme) => ({
+                                    display: "flex",
+                                    width: "100%",
+                                    height: "100%",
+                                    minWidth: "800px",
+                                    minHeight: "1200px",
+                                    bgcolor: "white",
+                                    borderRadius: "32px",
+                                    WebkitBoxShadow: theme.defaultBoxShadow,
+                                })}
+                            >
                                 <ALStaffInformation
                                     staff={staff}
+                                    patient={selectedRow.patient}
+                                    appointment={selectedRow.appointment}
                                     sx={{
+                                        height: "100%",
+                                        width: "100%",
                                         pt: "30px",
-                                        pl: "30px",
+                                        px: "30px",
                                     }}
                                 />
-                            )}
-                        </Box>
-                    </DefaultMotion>
+                            </Box>
+                        </DefaultMotion>
+                    )}
                 </Box>
             </Stack>
         </Box>

@@ -16,7 +16,7 @@ import { Appointment } from "../../../api/AppointmentAPI";
 import { Patient } from "../../../api/PatientAPI";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { TableStyleSx } from "../../ReusableComponent/PatientTableStyle";
+import { TableStyleSx } from "../../ReusableComponent/TableStyle";
 import { mergeSx } from "merge-sx";
 
 export interface IAppointmentRowProps {

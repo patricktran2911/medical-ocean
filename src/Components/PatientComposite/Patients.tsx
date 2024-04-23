@@ -10,8 +10,8 @@ import {
     getEmergencyContact,
 } from "../../api/EmergencyContactAPI";
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
-import { motion } from "framer-motion";
 import DefaultMotion from "../../Utility/DefaultMotion";
+import { useParams } from "react-router-dom";
 
 const BoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -40,15 +40,16 @@ interface PatientInfo {
 }
 
 export function Patients() {
+    const { patientId } = useParams();
     const [patientInfos, setPatientInfos] = useState<PatientInfo[]>([]);
     const [selectedPatientInfo, setSelectedPatientInfo] =
         useState<PatientInfo | null>(null);
 
     useEffect(() => {
-        fetchPatients();
+        fetchPatients(patientId);
     }, []);
 
-    async function fetchPatients() {
+    async function fetchPatients(patientId?: string) {
         const patients = await getAllPatients();
         const promises = patients.map(async (patient) => {
             const appointments = await getPatientAppointments(patient.id);
@@ -65,7 +66,7 @@ export function Patients() {
                     upcomingAppointments.length > 0
                         ? upcomingAppointments[0]
                         : undefined,
-                insurance: insurance.length > 0 ? insurance[0] : undefined,
+                insurance: insurance ?? undefined,
                 emergencyContact:
                     emergencyContact.length > 0
                         ? emergencyContact[0]
@@ -74,6 +75,14 @@ export function Patients() {
         });
         const patientInfos = await Promise.all(promises);
         setPatientInfos(patientInfos);
+        if (patientId) {
+            const patient = patientInfos.find(
+                (p) => p.patient.id === patientId
+            );
+            if (patient) {
+                setSelectedPatientInfo(patient);
+            }
+        }
     }
 
     function handleSelectedPatient(patient: Patient) {

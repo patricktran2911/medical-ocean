@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import { Box, SxProps, Theme, ThemeProvider, createTheme } from "@mui/material";
 import { ThemeOptions } from "@mui/material/styles";
-import NavBar from "./Components/NavBarComponent/NavBar";
+import { typographyDefault } from "./Utility/DefaultTypography";
 
 export const themeOptions: ThemeOptions = {
     defaultBoxShadow: "-1px 5px 10px 1px #000000",
@@ -22,9 +22,7 @@ export const themeOptions: ThemeOptions = {
             main: "#f50057",
         },
     },
-    typography: {
-        fontFamily: "montserrat",
-    },
+    typography: typographyDefault,
     transitions: {
         duration: {
             shortest: 150,

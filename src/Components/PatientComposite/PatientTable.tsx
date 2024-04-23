@@ -9,7 +9,7 @@ import {
     Theme,
 } from "@mui/material";
 import { Patient } from "../../api/PatientAPI";
-import { TableStyleSx } from "../ReusableComponent/PatientTableStyle";
+import { TableStyleSx } from "../ReusableComponent/TableStyle";
 import { mergeSx } from "merge-sx";
 
 interface PatientTableProps {
