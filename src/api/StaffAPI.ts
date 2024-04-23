@@ -2,11 +2,12 @@ import { supabase } from "./supabaseInterface";
 
 export interface Staff {
     id: string;
+    profile_image_url?: string;
     f_name: string;
     l_name: string;
     employee_id: string;
     phone_number: string;
-    title: string | null;
+    title: string;
     email: string;
 }
 

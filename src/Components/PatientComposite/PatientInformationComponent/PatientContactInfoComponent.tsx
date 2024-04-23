@@ -7,7 +7,7 @@ interface PatientContactInfoProps {
 
 const ContainerStyle: SxProps<Theme> = {
     padding: "20px",
-    backgroundColor: "lightgreen",
+    backgroundColor: "lightblue",
     borderRadius: "32px",
 };
 

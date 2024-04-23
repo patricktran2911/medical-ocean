@@ -1,10 +1,7 @@
-import React, { useRef, useState } from "react";
-import { EmergencyContact } from "../../../api/EmergencyContactAPI";
-import { Insurance } from "../../../api/InsuranceAPI";
-import { MedicalHistory } from "../../../api/MedicalHistoryAPI";
-import { Box, Button, Stack, SxProps, Theme, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, SxProps, Theme } from "@mui/material";
 import { NewPatientInformationForm } from "./PatientInformationForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { NewPatientECI } from "./NewPatientECI";
 import { useNavigate } from "react-router-dom";
 import DefaultMotion from "../../../Utility/DefaultMotion";
@@ -55,7 +52,7 @@ export function AddingNewPatient() {
                     <NewPatientECI
                         patient_id={data}
                         onSuccess={(patient_id) => {
-                            navigate("/patients");
+                            navigate("/patients/all-patients");
                         }}
                         onTapBack={() => {
                             setStep({ index: 0, data: null });

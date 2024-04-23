@@ -45,6 +45,7 @@ async function getMonthlyNumberOfPatients(
 const useContainerStyle: SxProps<Theme> = {
     width: "100%",
     height: "100%",
+    minHeight: "500px",
     maxHeight: "700px",
     maxWidth: "1500px",
     background: "white",
