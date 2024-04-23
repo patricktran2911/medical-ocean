@@ -1,4 +1,4 @@
-import { Avatar, Box, Stack, SxProps, Theme, Typography } from "@mui/material";
+import { Box, Stack, SxProps, Theme } from "@mui/material";
 import { Patient } from "../../../api/PatientAPI";
 import { format } from "date-fns";
 import { Appointment } from "../../../api/AppointmentAPI";
@@ -9,6 +9,7 @@ import { PatientContactInfo } from "./PatientContactInfoComponent";
 import { Insurance } from "../../../api/InsuranceAPI";
 import { PatientInsuranceInfo } from "./PatientInsuranceInfoComponent";
 import { Height } from "@mui/icons-material";
+import { PatientEditInfromation } from "./PatientEditInfromation";
 
 interface PatientInformationProps {
     patient: Patient;
@@ -56,6 +57,10 @@ export function PatientInformation({
                         emergencyContact={emergencyContact}
                     />
                 )}
+                <PatientEditInfromation
+                    patient={patient}
+                    nextAppointment={nextAppointment}
+                ></PatientEditInfromation>
             </Stack>
         </Box>
     );
