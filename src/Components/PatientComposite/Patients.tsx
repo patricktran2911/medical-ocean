@@ -12,6 +12,10 @@ import {
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
 import { motion } from "framer-motion";
 import DefaultMotion from "../../Utility/DefaultMotion";
+import {
+    DatabaseRTTable,
+    subscribeRTTable,
+} from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
 const BoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -47,6 +51,10 @@ export function Patients() {
     useEffect(() => {
         fetchPatients();
     }, []);
+
+    const handleChangeOfPatientInfos = () => {
+        fetchPatients();
+    };
 
     async function fetchPatients() {
         const patients = await getAllPatients();

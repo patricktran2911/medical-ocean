@@ -2,6 +2,7 @@ import {
     Avatar,
     Box,
     Button,
+    Grid,
     Modal,
     Stack,
     SxProps,
@@ -9,7 +10,7 @@ import {
     Theme,
     Typography,
 } from "@mui/material";
-import { Patient } from "../../../api/PatientAPI";
+import { Patient, updatePatient } from "../../../api/PatientAPI";
 import { format } from "date-fns";
 import { Appointment } from "../../../api/AppointmentAPI";
 import PatientInfoTopContent from "./PatientInfoTopComponent";
@@ -37,7 +38,7 @@ const modalStyle = {
 interface PatientInformationProps {
     patient: Patient;
     nextAppointment?: Appointment;
-    emergencyContact: EmergencyContact;
+    emergencyContact?: EmergencyContact;
     insurance?: Insurance;
     sx?: SxProps<Theme>;
 }
@@ -51,6 +52,14 @@ const ContainerStyle: SxProps<Theme> = {
     WebkitBoxShadow: "-1px 5px 10px 1px #000000",
 };
 
+interface IPatientInfo {
+    f_name: string;
+    l_name: string;
+    email: string;
+    phone_number: string;
+    address: string;
+}
+
 export function PatientEditInfromation({
     patient,
     nextAppointment,
@@ -60,14 +69,36 @@ export function PatientEditInfromation({
 }: PatientInformationProps) {
     let patientName = `${patient.f_name} ${patient.l_name}`;
     let patientAge = `${patient.age}`;
-    let name = `${emergencyContact.f_name} ${emergencyContact.l_name}`;
+    let name = `${emergencyContact?.f_name} ${emergencyContact?.l_name}`;
+    const [patientInfo, setPatientInfo] = useState<IPatientInfo>({
+        f_name: patient.f_name,
+        l_name: patient.l_name,
+        email: patient.email ?? "",
+        phone_number: patient.phone_number,
+        address: patient.address,
+    });
 
     const [openModal, setOpenModal] = useState(false);
     const handleModalOpen = () => {
         setOpenModal(true);
     };
 
-    const handleModalClose = () => {
+    function onChangeTextField(e: React.ChangeEvent<HTMLInputElement>) {
+        setPatientInfo({
+            ...patientInfo,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handleModalClose = async () => {
+        await updatePatient(
+            patient.id,
+            patientInfo.f_name,
+            patientInfo.l_name,
+            patientInfo.email ?? "",
+            patientInfo.phone_number,
+            patientInfo.address
+        );
         setOpenModal(false);
     };
 
@@ -83,118 +114,58 @@ export function PatientEditInfromation({
                 aria-describedby="modal-description"
             >
                 <Box sx={modalStyle}>
-                    <Stack
-                        direction={{ xs: "column", lg: "row" }}
-                        spacing={"240px"}
+                    <Grid
+                        container
+                        columnSpacing={"50px"}
+                        rowSpacing={"50px"}
+                        bgcolor={"green"}
                     >
-                        {" "}
-                        <Typography variant="h6" component="h2">
-                            Frist Name
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            component="h2"
-                            sx={{
-                                marginBottom: "16px", // Add spacing below the Typography component
-                            }}
-                        >
-                            Last Name
-                        </Typography>{" "}
-                    </Stack>
-                    <TextField
-                        label={`${patient.f_name}`}
-                        placeholder="Change Patient Name"
-                        style={{ width: "250px" }}
-                    />
-                    <TextField
-                        label={`${patient.l_name}`}
-                        placeholder="Change Patient Name"
-                        style={{ width: "250px" }}
-                        sx={{
-                            marginLeft: "100px",
-                        }}
-                    />
-                    <Typography
-                        id="modal-title"
-                        variant="h6"
-                        component="h2"
-                        sx={{
-                            marginTop: "16px",
-                        }}
-                    >
-                        Address:
-                    </Typography>
-                    <TextField
-                        label={`${patient.address}`}
-                        placeholder="Change Patient Address"
-                        style={{ width: "350px" }}
-                        sx={{
-                            marginBottom: "16px",
-                        }}
-                    />
-                    <Stack
-                        direction={{ xs: "column", lg: "row" }}
-                        spacing={"200px"}
-                    >
-                        <Typography variant="h6" component="h2">
-                            Phone Number:
-                        </Typography>
-                        <Typography variant="h6" component="h2">
-                            Email:
-                        </Typography>
-                    </Stack>
-                    <TextField
-                        label={`${patient.phone_number}`}
-                        placeholder="Change phone number"
-                        style={{ width: "250px", marginRight: "110px" }}
-                    />
-                    <TextField
-                        label={`${patient.email}`}
-                        placeholder="Change Email"
-                        style={{ width: "250px" }}
-                    />
-                    <Typography
-                        variant="h6"
-                        component="h2"
-                        sx={{ marginTop: "16px" }}
-                    >
-                        Emergency Contact information:
-                    </Typography>
-                    <Stack
-                        direction={{ xs: "column", lg: "row" }}
-                        spacing={"260px"}
-                        sx={{ marginTop: "16px" }}
-                    >
-                        <Typography variant="h6" component="h2">
-                            Fullname:
-                        </Typography>
-                        <Typography variant="h6" component="h2">
-                            Relationship Status:
-                        </Typography>
-                    </Stack>
-                    <TextField
-                        label={`${name}`}
-                        placeholder="Change Name"
-                        style={{ width: "250px", marginRight: "110px" }}
-                    />
-                    <TextField
-                        label={`${emergencyContact.relationship}`}
-                        placeholder="Change Relationship Status"
-                        style={{ width: "250px" }}
-                    />
-                    <Typography
-                        variant="h6"
-                        component="h2"
-                        sx={{ marginTop: "16px" }}
-                    >
-                        Phone number
-                    </Typography>
-                    <TextField
-                        label={`${emergencyContact.phone_number}`}
-                        placeholder="Change Phone number
-                        "
-                        style={{ width: "250px" }}
-                    />{" "}
+                        <Grid item xs={4}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    First Name
+                                </Typography>
+                                <TextField
+                                    name="f_name"
+                                    defaultValue={`${patient.f_name}`}
+                                    onChange={onChangeTextField}
+                                />
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Stack
+                                direction={"column"}
+                                spacing={"5px"}
+                                sx={{ width: "100%", height: "100%" }}
+                            >
+                                <Typography variant="h6" component="h2">
+                                    Last Name
+                                </Typography>
+                                <TextField
+                                    name="l_name"
+                                    defaultValue={`${patient.l_name}`}
+                                    style={{ width: "100%" }}
+                                />
+                            </Stack>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <Stack
+                                direction={"column"}
+                                spacing={"5px"}
+                                sx={{ width: "100%", height: "100%" }}
+                            >
+                                <Typography variant="h6" component="h2">
+                                    Address
+                                </Typography>
+                                <TextField
+                                    name="address"
+                                    defaultValue={`${patient.address}`}
+                                    style={{ width: "100%" }}
+                                />
+                            </Stack>
+                        </Grid>
+                    </Grid>
                     <Button
                         variant="contained"
                         onClick={handleModalClose}

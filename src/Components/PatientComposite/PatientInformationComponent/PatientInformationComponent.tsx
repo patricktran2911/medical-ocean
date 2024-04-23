@@ -57,14 +57,12 @@ export function PatientInformation({
                         emergencyContact={emergencyContact}
                     />
                 )}
-                {emergencyContact && (
-                    <PatientEditInfromation
-                        patient={patient}
-                        nextAppointment={nextAppointment}
-                        emergencyContact={emergencyContact}
-                        insurance={insurance}
-                    />
-                )}
+                <PatientEditInfromation
+                    patient={patient}
+                    nextAppointment={nextAppointment}
+                    emergencyContact={emergencyContact}
+                    insurance={insurance}
+                />
             </Stack>
         </Box>
     );

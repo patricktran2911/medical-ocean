@@ -54,3 +54,19 @@ export async function createEmergencyContact(
 
     return data;
 }
+
+export async function updateEmergencyContact(
+    emergencyContactId: string,
+    name: string,
+    relationship: string,
+    phone_number: string
+) {
+    const { data, error } = await supabase
+        .from("emergency_contact")
+        .update({
+            f_name: name,
+            relationship: relationship,
+            phone_number: phone_number,
+        })
+        .eq("id", emergencyContactId);
+}

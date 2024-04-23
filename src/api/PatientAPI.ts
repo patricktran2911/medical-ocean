@@ -103,4 +103,22 @@ export async function createPatient(newPatient: NewPatient): Promise<Patient> {
     return data;
 }
 
-// export async function updatePatient(patient_id: number)
+export async function updatePatient(
+    patient_id: string,
+    f_name: string,
+    l_name: string,
+    email: string,
+    phone_number: string,
+    address: string
+) {
+    const { data, error } = await supabase
+        .from("patient")
+        .update({
+            f_name: f_name,
+            l_name: l_name,
+            email: email,
+            phone_number: phone_number,
+            address: address,
+        })
+        .eq("id", patient_id);
+}
