@@ -43,11 +43,12 @@ function NavBar() {
     const LinkStyleSxProps: SxProps<Theme> = {
         color: "white",
         textTransform: "none",
-        fontSize: "1.2rem",
+        fontSize: (theme) => theme.typography.h6,
         textAlign: "left",
         padding: "10px",
         paddingLeft: "20px",
         paddingRight: "20px",
+        textDecoration: "none",
         transition: (theme) =>
             theme.transitions.create(["transform", "color"], {
                 duration: theme.transitions.duration.standard,
@@ -56,8 +57,13 @@ function NavBar() {
         ":hover": {
             color: "#c2caff",
             textDecoration: "none",
-            transform: "scale(1.055)",
+            transform: "scale(1.1)",
         },
+    };
+
+    const AccordionStyleSxProps: SxProps<Theme> = {
+        ...LinkStyleSxProps,
+        fontSize: (theme) => theme.typography.subtitle1,
     };
 
     const DrawerContent: React.FC = () => (
@@ -78,30 +84,17 @@ function NavBar() {
                 >
                     <Link
                         component={"button"}
-                        sx={LinkStyleSxProps}
+                        sx={{ textDecoration: "none" }}
                         onClick={() => handleNavigation("/dashboard")}
                     >
-                        <Typography variant="h6" fontWeight={500}>
-                            Dashboard
-                        </Typography>
+                        <Typography sx={LinkStyleSxProps}>Dashboard</Typography>
                     </Link>
-                    <Link
-                        component={"button"}
-                        sx={LinkStyleSxProps}
-                        onClick={() => handleNavigation("/appointments")}
-                    >
-                        <Typography variant="h6" fontWeight={500}>
-                            Appointments
-                        </Typography>
-                    </Link>
-
                     <Accordion
                         sx={{
                             backgroundColor: "transparent",
                             border: "none",
                             boxShadow: "none",
                         }}
-                        disableGutters
                     >
                         <AccordionSummary
                             expandIcon={
@@ -110,55 +103,100 @@ function NavBar() {
                                     fontSize="large"
                                 />
                             }
-                            sx={{ padding: "0", margin: "0", height: "50px" }}
+                            sx={{ padding: "0", margin: "0" }}
                         >
-                            <Typography
-                                variant="h6"
-                                fontWeight={500}
-                                sx={LinkStyleSxProps}
+                            <Typography sx={LinkStyleSxProps}>
+                                Appointment
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Link
+                                component={"button"}
+                                sx={{ textDecoration: "none" }}
+                                onClick={() =>
+                                    handleNavigation(
+                                        "/appointment/all-appointments"
+                                    )
+                                }
                             >
+                                <Typography sx={AccordionStyleSxProps}>
+                                    • All Appointments
+                                </Typography>
+                            </Link>
+                            <Link
+                                component={"button"}
+                                sx={{ textDecoration: "none" }}
+                                onClick={() =>
+                                    navigate(
+                                        "/appointment/create-new-appointment"
+                                    )
+                                }
+                            >
+                                <Typography sx={AccordionStyleSxProps}>
+                                    • Create New Appointment
+                                </Typography>
+                            </Link>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion
+                        sx={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            boxShadow: "none",
+                        }}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="secondary"
+                                    fontSize="large"
+                                />
+                            }
+                            sx={{ padding: "0", margin: "0" }}
+                        >
+                            <Typography sx={LinkStyleSxProps}>
                                 Patients
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Link
                                 component={"button"}
-                                sx={LinkStyleSxProps}
+                                sx={{ textDecoration: "none" }}
                                 onClick={() =>
                                     handleNavigation("/patients/all-patients")
                                 }
                             >
-                                <Typography variant="h6" fontWeight={500}>
-                                    All Patients
+                                <Typography sx={AccordionStyleSxProps}>
+                                    • All Patients
                                 </Typography>
                             </Link>
                             <Link
                                 component={"button"}
-                                sx={LinkStyleSxProps}
+                                sx={{ textDecoration: "none" }}
                                 onClick={() =>
                                     navigate("/patients/new-patient-form")
                                 }
                             >
-                                <Typography variant="h6" fontWeight={500}>
-                                    Create New Patient
+                                <Typography sx={AccordionStyleSxProps}>
+                                    • Create New Patient
                                 </Typography>
                             </Link>
                         </AccordionDetails>
                     </Accordion>
                     <Link
                         component={"button"}
-                        sx={LinkStyleSxProps}
-                        onClick={() => handleNavigation("/medical-staffs")}
+                        sx={{ textDecoration: "none" }}
+                        onClick={() => handleNavigation("/staffs")}
                     >
-                        <Typography variant="h6" fontWeight={500}>
-                            Medical Staff
-                        </Typography>
+                        <Typography sx={LinkStyleSxProps}>Staffs</Typography>
                     </Link>
                 </Stack>
                 <Button
                     variant="outlined"
                     color="warning"
                     sx={{
+                        textDecoration: "none",
                         ":hover": {
                             color: "red",
                             transform: "scale(1.055)",
@@ -176,30 +214,27 @@ function NavBar() {
                     }}
                     onClick={handleLogOut}
                 >
-                    <Typography variant="h6" fontWeight={500}>
-                        Log out
-                    </Typography>
+                    <Typography>Log out</Typography>
                 </Button>
             </Toolbar>
         </List>
     );
 
     return (
-        <Box sx={{ display: "flex" }}>
+        <Stack direction={"row"}>
             <Drawer
                 variant="persistent"
                 open={isOpen}
-                sx={{
+                sx={(theme) => ({
                     width: drawerWidth,
                     flexShrink: 0,
 
                     "& .MuiDrawer-paper": {
                         width: drawerWidth,
-                        background:
-                            "linear-gradient(45deg, #4c004c 0%, #6a6a89 50%, #b3b3ff 100%)",
+                        background: theme.linearGradients.purple,
                         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
                     },
-                }}
+                })}
             >
                 <DrawerContent />
             </Drawer>
@@ -219,7 +254,7 @@ function NavBar() {
             >
                 <MenuOpenIcon />
             </Button>
-        </Box>
+        </Stack>
     );
 }
 

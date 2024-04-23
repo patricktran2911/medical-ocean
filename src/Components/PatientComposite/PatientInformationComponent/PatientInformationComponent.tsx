@@ -1,4 +1,12 @@
-import { Avatar, Box, Stack, SxProps, Theme, Typography } from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Button,
+    Stack,
+    SxProps,
+    Theme,
+    Typography,
+} from "@mui/material";
 import { Patient } from "../../../api/PatientAPI";
 import { format } from "date-fns";
 import { Appointment } from "../../../api/AppointmentAPI";
@@ -9,6 +17,8 @@ import { PatientContactInfo } from "./PatientContactInfoComponent";
 import { Insurance } from "../../../api/InsuranceAPI";
 import { PatientInsuranceInfo } from "./PatientInsuranceInfoComponent";
 import { Height } from "@mui/icons-material";
+import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
+import { useNavigate } from "react-router-dom";
 
 interface PatientInformationProps {
     patient: Patient;
@@ -34,28 +44,44 @@ export function PatientInformation({
     insurance,
     sx,
 }: PatientInformationProps) {
+    const navigate = useNavigate();
     return (
         <Box sx={sx ?? ContainerStyle}>
             <Stack
                 direction={"column"}
-                sx={{ padding: "30px" }}
+                sx={{ p: "30px", height: "95%" }}
                 justifyContent={"space-between"}
-                spacing={"60px"}
             >
-                <PatientInfoTopContent
-                    patient={patient}
-                    nextAppointment={nextAppointment}
-                />
-
-                <PatientContactInfo patient={patient} />
-
-                {insurance && <PatientInsuranceInfo insurance={insurance} />}
-
-                {emergencyContact && (
-                    <PatientEmergencyInformation
-                        emergencyContact={emergencyContact}
+                <Stack direction={"column"} spacing={"60px"}>
+                    <PatientInfoTopContent
+                        patient={patient}
+                        nextAppointment={nextAppointment}
                     />
-                )}
+
+                    <PatientContactInfo patient={patient} />
+
+                    {insurance && (
+                        <PatientInsuranceInfo insurance={insurance} />
+                    )}
+
+                    {emergencyContact && (
+                        <PatientEmergencyInformation
+                            emergencyContact={emergencyContact}
+                        />
+                    )}
+                </Stack>
+
+                <Stack direction={"row"} justifyContent={"space-between"}>
+                    <ReusableButton color="info">Edit profile</ReusableButton>
+                    <ReusableButton
+                        color="secondary"
+                        onClick={() => {
+                            navigate(`/patients/lab-reports/${patient.id}`);
+                        }}
+                    >
+                        Lab reports
+                    </ReusableButton>
+                </Stack>
             </Stack>
         </Box>
     );

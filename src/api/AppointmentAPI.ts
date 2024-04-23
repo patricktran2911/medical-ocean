@@ -6,6 +6,7 @@ export interface Appointment {
     title: string;
     description: string | null;
     time: string;
+    staff_id: string;
 }
 
 export async function getAllAppointments(): Promise<Appointment[]> {

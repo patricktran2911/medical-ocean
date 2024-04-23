@@ -18,15 +18,21 @@ export interface CreateInsurance {
     primary_care_physician: string | null;
 }
 
-export async function getInsurance(patient_id: string): Promise<Insurance[]> {
+export async function getInsurance(
+    patient_id: string
+): Promise<Insurance | undefined> {
     const { data, error } = await supabase
         .from("insurance")
         .select(`*`)
-        .eq("patient_id", patient_id);
+        .eq("patient_id", patient_id)
+        .single();
 
-    if (error) throw new Error(error.message);
+    if (error) {
+        console.log(`Insurance of ${patient_id}`, error);
+        return undefined;
+    }
 
-    return data ?? [];
+    return data ?? undefined;
 }
 export async function createInsurance(
     insurance: CreateInsurance,

@@ -52,7 +52,7 @@ export function AddingNewPatient() {
                     <NewPatientECI
                         patient_id={data}
                         onSuccess={(patient_id) => {
-                            navigate("/patients");
+                            navigate("/patients/all-patients");
                         }}
                         onTapBack={() => {
                             setStep({ index: 0, data: null });
