@@ -153,12 +153,14 @@ export function AppointmentTable() {
                                 return (
                                     <TableRow>
                                         <TableCell
-                                            sx={{
+                                            sx={(theme) => ({
                                                 borderRight:
                                                     "1px solid lightgray",
-                                            }}
+                                                [theme.breakpoints.down("md")]:
+                                                    {},
+                                            })}
                                         >
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {data.patient.f_name}{" "}
                                                 {data.patient.l_name}
                                             </Typography>
