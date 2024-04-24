@@ -36,6 +36,11 @@ export async function getPatientAppointments(
     return data;
 }
 
+export async function deleteAppointment(id: string) {
+    const { error } = await supabase.from("appointments").delete().eq("id", id);
+    console.log(error?.message);
+}
+
 export async function createAppointment(
     patient_id: number,
     time: Date,

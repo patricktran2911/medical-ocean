@@ -129,7 +129,10 @@ export function StaffWorkingDashboardTable() {
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Staff name
                                     </Typography>
                                 </TableCell>
@@ -139,12 +142,18 @@ export function StaffWorkingDashboardTable() {
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Title
                                     </Typography>
                                 </TableCell>
                                 <TableCell key={"Check time"}>
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Time
                                     </Typography>
                                 </TableCell>
@@ -164,7 +173,9 @@ export function StaffWorkingDashboardTable() {
                                                     "1px solid lightgray",
                                             }}
                                         >
-                                            <Typography>{staffName}</Typography>
+                                            <Typography variant="h6">
+                                                {staffName}
+                                            </Typography>
                                         </TableCell>
                                         <TableCell
                                             key={
@@ -176,7 +187,7 @@ export function StaffWorkingDashboardTable() {
                                                     "1px solid lightgray",
                                             }}
                                         >
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {staffWorking.info.title}
                                             </Typography>
                                         </TableCell>
@@ -186,7 +197,7 @@ export function StaffWorkingDashboardTable() {
                                                 staffWorking.status.time
                                             }
                                         >
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {format(
                                                     staffWorking.status.time,
                                                     "hh:mma"
