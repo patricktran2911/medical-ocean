@@ -17,6 +17,7 @@ import { TableStyleSx } from "../ReusableComponent/TableStyle";
 import { mergeSx } from "merge-sx";
 import { useEffect, useState } from "react";
 import fuzzysearch from "fuzzysearch-ts";
+import { format } from "date-fns";
 
 interface PatientTableProps {
     patients: Patient[];
@@ -147,7 +148,7 @@ export function PatientTable({ patients, onSelect, sx }: PatientTableProps) {
                                 </Button>
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
-                                {patient.dob}
+                                {format(patient.dob, "MMM do, yyyy")}
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
                                 {patient.phone_number}

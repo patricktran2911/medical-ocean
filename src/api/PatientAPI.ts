@@ -1,4 +1,4 @@
-import { parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { supabase } from "./supabaseInterface";
 
 export interface Patient {
@@ -8,7 +8,7 @@ export interface Patient {
     l_name: string;
     gender: string;
     email: string;
-    dob: string;
+    dob: Date;
     age: string;
     blood_group: string;
     marital_status: string;
@@ -29,13 +29,7 @@ export async function getAllPatients(): Promise<Patient[]> {
         throw new Error(error.message);
     }
 
-    return data.map((patient) => {
-        var result = patient;
-        const dateOfBirth = parseISO(patient.dob);
-
-        result.dob = dateOfBirth.toLocaleDateString();
-        return result;
-    });
+    return data;
 }
 
 export async function getPatient(id: string): Promise<Patient> {
@@ -77,25 +71,7 @@ export type NewPatient = {
 export async function createPatient(newPatient: NewPatient): Promise<Patient> {
     const { data, error } = await supabase
         .from("patient")
-        .insert([
-            {
-                f_name: newPatient.f_name,
-                m_name: newPatient.m_name,
-                l_name: newPatient.l_name,
-                gender: newPatient.gender,
-                email: newPatient.email,
-                dob: newPatient.dob,
-                blood_group: newPatient.blood_group,
-                marital_status: newPatient.marital_status,
-                rh_factor: newPatient.rh_factor,
-                address: newPatient.address,
-                phone_number: newPatient.phone_number,
-                preferred_language: newPatient.preferred_language,
-                occupation: newPatient.occupation,
-                ethnicity: newPatient.ethnicity,
-                special_allergies: newPatient.special_allergies,
-            },
-        ])
+        .insert([newPatient])
         .select()
         .single();
 
