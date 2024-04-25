@@ -99,7 +99,7 @@ export default function CreateNewAppointment() {
         const staffs = await getAllStaff();
         const patients = await getAllPatients();
         const doctors = staffs.filter((staff) => staff.title === "Doctor");
-
+        console.log(staffs, patients, doctors);
         setIData({
             ...IData,
             allDoctor: doctors,
