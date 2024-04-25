@@ -30,11 +30,11 @@ export function PatientEmergencyInformation({
                         fontWeight={"bold"}
                     >{`♦ Fullname: ${name}`}</Typography>
                     <Typography variant="h5" fontWeight={"bold"}>
-                        ♦ Relationship: {emergencyContact.relationship}
+                        ♦ Phone number: {emergencyContact.relationship}
                     </Typography>
                 </Stack>
                 <Typography variant="h5" fontWeight={"bold"}>
-                    {`♦ Phone number: ${emergencyContact.phone_number}`}
+                    {`♦ Relationship: ${emergencyContact.phone_number}`}
                 </Typography>
             </Stack>
         </Box>

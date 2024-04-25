@@ -63,8 +63,8 @@ interface IPatientInfo {
 interface emergencyPatientInfo {
     //f_name: string;
     //l_name: string;
-    phone_number2: string;
     relationship: string;
+    phone_number2: string;
 }
 
 export function PatientEditInfromation({
@@ -119,8 +119,8 @@ export function PatientEditInfromation({
         );
         await updateEmergencyContact(
             emergencyContact?.id ?? "",
-            emergencypatientInfo.phone_number2 ?? "",
-            emergencypatientInfo.relationship ?? ""
+            emergencypatientInfo.relationship ?? "",
+            emergencypatientInfo.phone_number2 ?? ""
         );
 
         setOpenModal(false);
@@ -235,7 +235,7 @@ export function PatientEditInfromation({
                         <Grid item xs={4}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
-                                    Relationship Status:
+                                    Phone Number:
                                 </Typography>
                                 <TextField
                                     name="relationship"
@@ -247,7 +247,7 @@ export function PatientEditInfromation({
                         <Grid item xs={4}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
-                                    Phone Number:
+                                    Relationship Status:
                                 </Typography>
                                 <TextField
                                     name="phone_number2"
