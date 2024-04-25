@@ -1,5 +1,4 @@
 import {
-    Avatar,
     Box,
     Button,
     Grid,
@@ -15,12 +14,16 @@ import { format } from "date-fns";
 import { Appointment } from "../../../api/AppointmentAPI";
 import PatientInfoTopContent from "./PatientInfoTopComponent";
 import { PatientEmergencyInformation } from "./PatientEmergencyInformationComponent";
-import { EmergencyContact } from "../../../api/EmergencyContactAPI";
+import {
+    EmergencyContact,
+    updateEmergencyContact,
+} from "../../../api/EmergencyContactAPI";
 import { PatientContactInfo } from "./PatientContactInfoComponent";
 import { Insurance } from "../../../api/InsuranceAPI";
 import { PatientInsuranceInfo } from "./PatientInsuranceInfoComponent";
 import { Height, Margin } from "@mui/icons-material";
 import { useState } from "react";
+import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
 
 const modalStyle = {
     position: "absolute",
@@ -31,8 +34,8 @@ const modalStyle = {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-    width: "40%", // Set the width of the modal to 80% of its parent container
-    height: 600,
+    width: "40%",
+    height: 750,
 };
 
 interface PatientInformationProps {
@@ -46,10 +49,6 @@ interface PatientInformationProps {
 const ContainerStyle: SxProps<Theme> = {
     width: "100%",
     height: "100%",
-    backgroundColor: "lightcyan",
-    borderRadius: "32px",
-    whiteSpace: "nowrap",
-    WebkitBoxShadow: "-1px 5px 10px 1px #000000",
 };
 
 interface IPatientInfo {
@@ -58,13 +57,19 @@ interface IPatientInfo {
     email: string;
     phone_number: string;
     address: string;
+    //relationship: string;
+}
+
+interface emergencyPatientInfo {
+    //f_name: string;
+    //l_name: string;
+    phone_number2: string;
+    relationship: string;
 }
 
 export function PatientEditInfromation({
     patient,
-    nextAppointment,
     emergencyContact,
-    insurance,
     sx,
 }: PatientInformationProps) {
     let patientName = `${patient.f_name} ${patient.l_name}`;
@@ -76,8 +81,17 @@ export function PatientEditInfromation({
         email: patient.email ?? "",
         phone_number: patient.phone_number,
         address: patient.address,
+        //relationship: emergencyContact?.relationship ?? "",
+        //phone_number2: emergencyContact?.phone_number ?? "",
     });
 
+    const [emergencypatientInfo, emergencysetPatientInfo] =
+        useState<emergencyPatientInfo>({
+            //f_name: emergencyContact?.f_name,
+            //l_name: emergencyContact?.l_name,
+            relationship: emergencyContact?.relationship ?? "",
+            phone_number2: emergencyContact?.phone_number ?? "",
+        });
     const [openModal, setOpenModal] = useState(false);
     const handleModalOpen = () => {
         setOpenModal(true);
@@ -86,6 +100,10 @@ export function PatientEditInfromation({
     function onChangeTextField(e: React.ChangeEvent<HTMLInputElement>) {
         setPatientInfo({
             ...patientInfo,
+            [e.target.name]: e.target.value,
+        });
+        emergencysetPatientInfo({
+            ...emergencypatientInfo,
             [e.target.name]: e.target.value,
         });
     }
@@ -99,14 +117,20 @@ export function PatientEditInfromation({
             patientInfo.phone_number,
             patientInfo.address
         );
+        await updateEmergencyContact(
+            emergencyContact?.id ?? "",
+            emergencypatientInfo.phone_number2 ?? "",
+            emergencypatientInfo.relationship ?? ""
+        );
+
         setOpenModal(false);
     };
 
     return (
         <Box sx={sx ?? ContainerStyle}>
-            <Button variant="contained" onClick={handleModalOpen}>
-                Edit Patient information
-            </Button>
+            <ReusableButton color="info" onClick={handleModalOpen}>
+                Edit profile
+            </ReusableButton>
             <Modal
                 open={openModal}
                 onClose={handleModalClose}
@@ -114,12 +138,14 @@ export function PatientEditInfromation({
                 aria-describedby="modal-description"
             >
                 <Box sx={modalStyle}>
-                    <Grid
-                        container
-                        columnSpacing={"50px"}
-                        rowSpacing={"50px"}
-                        bgcolor={"green"}
-                    >
+                    <Grid container columnSpacing={"50px"} rowSpacing={"50px"}>
+                        <Grid item xs={9}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Patient Informaiton:
+                                </Typography>
+                            </Stack>
+                        </Grid>
                         <Grid item xs={4}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
@@ -133,18 +159,14 @@ export function PatientEditInfromation({
                             </Stack>
                         </Grid>
                         <Grid item xs={4}>
-                            <Stack
-                                direction={"column"}
-                                spacing={"5px"}
-                                sx={{ width: "100%", height: "100%" }}
-                            >
+                            <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
                                     Last Name
                                 </Typography>
                                 <TextField
                                     name="l_name"
                                     defaultValue={`${patient.l_name}`}
-                                    style={{ width: "100%" }}
+                                    onChange={onChangeTextField}
                                 />
                             </Stack>
                         </Grid>
@@ -161,7 +183,76 @@ export function PatientEditInfromation({
                                 <TextField
                                     name="address"
                                     defaultValue={`${patient.address}`}
-                                    style={{ width: "100%" }}
+                                    onChange={onChangeTextField}
+                                />
+                            </Stack>
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Phone Number:
+                                </Typography>
+                                <TextField
+                                    name="phone_number"
+                                    defaultValue={`${patient.phone_number}`}
+                                    onChange={onChangeTextField}
+                                />
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Email:
+                                </Typography>
+                                <TextField
+                                    name="email"
+                                    defaultValue={`${patient.email}`}
+                                    onChange={onChangeTextField}
+                                />
+                            </Stack>
+                        </Grid>
+
+                        <Grid item xs={9}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Emergency Contact Informaion:
+                                </Typography>
+                            </Stack>
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Full Name:
+                                </Typography>
+                                <TextField
+                                    name="Full_Name"
+                                    defaultValue={`${name}`}
+                                />
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Relationship Status:
+                                </Typography>
+                                <TextField
+                                    name="relationship"
+                                    defaultValue={`${emergencyContact?.relationship}`}
+                                    onChange={onChangeTextField}
+                                />
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Phone Number:
+                                </Typography>
+                                <TextField
+                                    name="phone_number2"
+                                    defaultValue={`${emergencyContact?.phone_number}`}
+                                    onChange={onChangeTextField}
                                 />
                             </Stack>
                         </Grid>
@@ -171,8 +262,8 @@ export function PatientEditInfromation({
                         onClick={handleModalClose}
                         sx={{
                             position: "absolute",
-                            top: "90%",
-                            left: "50%",
+                            top: "94%",
+                            left: "45%",
                         }}
                     >
                         Close

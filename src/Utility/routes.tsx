@@ -9,6 +9,7 @@ import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormC
 import Staffs from "../Components/Staffs";
 import AllAppointments from "../Components/AppointmentsComposite/AllAppointment";
 import LabReport from "../Components/LabReportComposite/LabReport";
+import { PatientEditInfromation } from "../Components/PatientComposite/PatientInformationComponent/PatientEditInfromation";
 
 export const MainRoutes = () => (
     <Routes>

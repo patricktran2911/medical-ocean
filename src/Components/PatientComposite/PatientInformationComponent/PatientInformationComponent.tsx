@@ -73,7 +73,10 @@ export function PatientInformation({
                 </Stack>
 
                 <Stack direction={"row"} justifyContent={"space-between"}>
-                    <ReusableButton color="info">Edit profile</ReusableButton>
+                    <PatientEditInfromation
+                        emergencyContact={emergencyContact}
+                        patient={patient}
+                    />
                     <ReusableButton
                         color="secondary"
                         onClick={() => {
