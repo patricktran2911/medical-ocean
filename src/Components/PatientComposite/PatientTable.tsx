@@ -7,6 +7,8 @@ import {
     TableCell,
     TableBody,
     Theme,
+    Button,
+    Typography,
 } from "@mui/material";
 import { Patient } from "../../api/PatientAPI";
 import { TableStyleSx } from "../ReusableComponent/TableStyle";
@@ -47,12 +49,25 @@ export function PatientTable({ patients, onSelect, sx }: PatientTableProps) {
                 <TableBody>
                     {patients.map((patient) => (
                         <TableRow sx={TableStyleSx.bodyRow} key={patient.id}>
-                            <TableCell
-                                sx={TableStyleSx.bodyCell}
-                                onClick={() => onSelect(patient)}
-                                style={{ cursor: "pointer" }}
-                            >
-                                {`${patient.f_name} ${patient.l_name}`}
+                            <TableCell sx={TableStyleSx.bodyCell}>
+                                <Button
+                                    sx={(theme) => ({
+                                        color: "black",
+                                        textTransform: "none",
+
+                                        ":hover": {
+                                            color: theme.palette.warning.dark,
+                                            cursor: "pointer",
+                                        },
+                                    })}
+                                    onClick={() => {
+                                        onSelect(patient);
+                                    }}
+                                >
+                                    <Typography sx={TableStyleSx.bodyCell}>
+                                        {`${patient.f_name} ${patient.l_name}`}
+                                    </Typography>
+                                </Button>
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
                                 {patient.dob}

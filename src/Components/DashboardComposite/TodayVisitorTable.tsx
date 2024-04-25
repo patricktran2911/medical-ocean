@@ -129,7 +129,10 @@ export function TodayVisitorTable() {
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Patient Name
                                     </Typography>
                                 </TableCell>
@@ -138,12 +141,18 @@ export function TodayVisitorTable() {
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Type
                                     </Typography>
                                 </TableCell>
                                 <TableCell>
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Time
                                     </Typography>
                                 </TableCell>
@@ -160,7 +169,7 @@ export function TodayVisitorTable() {
                                                     "1px solid lightgray",
                                             }}
                                         >
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {visitor.patient.f_name}{" "}
                                                 {visitor.patient.l_name}
                                             </Typography>
@@ -171,12 +180,12 @@ export function TodayVisitorTable() {
                                                     "1px solid lightgray",
                                             }}
                                         >
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {visitor.visitor.type}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {format(
                                                     visitor.visitor.time,
                                                     "hh:mma"

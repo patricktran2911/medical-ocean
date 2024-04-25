@@ -17,6 +17,7 @@ interface IALInformation {
     appointment: Appointment;
     staff: Staff;
     patient: Patient;
+    onDelete?: () => void;
     sx?: SxProps<Theme>;
 }
 export default function ALInformation({
@@ -24,6 +25,7 @@ export default function ALInformation({
     staff,
     patient,
     sx,
+    onDelete,
 }: IALInformation) {
     const currentSx = mergeSx(sx);
 
@@ -161,7 +163,21 @@ export default function ALInformation({
                     </Stack>
                 </Stack>
             </Stack>
-            <ReusableButton color="info">Edit Appointment</ReusableButton>
+            <Stack
+                direction={"row"}
+                justifyContent={"space-between"}
+                sx={{
+                    position: "absolute",
+                    width: "95%",
+                    bottom: "50px",
+                }}
+            >
+                <ReusableButton color="error" onClick={onDelete}>
+                    Cancel Appointment
+                </ReusableButton>
+
+                <ReusableButton color="info">Edit Appointment</ReusableButton>
+            </Stack>
         </Stack>
     );
 }

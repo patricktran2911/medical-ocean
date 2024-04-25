@@ -4,21 +4,21 @@ import { supabase } from "./supabaseInterface";
 export interface Patient {
     id: string;
     f_name: string;
-    m_name: string | null;
+    m_name: string;
     l_name: string;
     gender: string;
-    email: string | null;
+    email: string;
     dob: string;
     age: string;
-    blood_group: string | null;
-    marital_status: string | null;
-    rh_factor: string | null;
+    blood_group: string;
+    marital_status: string;
+    rh_factor: string;
     address: string;
     phone_number: string;
-    preferred_language: string | null;
-    occupation: string | null;
-    ethnicity: string | null;
-    special_allergies: string | null;
+    preferred_language: string;
+    occupation: string;
+    ethnicity: string;
+    special_allergies: string;
     created_date: Date;
 }
 
@@ -59,20 +59,20 @@ export async function getPatient(id: string): Promise<Patient> {
 
 export type NewPatient = {
     f_name: string;
-    m_name: string | null;
+    m_name?: string;
     l_name: string;
-    gender: string;
-    email: string | null;
-    dob: string;
-    blood_group: string | null;
-    marital_status: string | null;
-    rh_factor: string | null;
-    address: string;
+    gender?: string;
+    email?: string;
+    dob?: string;
+    blood_group?: string;
+    marital_status?: string;
+    rh_factor?: string;
+    address?: string;
     phone_number: string;
-    preferred_language: string | null;
-    occupation: string | null;
-    ethnicity: string | null;
-    special_allergies: string | null;
+    preferred_language?: string;
+    occupation?: string;
+    ethnicity?: string;
+    special_allergies?: string;
 };
 export async function createPatient(newPatient: NewPatient): Promise<Patient> {
     const { data, error } = await supabase

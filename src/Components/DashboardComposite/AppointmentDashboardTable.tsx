@@ -136,12 +136,18 @@ export function AppointmentTable() {
                                         borderRight: "1px solid lightgray",
                                     }}
                                 >
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Patient Name
                                     </Typography>
                                 </TableCell>
                                 <TableCell>
-                                    <Typography fontWeight={"bold"}>
+                                    <Typography
+                                        fontWeight={"bold"}
+                                        variant="h6"
+                                    >
                                         Time
                                     </Typography>
                                 </TableCell>
@@ -166,7 +172,7 @@ export function AppointmentTable() {
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <Typography>
+                                            <Typography variant="h6">
                                                 {format(
                                                     data.appointment.time,
                                                     "hh:mma"

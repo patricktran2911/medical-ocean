@@ -2,12 +2,21 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import AppointmentList, {
     IAppointmentRowProps,
 } from "./AppointmentListComponent/ALAppointmentList";
-import { getAllAppointments } from "../../api/AppointmentAPI";
+import {
+    deleteAppointment,
+    getAllAppointments,
+} from "../../api/AppointmentAPI";
 import { getPatient } from "../../api/PatientAPI";
-import { Box, Paper, Stack } from "@mui/material";
+import { Box, Modal, Stack, Typography } from "@mui/material";
 import { Staff, getStaffWithId } from "../../api/StaffAPI";
 import DefaultMotion from "../../Utility/DefaultMotion";
 import ALStaffInformation from "./AppointmentListComponent/ALInfomation";
+import {
+    DatabaseRTTable,
+    subscribeRTTable,
+} from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
+import { ReusableButton } from "../ReusableComponent/ButtonStyle";
+import DeleteAppointmentModal from "./AppointmentListComponent/DeleteAppointmentModal";
 
 interface IViewModel {
     rows: IAppointmentRowProps[];
@@ -22,14 +31,36 @@ export default function AllAppointments() {
     const [selectedRow, setSelectedRow] = useState<
         IAppointmentRowProps | undefined
     >(undefined);
+    const [isDeleting, setIsDeleting] = useState(false);
     const [staff, setStaff] = useState<Staff | undefined>(undefined);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         fetchRequireData();
     }, []);
 
+    const onDeleteAppointment = async () => {
+        if (selectedRow?.appointment.id) {
+            await deleteAppointment(selectedRow.appointment.id);
+            setSelectedRow(undefined);
+            setIsDeleting(false);
+        }
+    };
+
+    function onDataChange() {
+        fetchRequireData();
+        setSelectedRow(undefined);
+        setIsDeleting(false);
+    }
+
+    subscribeRTTable(
+        DatabaseRTTable.appointments,
+        onDataChange,
+        onDataChange,
+        onDataChange
+    );
+
     useEffect(() => {
-        if (selectedRow) {
+        if (selectedRow && selectedRow.appointment.staff_id) {
             fetchStaffData(selectedRow.appointment.staff_id);
         }
     }, [selectedRow]);
@@ -63,6 +94,13 @@ export default function AllAppointments() {
                 justifyContent: "space-between",
             }}
         >
+            <DeleteAppointmentModal
+                isShowing={isDeleting}
+                onClickCancel={() => {
+                    setIsDeleting(false);
+                }}
+                onClickConfirm={onDeleteAppointment}
+            />
             <Stack
                 direction={"row"}
                 sx={{
@@ -89,22 +127,24 @@ export default function AllAppointments() {
                 />
                 <Box
                     sx={{
-                        width: "30%",
+                        width: "40%",
                         height: "100%",
                         minHeight: "1200px",
                     }}
                 >
                     {staff && selectedRow && (
-                        <DefaultMotion key={selectedRow?.appointment.id}>
+                        <DefaultMotion key={selectedRow.appointment.id}>
                             <Box
                                 sx={(theme) => ({
                                     display: "flex",
                                     width: "100%",
                                     height: "100%",
-                                    minWidth: "800px",
-                                    minHeight: "1200px",
+                                    minWidth: "850px",
+                                    minHeight: "1100px",
                                     bgcolor: "white",
                                     borderRadius: "32px",
+                                    my: "50px",
+
                                     WebkitBoxShadow: theme.defaultBoxShadow,
                                 })}
                             >
@@ -112,6 +152,9 @@ export default function AllAppointments() {
                                     staff={staff}
                                     patient={selectedRow.patient}
                                     appointment={selectedRow.appointment}
+                                    onDelete={() => {
+                                        setIsDeleting(true);
+                                    }}
                                     sx={{
                                         height: "100%",
                                         width: "100%",

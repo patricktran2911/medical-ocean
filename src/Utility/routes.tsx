@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Dashboard from "../Components/DashboardComposite/Dashboard";
 import Appointments from "../Components/AppointmentsComposite/AllAppointment";
 import { Patients } from "../Components/PatientComposite/Patients";
@@ -9,13 +9,11 @@ import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormC
 import Staffs from "../Components/Staffs";
 import AllAppointments from "../Components/AppointmentsComposite/AllAppointment";
 import LabReport from "../Components/LabReportComposite/LabReport";
-import { PatientEditInfromation } from "../Components/PatientComposite/PatientInformationComponent/PatientEditInfromation";
-
+import CreateNewAppointment from "../Components/AppointmentsComposite/CreateNewAppointment";
 export const MainRoutes = () => (
     <Routes>
-        <Route path="/" element={<Login />} />
         <Route path="login" element={<Login />} />
-        <Route path="appointment" element={<Appointments />}>
+        <Route path="appointment">
             <Route path="*" element={<AppointmentRoutes />} />
         </Route>
         <Route path="team-members" element={<TeamMember />} />
@@ -27,14 +25,17 @@ export const MainRoutes = () => (
     </Routes>
 );
 
-export const AppointmentRoutes = () => (
+const AppointmentRoutes = () => (
     <Routes>
         <Route path="all-appointments" element={<AllAppointments />} />
-        <Route path="create-new-appointment" element={<AllAppointments />} />
+        <Route
+            path="create-new-appointment"
+            element={<CreateNewAppointment />}
+        />
     </Routes>
 );
 
-export const PatientRoutes = () => (
+const PatientRoutes = () => (
     <Routes>
         <Route path="all-patients/" element={<Patients />} />
         <Route path="all-patients/:patientId" element={<Patients />} />

@@ -66,23 +66,21 @@ export function AddingNewPatient() {
 
     return (
         <Box sx={useContainerBoxStyle}>
-            <AnimatePresence>
-                <Box sx={useFormContainerStyle}>
-                    <DefaultMotion
-                        key={step.index}
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignContent: "center",
-                            alignItems: "center",
-                            width: "100%",
-                            height: "100%",
-                        }}
-                    >
-                        <StepContent index={step.index} data={step.data} />
-                    </DefaultMotion>
-                </Box>
-            </AnimatePresence>
+            <Box sx={useFormContainerStyle}>
+                <DefaultMotion
+                    key={step.index}
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%",
+                    }}
+                >
+                    <StepContent index={step.index} data={step.data} />
+                </DefaultMotion>
+            </Box>
         </Box>
     );
 }
