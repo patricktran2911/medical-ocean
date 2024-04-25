@@ -46,7 +46,7 @@ export const TableStyleSx: Record<string, SxProps<Theme>> = {
     bodyCell: (theme) => ({
         whiteSpace: "nowrap",
 
-        fontSize: theme.typography.subtitle1,
+        fontSize: theme.typography.h6,
         fontWeight: theme.typography.fontWeightMedium,
         ":hover": {
             color: "red",

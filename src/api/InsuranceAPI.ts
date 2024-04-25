@@ -28,7 +28,6 @@ export async function getInsurance(
         .single();
 
     if (error) {
-        console.log(`Insurance of ${patient_id}`, error);
         return undefined;
     }
 

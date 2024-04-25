@@ -40,20 +40,8 @@ export function NewPatientInformationForm({
 
     const [newPatient, setNewPatient] = useState<NewPatient>({
         f_name: "",
-        m_name: null,
         l_name: "",
-        gender: "",
-        email: null,
-        dob: "",
-        blood_group: null,
-        marital_status: null,
-        rh_factor: null,
-        address: "",
         phone_number: "",
-        preferred_language: null,
-        occupation: null,
-        ethnicity: null,
-        special_allergies: null,
     });
 
     const [errors, setErrors] = useState<ErrorStates>({
@@ -93,9 +81,9 @@ export function NewPatientInformationForm({
     function checkError(): boolean {
         let errorF_name = newPatient.f_name.length === 0;
         let errorL_name = newPatient.l_name.length === 0;
-        let errorGender = newPatient.gender.length === 0;
-        let errorDob = newPatient.dob.length === 0;
-        let errorAddress = newPatient.address.length === 0;
+        let errorGender = newPatient.gender?.length === 0;
+        let errorDob = newPatient.dob?.length === 0;
+        let errorAddress = newPatient.address?.length === 0;
         let errorPhone_number = newPatient.phone_number.length === 0;
         setErrors({
             f_name: errorF_name,

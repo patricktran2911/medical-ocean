@@ -5,6 +5,7 @@ export enum DatabaseRTTable {
     appointments = "appointments",
     patientVisitor = "patient_visitors",
     staffWorkingStatus = "staff_working_status",
+    patient = "patient",
 }
 
 export function subscribeRTTable(
