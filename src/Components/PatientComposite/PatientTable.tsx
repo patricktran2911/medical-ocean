@@ -148,13 +148,15 @@ export function PatientTable({ patients, onSelect, sx }: PatientTableProps) {
                                 </Button>
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
-                                {format(patient.dob, "MMM do, yyyy")}
+                                {patient.dob
+                                    ? format(patient.dob, "MMM do, yyyy")
+                                    : ""}
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
                                 {patient.phone_number}
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
-                                {patient.email}
+                                {patient.email ?? ""}
                             </TableCell>
                         </TableRow>
                     ))}

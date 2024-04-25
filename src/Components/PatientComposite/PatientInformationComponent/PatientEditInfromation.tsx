@@ -54,9 +54,9 @@ const ContainerStyle: SxProps<Theme> = {
 interface IPatientInfo {
     f_name: string;
     l_name: string;
-    email: string;
+    email?: string;
     phone_number: string;
-    address: string;
+    address?: string;
     //relationship: string;
 }
 
@@ -74,7 +74,7 @@ export function PatientEditInfromation({
 }: PatientInformationProps) {
     let patientName = `${patient.f_name} ${patient.l_name}`;
     let patientAge = `${patient.age}`;
-    let name = `${emergencyContact?.f_name} ${emergencyContact?.l_name}`;
+    let name = `${emergencyContact?.f_name ?? ""} ${emergencyContact?.l_name ?? ""}`;
     const [patientInfo, setPatientInfo] = useState<IPatientInfo>({
         f_name: patient.f_name,
         l_name: patient.l_name,
@@ -115,7 +115,7 @@ export function PatientEditInfromation({
             patientInfo.l_name,
             patientInfo.email ?? "",
             patientInfo.phone_number,
-            patientInfo.address
+            patientInfo.address ?? ""
         );
         await updateEmergencyContact(
             emergencyContact?.id ?? "",
@@ -239,7 +239,7 @@ export function PatientEditInfromation({
                                 </Typography>
                                 <TextField
                                     name="relationship"
-                                    defaultValue={`${emergencyContact?.relationship}`}
+                                    defaultValue={`${emergencyContact?.relationship ?? ""}`}
                                     onChange={onChangeTextField}
                                 />
                             </Stack>
@@ -251,7 +251,7 @@ export function PatientEditInfromation({
                                 </Typography>
                                 <TextField
                                     name="phone_number2"
-                                    defaultValue={`${emergencyContact?.phone_number}`}
+                                    defaultValue={`${emergencyContact?.phone_number ?? ""}`}
                                     onChange={onChangeTextField}
                                 />
                             </Stack>
