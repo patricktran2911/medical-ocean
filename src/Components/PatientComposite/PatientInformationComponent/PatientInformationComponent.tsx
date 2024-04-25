@@ -20,6 +20,7 @@ import { Height } from "@mui/icons-material";
 import { PatientEditInfromation } from "./PatientEditInfromation";
 import { useNavigate } from "react-router-dom";
 import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
+import { useEffect, useState } from "react";
 
 interface PatientInformationProps {
     patient: Patient;
@@ -45,7 +46,13 @@ export function PatientInformation({
     insurance,
     sx,
 }: PatientInformationProps) {
+    const [curerntPatient, setCurrentPatient] = useState(patient);
+
+    useEffect(() => {
+        setCurrentPatient(patient);
+    }, [patient]);
     const navigate = useNavigate();
+
     return (
         <Box sx={sx ?? ContainerStyle}>
             <Stack
@@ -55,11 +62,11 @@ export function PatientInformation({
             >
                 <Stack direction={"column"} spacing={"60px"}>
                     <PatientInfoTopContent
-                        patient={patient}
+                        patient={curerntPatient}
                         nextAppointment={nextAppointment}
                     />
 
-                    <PatientContactInfo patient={patient} />
+                    <PatientContactInfo patient={curerntPatient} />
 
                     {insurance && (
                         <PatientInsuranceInfo insurance={insurance} />
@@ -75,12 +82,14 @@ export function PatientInformation({
                 <Stack direction={"row"} justifyContent={"space-between"}>
                     <PatientEditInfromation
                         emergencyContact={emergencyContact}
-                        patient={patient}
+                        patient={curerntPatient}
                     />
                     <ReusableButton
                         color="secondary"
                         onClick={() => {
-                            navigate(`/patients/lab-reports/${patient.id}`);
+                            navigate(
+                                `/patients/lab-reports/${curerntPatient.id}`
+                            );
                         }}
                     >
                         Lab reports
