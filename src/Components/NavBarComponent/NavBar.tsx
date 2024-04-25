@@ -127,7 +127,7 @@ function NavBar() {
                                 component={"button"}
                                 sx={{ textDecoration: "none" }}
                                 onClick={() =>
-                                    navigate(
+                                    handleNavigation(
                                         "/appointment/create-new-appointment"
                                     )
                                 }

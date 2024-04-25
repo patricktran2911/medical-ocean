@@ -5,11 +5,13 @@ interface PatientEmergencyInformationProps {
     emergencyContact: EmergencyContact;
 }
 
-const ContainerStyle: SxProps<Theme> = {
-    padding: "20px",
-    backgroundColor: "lightblue",
-    borderRadius: "32px",
-};
+const ContainerStyle: SxProps<Theme> = (theme) => ({
+    backgroundColor: "lightcyan",
+    borderColor: theme.palette.grey[700],
+    borderWidth: "1px",
+    borderStyle: "solid",
+    padding: "50px",
+});
 
 export function PatientEmergencyInformation({
     emergencyContact,
@@ -17,30 +19,21 @@ export function PatientEmergencyInformation({
     let name = `${emergencyContact.f_name} ${emergencyContact.l_name}`;
     return (
         <Box sx={ContainerStyle}>
-            <Typography variant="h5" fontWeight={"bold"} color={"white"}>
+            <Typography variant="h4" fontWeight={"bold"}>
                 Emergency Contact
             </Typography>
             <br />
             <Stack direction="column" spacing={"20px"}>
                 <Stack direction={{ xs: "column", lg: "row" }} spacing={"80px"}>
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         fontWeight={"bold"}
-                        color={"blueviolet"}
                     >{`♦ Fullname: ${name}`}</Typography>
-                    <Typography
-                        variant="h6"
-                        fontWeight={"bold"}
-                        color={"blueviolet"}
-                    >
+                    <Typography variant="h5" fontWeight={"bold"}>
                         ♦ Relationship: {emergencyContact.relationship}
                     </Typography>
                 </Stack>
-                <Typography
-                    variant="h6"
-                    fontWeight={"bold"}
-                    color={"blueviolet"}
-                >
+                <Typography variant="h5" fontWeight={"bold"}>
                     {`♦ Phone number: ${emergencyContact.phone_number}`}
                 </Typography>
             </Stack>

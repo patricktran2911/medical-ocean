@@ -1,12 +1,13 @@
+import { format } from "date-fns";
 import { supabase } from "./supabaseInterface";
 
 export interface Appointment {
     id: string;
     patient_id: string;
     title: string;
-    description: string | null;
+    description?: string;
     time: string;
-    staff_id: string;
+    staff_id?: string;
 }
 
 export async function getAllAppointments(): Promise<Appointment[]> {
@@ -42,14 +43,22 @@ export async function deleteAppointment(id: string) {
 }
 
 export async function createAppointment(
-    patient_id: number,
+    patient_id: string,
     time: Date,
     title: string,
-    description: string | null
+    description?: string,
+    staff_id?: string
 ) {
+    const newAppointment = {
+        patient_id: patient_id,
+        time: time,
+        title: title,
+        description: description ?? null,
+        staff_id: staff_id ?? null,
+    };
     const { data, error } = await supabase
         .from("appointments")
-        .insert([patient_id, title, description, time]);
+        .insert([newAppointment]);
 
     if (error) throw new Error(error.message);
 }

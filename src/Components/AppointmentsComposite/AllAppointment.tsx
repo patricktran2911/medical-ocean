@@ -55,12 +55,12 @@ export default function AllAppointments() {
     subscribeRTTable(
         DatabaseRTTable.appointments,
         onDataChange,
-        undefined,
-        undefined
+        onDataChange,
+        onDataChange
     );
 
     useEffect(() => {
-        if (selectedRow) {
+        if (selectedRow && selectedRow.appointment.staff_id) {
             fetchStaffData(selectedRow.appointment.staff_id);
         }
     }, [selectedRow]);

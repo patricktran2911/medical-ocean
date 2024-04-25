@@ -9,7 +9,7 @@ import {
 import { Staff } from "../../../api/StaffAPI";
 import { mergeSx } from "merge-sx";
 import { Patient } from "../../../api/PatientAPI";
-import { Appointment, deleteAppointment } from "../../../api/AppointmentAPI";
+import { Appointment } from "../../../api/AppointmentAPI";
 import { format } from "date-fns";
 import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
 
