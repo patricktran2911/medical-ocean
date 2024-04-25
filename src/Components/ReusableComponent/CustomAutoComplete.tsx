@@ -79,6 +79,7 @@ export default function AutoComplete({ options, onSelected }: IAutocomplete) {
                 <List
                     sx={(theme) => ({
                         width: "100%",
+                        zIndex: "9",
                     })}
                 >
                     {IData.filtered.map((value) => (
