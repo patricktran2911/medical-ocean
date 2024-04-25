@@ -4,21 +4,21 @@ import { supabase } from "./supabaseInterface";
 export interface Patient {
     id: string;
     f_name: string;
-    m_name: string;
+    m_name?: string;
     l_name: string;
-    gender: string;
-    email: string;
-    dob: Date;
-    age: string;
-    blood_group: string;
-    marital_status: string;
-    rh_factor: string;
-    address: string;
+    gender?: string;
+    email?: string;
+    dob?: Date;
+    age?: string;
+    blood_group?: string;
+    marital_status?: string;
+    rh_factor?: string;
+    address?: string;
     phone_number: string;
-    preferred_language: string;
-    occupation: string;
-    ethnicity: string;
-    special_allergies: string;
+    preferred_language?: string;
+    occupation?: string;
+    ethnicity?: string;
+    special_allergies?: string;
     created_date: Date;
 }
 
