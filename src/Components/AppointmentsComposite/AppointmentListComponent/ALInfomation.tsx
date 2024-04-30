@@ -12,6 +12,7 @@ import { Patient } from "../../../api/PatientAPI";
 import { Appointment } from "../../../api/AppointmentAPI";
 import { format } from "date-fns";
 import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
+import { TestAppointmentEdit } from "./TestAppointmentEdit";
 
 interface IALInformation {
     appointment: Appointment;
@@ -172,11 +173,10 @@ export default function ALInformation({
                     bottom: "50px",
                 }}
             >
+                <TestAppointmentEdit />
                 <ReusableButton color="error" onClick={onDelete}>
                     Cancel Appointment
                 </ReusableButton>
-
-                <ReusableButton color="info">Edit Appointment</ReusableButton>
             </Stack>
         </Stack>
     );

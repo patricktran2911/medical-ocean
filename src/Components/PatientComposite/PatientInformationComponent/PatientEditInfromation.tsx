@@ -194,6 +194,7 @@ export function PatientEditInfromation({
                                     Phone Number:
                                 </Typography>
                                 <TextField
+                                    placeholder={patient.phone_number}
                                     name="phone_number"
                                     defaultValue={`${patient.phone_number}`}
                                     onChange={onChangeTextField}

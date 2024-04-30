@@ -62,3 +62,9 @@ export async function createAppointment(
 
     if (error) throw new Error(error.message);
 }
+
+export async function updateAppointmentTime(time: Date) {
+    const { data, error } = await supabase.from("emergency_contact").update({
+        time: time,
+    });
+}
