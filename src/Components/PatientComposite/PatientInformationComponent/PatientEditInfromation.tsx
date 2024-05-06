@@ -61,8 +61,7 @@ interface IPatientInfo {
 }
 
 interface emergencyPatientInfo {
-    //f_name: string;
-    //l_name: string;
+    full_Name: string;
     relationship: string;
     phone_number2: string;
 }
@@ -85,10 +84,13 @@ export function PatientEditInfromation({
         //phone_number2: emergencyContact?.phone_number ?? "",
     });
 
+    const full_name = name.split(" ");
+    const emergencyf_nameTest = full_name[0];
+    const emergencyl_nameTest2 = full_name[1];
+
     const [emergencypatientInfo, emergencysetPatientInfo] =
         useState<emergencyPatientInfo>({
-            //f_name: emergencyContact?.f_name,
-            //l_name: emergencyContact?.l_name,
+            full_Name: name,
             relationship: emergencyContact?.relationship ?? "",
             phone_number2: emergencyContact?.phone_number ?? "",
         });
@@ -119,6 +121,7 @@ export function PatientEditInfromation({
         );
         await updateEmergencyContact(
             emergencyContact?.id ?? "",
+            emergencypatientInfo.full_Name,
             emergencypatientInfo.relationship ?? "",
             emergencypatientInfo.phone_number2 ?? ""
         );
@@ -228,8 +231,9 @@ export function PatientEditInfromation({
                                     Full Name:
                                 </Typography>
                                 <TextField
-                                    name="Full_Name"
+                                    name="full_Name"
                                     defaultValue={`${name}`}
+                                    onChange={onChangeTextField}
                                 />
                             </Stack>
                         </Grid>

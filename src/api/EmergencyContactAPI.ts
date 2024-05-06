@@ -57,17 +57,19 @@ export async function createEmergencyContact(
 
 export async function updateEmergencyContact(
     emergencyContactId: string,
-    // name: string,
-    //  f_name: string,
-    //  l_name: string,
+    full_Name: string,
     relationship: string,
     phone_number: string
 ) {
+    const full_name = full_Name.split(" ");
+    const emergencyf_name = full_name[0];
+    const emergencyl_name = full_name[1];
+
     const { data, error } = await supabase
         .from("emergency_contact")
         .update({
-            //     f_name: f_name,
-            //     l_name: l_name,
+            f_name: emergencyf_name,
+            l_name: emergencyl_name,
             relationship: relationship,
             phone_number: phone_number,
         })

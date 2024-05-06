@@ -173,7 +173,11 @@ export default function ALInformation({
                     bottom: "50px",
                 }}
             >
-                <TestAppointmentEdit />
+                <TestAppointmentEdit
+                    patient={patient}
+                    appointment={appointment}
+                    staff={staff}
+                />
                 <ReusableButton color="error" onClick={onDelete}>
                     Cancel Appointment
                 </ReusableButton>
