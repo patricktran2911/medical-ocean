@@ -13,18 +13,18 @@ import {
     Patient,
     createPatient,
     getAllPatients,
-} from "../../api/PatientAPI";
-import logo from "../../Assets/Images/Icon120.png";
+} from "../../../api/PatientAPI";
+import logo from "../../../Assets/Images/Icon120.png";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import "../../style.css";
+import "../../../style.css";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import DefaultMotion from "../../Utility/DefaultMotion";
-import { Staff, getAllStaff } from "../../api/StaffAPI";
+import DefaultMotion from "../../../Utility/DefaultMotion";
+import { Staff, getAllStaff } from "../../../api/StaffAPI";
 import fuzzysearch from "fuzzysearch-ts";
-import AutoComplete from "../ReusableComponent/CustomAutoComplete";
-import { ReusableButton } from "../ReusableComponent/ButtonStyle";
-import { createAppointment } from "../../api/AppointmentAPI";
+import AutoComplete from "../../ReusableComponent/CustomAutoComplete";
+import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
+import { createAppointment } from "../../../api/AppointmentAPI";
 import { addMinutes } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
@@ -99,7 +99,6 @@ export default function CreateNewAppointment() {
         const staffs = await getAllStaff();
         const patients = await getAllPatients();
         const doctors = staffs.filter((staff) => staff.title === "Doctor");
-        console.log(staffs, patients, doctors);
         setIData({
             ...IData,
             allDoctor: doctors,

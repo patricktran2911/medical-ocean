@@ -52,7 +52,7 @@ export default function AppointmentList({
             <Table sx={TableStyleSx.table}>
                 <TableHead sx={TableStyleSx.head}>
                     <TableRow sx={TableStyleSx.headRow}>
-                        <TableCell sx={TableStyleSx.headCell}>
+                        <TableCell id="patientName" sx={TableStyleSx.headCell}>
                             <Autocomplete
                                 disableListWrap
                                 style={{
@@ -128,10 +128,16 @@ export default function AppointmentList({
                                 }}
                             />
                         </TableCell>
-                        <TableCell sx={TableStyleSx.headCell}>Title </TableCell>
-                        <TableCell sx={TableStyleSx.headCell}>Time </TableCell>
-                        <TableCell sx={TableStyleSx.headCell}>Date </TableCell>
-                        <TableCell sx={TableStyleSx.headCell}>
+                        <TableCell id="title" sx={TableStyleSx.headCell}>
+                            Title{" "}
+                        </TableCell>
+                        <TableCell id="time" sx={TableStyleSx.headCell}>
+                            Time{" "}
+                        </TableCell>
+                        <TableCell id="date" sx={TableStyleSx.headCell}>
+                            Date{" "}
+                        </TableCell>
+                        <TableCell id="description" sx={TableStyleSx.headCell}>
                             Description
                         </TableCell>
                     </TableRow>
@@ -139,7 +145,10 @@ export default function AppointmentList({
                 <TableBody>
                     {filteredRows.map((row) => (
                         <TableRow sx={TableStyleSx.bodyRow}>
-                            <TableCell sx={TableStyleSx.bodyCell}>
+                            <TableCell
+                                id={`${row.patient.f_name} ${row.patient.l_name}`}
+                                sx={TableStyleSx.bodyCell}
+                            >
                                 <Button
                                     sx={(theme) => ({
                                         color: "black",

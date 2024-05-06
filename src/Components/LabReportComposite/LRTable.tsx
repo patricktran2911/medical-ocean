@@ -28,13 +28,19 @@ export default function LRTable({ labReports, sx }: ILRTable) {
                 <TableHead sx={TableStyleSx.head}>
                     <TableRow sx={TableStyleSx.headRow}>
                         <TableCell sx={TableStyleSx.headCell}>
-                            <Typography>Lab Name</Typography>
+                            <Typography variant="h5" fontWeight={"bold"}>
+                                Lab Name
+                            </Typography>
                         </TableCell>
                         <TableCell sx={TableStyleSx.headCell}>
-                            <Typography>Date Received</Typography>
+                            <Typography variant="h5" fontWeight={"bold"}>
+                                Date Received
+                            </Typography>
                         </TableCell>
                         <TableCell sx={TableStyleSx.headCell}>
-                            <Typography>File</Typography>
+                            <Typography variant="h5" fontWeight={"bold"}>
+                                File
+                            </Typography>
                         </TableCell>
                     </TableRow>
                 </TableHead>
@@ -42,13 +48,18 @@ export default function LRTable({ labReports, sx }: ILRTable) {
                     {labReports.map((lab) => (
                         <TableRow key={lab.id} sx={TableStyleSx.bodyRow}>
                             <TableCell sx={TableStyleSx.bodyCell}>
-                                <Typography>{`${lab.name_of_lab}`}</Typography>
+                                <Typography variant="h6">{`${lab.name_of_lab}`}</Typography>
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
-                                <Typography>{`${format(lab.date_received, "MMMM do, yyyy")}`}</Typography>
+                                <Typography variant="h6">{`${format(lab.date_received, "MMMM do, yyyy")}`}</Typography>
                             </TableCell>
                             <TableCell sx={TableStyleSx.bodyCell}>
-                                <Link href={lab.file_url.toString()}>
+                                <Link
+                                    href={lab.file_url.toString()}
+                                    sx={(theme) => ({
+                                        fontSize: theme.typography.h6,
+                                    })}
+                                >
                                     View file
                                 </Link>
                             </TableCell>

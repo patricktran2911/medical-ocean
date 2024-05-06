@@ -46,8 +46,8 @@ export default function AllAppointments() {
         }
     };
 
-    function onDataChange() {
-        fetchRequireData();
+    async function onDataChange() {
+        await fetchRequireData();
         setSelectedRow(undefined);
         setIsDeleting(false);
     }

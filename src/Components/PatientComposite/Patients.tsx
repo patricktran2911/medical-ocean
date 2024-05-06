@@ -66,6 +66,7 @@ export function Patients() {
 
     async function fetchPatients(patientId?: string) {
         const patients = await getAllPatients();
+        console.log(patients.map((patient) => patient.id).join(", "));
         const promises = patients.map(async (patient) => {
             const appointments = await getPatientAppointments(patient.id);
             const emergencyContact = await getEmergencyContact(patient.id);

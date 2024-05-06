@@ -1,4 +1,4 @@
-import { Stack, TextField, List, ListItem, Divider } from "@mui/material";
+import { Stack, TextField, List, ListItem, Divider, Box } from "@mui/material";
 import { ReusableButton } from "./ButtonStyle";
 import { useEffect, useState } from "react";
 import fuzzysearch from "fuzzysearch-ts";
@@ -58,19 +58,18 @@ export default function AutoComplete({ options, onSelected }: IAutocomplete) {
     }
 
     return (
-        <Stack
-            direction={"column"}
-            spacing={0}
+        <Box
             sx={(theme) => ({
                 width: "100%",
                 border: "solid",
                 borderColor: theme.palette.divider,
                 borderWidth: "3px",
                 borderRadius: "8px",
+                position: "relative",
             })}
         >
             <TextField
-                variant="outlined"
+                variant="standard"
                 onChange={handleTextChange}
                 sx={{ width: "100%" }}
                 value={textValue}
@@ -78,8 +77,19 @@ export default function AutoComplete({ options, onSelected }: IAutocomplete) {
             {IData.filtered && IData.filtered.length !== 0 && (
                 <List
                     sx={(theme) => ({
+                        position: "absolute", // Position the list absolutely
+                        top: "100%", // Start the list right below the TextField
+                        left: 0,
                         width: "100%",
-                        zIndex: "9",
+                        background: theme.palette.background.default,
+                        zIndex: "99999",
+                        maxHeight: "300px", // Set a max-height and make it scrollable
+                        border: "solid",
+
+                        overflow: "auto",
+                        borderWidth: "3px",
+                        borderTopWidth: "0px",
+                        borderColor: theme.palette.divider,
                     })}
                 >
                     {IData.filtered.map((value) => (
@@ -115,6 +125,6 @@ export default function AutoComplete({ options, onSelected }: IAutocomplete) {
                     ))}
                 </List>
             )}
-        </Stack>
+        </Box>
     );
 }

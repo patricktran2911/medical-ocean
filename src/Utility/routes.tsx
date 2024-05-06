@@ -9,7 +9,7 @@ import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormC
 import Staffs from "../Components/Staffs";
 import AllAppointments from "../Components/AppointmentsComposite/AllAppointment";
 import LabReport from "../Components/LabReportComposite/LabReport";
-import CreateNewAppointment from "../Components/AppointmentsComposite/CreateNewAppointment";
+import CreateNewAppointment from "../Components/AppointmentsComposite/CreateNewAppointmentComponents/CreateNewAppointment";
 export const MainRoutes = () => (
     <Routes>
         <Route path="login" element={<Login />} />

@@ -7,6 +7,7 @@ import LRPatientInformation, {
 } from "./LRPatientInformation";
 import { getInsurance } from "../../api/InsuranceAPI";
 import LRTable, { ILRTable } from "./LRTable";
+import { getAllLabReports } from "../../api/LabReportAPI";
 
 const useBoxSx: SxProps<Theme> = (theme) => ({
     width: "100%",
@@ -26,10 +27,11 @@ export default function LabReport() {
     const { patientId } = useParams();
     const [patientInfo, setPatientInfo] =
         useState<ILRPatientInformation | null>(null);
-    const [ILRTable, setIRLTable] = useState<ILRTable>({
+    const [ILRTable, setILRTable] = useState<ILRTable>({
         labReports: [],
     });
     useEffect(() => {
+        console.log(patientId);
         fetchRequireData(patientId);
     }, [patientId]);
 
@@ -37,9 +39,14 @@ export default function LabReport() {
         if (patientId) {
             const result = await getPatient(patientId);
             const insurance = await getInsurance(patientId);
+            const labReports = await getAllLabReports(patientId);
             setPatientInfo({
                 patient: result,
                 insurance: insurance ?? undefined,
+            });
+            setILRTable({
+                ...ILRTable,
+                labReports: labReports,
             });
         }
     }

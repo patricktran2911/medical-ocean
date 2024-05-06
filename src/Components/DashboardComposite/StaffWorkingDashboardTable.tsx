@@ -71,6 +71,7 @@ export function StaffWorkingDashboardTable() {
     const BoxCardStyle: SxProps<Theme> = {
         backgroundColor: "white",
         borderRadius: "32px",
+        height: "100%",
         width: "100%",
         minWidth: "350px",
         whiteSpace: "nowrap",
