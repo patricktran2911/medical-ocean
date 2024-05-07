@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Patient, getAllPatients } from "../../api/PatientAPI";
-import { Box, Button, Stack, SxProps } from "@mui/material";
+import { Box, Stack, SxProps } from "@mui/material";
 import { Theme } from "@emotion/react";
 import { PatientTable } from "./PatientTable";
 import { PatientInformation } from "./PatientInformationComponent/PatientInformationComponent";
@@ -11,11 +11,11 @@ import {
 } from "../../api/EmergencyContactAPI";
 import { Insurance, getInsurance } from "../../api/InsuranceAPI";
 import DefaultMotion from "../../Utility/DefaultMotion";
+import { useParams } from "react-router-dom";
 import {
     DatabaseRTTable,
     subscribeRTTable,
 } from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
-import { useParams } from "react-router-dom";
 
 const BoxStyle: SxProps<Theme> = {
     display: "flex",
@@ -57,8 +57,16 @@ export function Patients() {
         fetchPatients();
     };
 
+    subscribeRTTable(
+        DatabaseRTTable.patient,
+        undefined,
+        fetchPatients,
+        fetchPatients
+    );
+
     async function fetchPatients(patientId?: string) {
         const patients = await getAllPatients();
+        console.log(patients.map((patient) => patient.id).join(", "));
         const promises = patients.map(async (patient) => {
             const appointments = await getPatientAppointments(patient.id);
             const emergencyContact = await getEmergencyContact(patient.id);

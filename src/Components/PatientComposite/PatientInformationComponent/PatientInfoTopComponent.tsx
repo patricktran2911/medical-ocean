@@ -56,7 +56,7 @@ export default function PatientInfoTopContent({
                     fontWeight: "bold",
                 }}
             >
-                {patient.f_name}
+                {`${patient.f_name[0]}${patient.l_name[0]}`}
             </Avatar>
             <Stack direction={"column"} spacing={"8px"}>
                 <Typography

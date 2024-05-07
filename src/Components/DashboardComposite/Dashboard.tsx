@@ -6,6 +6,9 @@ import { StaffWorkingDashboardTable } from "./StaffWorkingDashboardTable";
 import MonthlyNewPatientsChart from "./MonthlyNewPatientChart";
 
 const ContainerSxProps: SxProps<Theme> = {
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
     width: "100%",
     minWidth: "1700px",
     height: "100%",
@@ -21,8 +24,11 @@ function Dashboard() {
                 sx={{
                     width: "100%",
                     height: "100%",
-                    padding: "50px",
+                    px: "50px",
+                    py: "200px",
+                    justifySelf: "center",
                     justifyContent: "space-evenly",
+                    alignSelf: "center",
                 }}
                 spacing={"100px"}
             >
@@ -34,9 +40,6 @@ function Dashboard() {
                 </Grid>
                 <Grid item xs={3}>
                     <StaffWorkingDashboardTable />
-                </Grid>
-                <Grid item xs={5}>
-                    <MonthlyNewPatientsChart />
                 </Grid>
             </Grid>
         </Box>

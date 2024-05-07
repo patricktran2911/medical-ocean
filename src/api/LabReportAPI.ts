@@ -8,7 +8,7 @@ export default interface LabReportObject {
     patient_id: string;
 }
 
-async function getAllLabReports(
+export async function getAllLabReports(
     patient_id: string
 ): Promise<LabReportObject[]> {
     const { data, error } = await supabase

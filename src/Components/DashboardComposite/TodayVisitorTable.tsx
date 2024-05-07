@@ -65,6 +65,7 @@ export function TodayVisitorTable() {
     const BoxCardStyle: SxProps<Theme> = {
         backgroundColor: "white",
         borderRadius: "32px",
+        height: "100%",
         width: "100%",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
         transition: "width 0.3s ease-in-out",

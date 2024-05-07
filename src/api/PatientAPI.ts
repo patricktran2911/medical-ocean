@@ -29,7 +29,11 @@ export async function getAllPatients(): Promise<Patient[]> {
         throw new Error(error.message);
     }
 
-    return data;
+    return data.sort((a, b) => {
+        const aName = a.f_name + a.l_name;
+        const bName = b.f_name + b.l_name;
+        return aName < bName ? -1 : 1;
+    });
 }
 
 export async function getPatient(id: string): Promise<Patient> {
