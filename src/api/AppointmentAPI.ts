@@ -69,7 +69,7 @@ export async function updateAppointmentTime(
     staff_id?: string
 ) {
     const { data, error } = await supabase
-        .from("emergency_contact")
+        .from("appointments")
         .update({
             time: time,
             staff_id: staff_id ?? null,
