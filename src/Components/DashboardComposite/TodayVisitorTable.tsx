@@ -55,7 +55,6 @@ export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisi
 
     async function fetchRequireData() {
         var today = new Date();
-        console.log('fetch')
 
         const visitors = await getPatientVisitors(today);
         const promises = visitors.map(async (visitor) => {
@@ -76,7 +75,6 @@ export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisi
         width: "100%",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
         transition: "width 0.3s ease-in-out",
-        whiteSpace: "nowrap",
     };
 
     const useTableContainerStyle: SxProps<Theme> = {
@@ -85,7 +83,7 @@ export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisi
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
-        height: "100%",
+        maxHeight: '750px'
     };
 
     const useTableHeadStyle: SxProps<Theme> = {

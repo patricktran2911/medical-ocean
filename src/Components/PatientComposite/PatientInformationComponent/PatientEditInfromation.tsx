@@ -161,7 +161,7 @@ export function PatientEditInfromation({
                         <Grid item xs={9}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
-                                    Patient Informaiton:
+                                    Patient Information:
                                 </Typography>
                             </Stack>
                         </Grid>
