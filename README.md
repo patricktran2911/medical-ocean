@@ -3,7 +3,7 @@
 ## Description
 This website is developed as a student project by CSUS Sacramento students for managing patient and appointment data in a medical office. It supports functionalities to assist multiple clients and medical staff efficiently.
 
-## Built With
+## Built Tools
 - **Frontend:** React, TypeScript, MUI Library, Node.js
 - **Backend:** Supabase
 - **Version Control:** GitHub
@@ -28,3 +28,10 @@ To set up this project locally, follow the steps below:
     ```bash
     npm start
     ```
+
+## Team Members
+- [Patrick Tran](https://github.com/patricktran2911)
+- [Lupe Herrera](https://github.com/lupeherreracsus)
+- [Cristian Magallom](https://github.com/Cris4110)
+- [Daniel Torres](https://github.com/Dtorres1121)
+- [Mandee Jauregui](https://github.com/mandeejauregui)
