@@ -84,8 +84,10 @@ export function AppointmentTable() {
         borderRadius: "32px",
         height: "100%",
         width: "100%",
-        whiteSpace: "nowrap",
+        maxHeight: '850px',
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
+        whiteSpace: 'nowrap',
+        transition: "width 0.3s ease-in-out",
     };
 
     const useTableContainerStyle: SxProps<Theme> = {
@@ -94,7 +96,7 @@ export function AppointmentTable() {
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
-        height: "100%",
+        maxHeight: '750px',
     };
 
     const addButtonStyle: SxProps<Theme> = {
@@ -106,6 +108,7 @@ export function AppointmentTable() {
         },
         alignSelf: "center",
         justifySelf: "center",
+        cursor: 'pointer'
     };
 
     return (

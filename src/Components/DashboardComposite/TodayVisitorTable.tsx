@@ -73,7 +73,9 @@ export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisi
         borderRadius: "32px",
         height: "100%",
         width: "100%",
+        maxHeight: '850px',
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
+        whiteSpace: 'nowrap',
         transition: "width 0.3s ease-in-out",
     };
 
@@ -83,7 +85,7 @@ export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisi
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
-        maxHeight: '750px'
+        maxHeight: '750px',
     };
 
     const useTableHeadStyle: SxProps<Theme> = {
@@ -101,6 +103,7 @@ export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisi
         },
         alignSelf: "center",
         justifySelf: "center",
+        cursor: 'pointer'
     };
 
     return (

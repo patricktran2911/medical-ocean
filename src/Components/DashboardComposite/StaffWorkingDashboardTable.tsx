@@ -75,8 +75,10 @@ export function StaffWorkingDashboardTable() {
         borderRadius: "32px",
         height: "100%",
         width: "100%",
-        whiteSpace: "nowrap",
+        maxHeight: '850px',
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
+        whiteSpace: 'nowrap',
+        transition: "width 0.3s ease-in-out",
     };
 
     const useTableContainerStyle: SxProps<Theme> = {
@@ -85,8 +87,8 @@ export function StaffWorkingDashboardTable() {
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
+        maxHeight: '750px',
     };
-
     return (
         <Box sx={BoxCardStyle}>
             <Stack direction={"column"} justifyContent={"right"}>
