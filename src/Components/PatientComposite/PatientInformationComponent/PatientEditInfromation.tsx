@@ -15,7 +15,9 @@ import { Appointment } from "../../../api/AppointmentAPI";
 import PatientInfoTopContent from "./PatientInfoTopComponent";
 import { PatientEmergencyInformation } from "./PatientEmergencyInformationComponent";
 import {
+    CreateEmergencyContact,
     EmergencyContact,
+    createEmergencyContact,
     updateEmergencyContact,
 } from "../../../api/EmergencyContactAPI";
 import { PatientContactInfo } from "./PatientContactInfoComponent";
@@ -25,8 +27,8 @@ import { Height, Margin } from "@mui/icons-material";
 import { useState } from "react";
 import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
 
-const modalStyle = {
-    position: "absolute",
+const modalStyle: SxProps<Theme> = {
+    position: "relative",
     top: "50%",
     left: "38%",
     transform: "translate(-50%, -50%)",
@@ -61,9 +63,10 @@ interface IPatientInfo {
 }
 
 interface emergencyPatientInfo {
-    full_Name: string;
+    f_name: string;
+    l_name: string;
     relationship: string;
-    phone_number2: string;
+    phone_number: string;
 }
 
 export function PatientEditInfromation({
@@ -73,44 +76,43 @@ export function PatientEditInfromation({
 }: PatientInformationProps) {
     let patientName = `${patient.f_name} ${patient.l_name}`;
     let patientAge = `${patient.age}`;
-    let name = `${emergencyContact?.f_name ?? ""} ${emergencyContact?.l_name ?? ""}`;
     const [patientInfo, setPatientInfo] = useState<IPatientInfo>({
         f_name: patient.f_name,
         l_name: patient.l_name,
         email: patient.email ?? "",
         phone_number: patient.phone_number,
         address: patient.address,
-        //relationship: emergencyContact?.relationship ?? "",
-        //phone_number2: emergencyContact?.phone_number ?? "",
     });
-
-    const full_name = name.split(" ");
-    const emergencyf_nameTest = full_name[0];
-    const emergencyl_nameTest2 = full_name[1];
 
     const [emergencypatientInfo, emergencysetPatientInfo] =
         useState<emergencyPatientInfo>({
-            full_Name: name,
+            f_name: emergencyContact?.f_name ?? "",
+            l_name: emergencyContact?.l_name ?? "",
             relationship: emergencyContact?.relationship ?? "",
-            phone_number2: emergencyContact?.phone_number ?? "",
+            phone_number: emergencyContact?.phone_number ?? "",
         });
     const [openModal, setOpenModal] = useState(false);
     const handleModalOpen = () => {
         setOpenModal(true);
     };
 
-    function onChangeTextField(e: React.ChangeEvent<HTMLInputElement>) {
-        setPatientInfo({
-            ...patientInfo,
-            [e.target.name]: e.target.value,
-        });
+    function onChangeEmergencyContactTextField(
+        e: React.ChangeEvent<HTMLInputElement>
+    ) {
         emergencysetPatientInfo({
             ...emergencypatientInfo,
             [e.target.name]: e.target.value,
         });
     }
 
-    const handleModalClose = async () => {
+    function onChangeTextField(e: React.ChangeEvent<HTMLInputElement>) {
+        setPatientInfo({
+            ...patientInfo,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    async function didTapSave() {
         await updatePatient(
             patient.id,
             patientInfo.f_name,
@@ -119,15 +121,30 @@ export function PatientEditInfromation({
             patientInfo.phone_number,
             patientInfo.address ?? ""
         );
-        await updateEmergencyContact(
-            emergencyContact?.id ?? "",
-            emergencypatientInfo.full_Name,
-            emergencypatientInfo.relationship ?? "",
-            emergencypatientInfo.phone_number2 ?? ""
-        );
+        if (emergencyContact) {
+            await updateEmergencyContact(
+                emergencyContact?.id ?? "",
+                emergencypatientInfo.f_name,
+                emergencypatientInfo.l_name,
+                emergencypatientInfo.relationship ?? "",
+                emergencypatientInfo.phone_number ?? ""
+            );
+        } else {
+            const emergencyContact: CreateEmergencyContact = {
+                f_name: emergencypatientInfo.f_name,
+                l_name: emergencypatientInfo.l_name,
+                relationship: emergencypatientInfo.relationship,
+                phone_number: emergencypatientInfo.phone_number,
+            };
+            await createEmergencyContact(emergencyContact, patient.id);
+        }
 
         setOpenModal(false);
-    };
+    }
+
+    function didTapClose() {
+        setOpenModal(false);
+    }
 
     return (
         <Box sx={sx ?? ContainerStyle}>
@@ -136,7 +153,6 @@ export function PatientEditInfromation({
             </ReusableButton>
             <Modal
                 open={openModal}
-                onClose={handleModalClose}
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
             >
@@ -217,7 +233,7 @@ export function PatientEditInfromation({
                             </Stack>
                         </Grid>
 
-                        <Grid item xs={9}>
+                        <Grid item xs={12}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
                                     Emergency Contact Informaion:
@@ -225,54 +241,80 @@ export function PatientEditInfromation({
                             </Stack>
                         </Grid>
 
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
-                                    Full Name:
+                                    First Name:
                                 </Typography>
                                 <TextField
-                                    name="full_Name"
-                                    defaultValue={`${name}`}
-                                    onChange={onChangeTextField}
+                                    name="f_name"
+                                    defaultValue={`${emergencyContact?.f_name ?? ""}`}
+                                    onChange={onChangeEmergencyContactTextField}
                                 />
                             </Stack>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
+                            <Stack direction={"column"} spacing={"5px"}>
+                                <Typography variant="h6" component="h2">
+                                    Last Name:
+                                </Typography>
+                                <TextField
+                                    name="l_name"
+                                    defaultValue={`${emergencyContact?.l_name ?? ""}`}
+                                    onChange={onChangeEmergencyContactTextField}
+                                />
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={3}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
                                     Phone Number:
                                 </Typography>
                                 <TextField
-                                    name="relationship"
-                                    defaultValue={`${emergencyContact?.relationship ?? ""}`}
-                                    onChange={onChangeTextField}
+                                    name="phone_number"
+                                    defaultValue={`${emergencyContact?.phone_number ?? ""}`}
+                                    onChange={onChangeEmergencyContactTextField}
                                 />
                             </Stack>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                             <Stack direction={"column"} spacing={"5px"}>
                                 <Typography variant="h6" component="h2">
                                     Relationship Status:
                                 </Typography>
                                 <TextField
-                                    name="phone_number2"
-                                    defaultValue={`${emergencyContact?.phone_number ?? ""}`}
-                                    onChange={onChangeTextField}
+                                    name="relationship"
+                                    defaultValue={`${emergencyContact?.relationship ?? ""}`}
+                                    onChange={onChangeEmergencyContactTextField}
                                 />
                             </Stack>
                         </Grid>
+                        <Grid item xs={12}>
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"space-between"}
+                                sx={{ width: "100%" }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    color="error"
+                                    onClick={didTapClose}
+                                >
+                                    Close
+                                </Button>
+
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={async () => {
+                                        await didTapSave();
+                                    }}
+                                >
+                                    Save
+                                </Button>
+                            </Stack>
+                        </Grid>
                     </Grid>
-                    <Button
-                        variant="contained"
-                        onClick={handleModalClose}
-                        sx={{
-                            position: "absolute",
-                            top: "94%",
-                            left: "45%",
-                        }}
-                    >
-                        Close
-                    </Button>
                 </Box>
             </Modal>
         </Box>

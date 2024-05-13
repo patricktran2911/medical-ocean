@@ -1,9 +1,22 @@
-import React from "react";
-import { Box, Grid, SxProps, Theme } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+    Box,
+    Grid,
+    Modal,
+    Stack,
+    SxProps,
+    TextField,
+    Theme,
+    Typography,
+} from "@mui/material";
 import { AppointmentTable } from "./AppointmentDashboardTable";
 import { TodayVisitorTable } from "./TodayVisitorTable";
 import { StaffWorkingDashboardTable } from "./StaffWorkingDashboardTable";
-import MonthlyNewPatientsChart from "./MonthlyNewPatientChart";
+import { getAllLabReports, updateLabReport } from "../../api/LabReportAPI";
+import { getAllPatientVisitor } from "../../api/PatientVisitorAPI";
+import { getAllPatients } from "../../api/PatientAPI";
+import AutoComplete from "../ReusableComponent/CustomAutoComplete";
+import { CreateNewVisitorModal } from "./CreateNewVisitorModal";
 
 const ContainerSxProps: SxProps<Theme> = {
     display: "flex",
@@ -16,9 +29,16 @@ const ContainerSxProps: SxProps<Theme> = {
 };
 
 function Dashboard() {
-    console.log(new Date());
+    const [showCreateVisitor, setShowCreateVisitor] = useState(false);
     return (
         <Box sx={ContainerSxProps}>
+            <Modal open={showCreateVisitor}>
+                <CreateNewVisitorModal
+                    onFinished={() => {
+                        setShowCreateVisitor(false);
+                    }}
+                />
+            </Modal>
             <Grid
                 container
                 sx={{
@@ -32,13 +52,18 @@ function Dashboard() {
                 }}
                 spacing={"100px"}
             >
-                <Grid item xs={3}>
-                    <TodayVisitorTable />
+                <Grid item xs={4}>
+                    <TodayVisitorTable
+                        onTapCreateIcon={() => {
+                            setShowCreateVisitor(true);
+                        }}
+                        triggerUpdate = {showCreateVisitor}
+                    />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <AppointmentTable />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <StaffWorkingDashboardTable />
                 </Grid>
             </Grid>

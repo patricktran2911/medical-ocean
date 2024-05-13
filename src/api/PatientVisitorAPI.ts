@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, formatDate } from "date-fns";
 import { supabase } from "./supabaseInterface";
 
 export interface PatientVisitor {
@@ -53,9 +53,17 @@ export async function createPatientVisitor(
     patient_id: string,
     type: VisitorType
 ) {
-    await supabase.from("patient_visitors").insert({
+    const currentTime = new Date()
+    const { data, error} = await supabase
+    .from("patient_visitors")
+    .insert([{
         patient_id: patient_id,
-        time: new Date(),
+        time: currentTime,
         type: type,
-    });
+    }]);
+
+    if (error) {
+        console.error(error);
+    }
+    return data;
 }

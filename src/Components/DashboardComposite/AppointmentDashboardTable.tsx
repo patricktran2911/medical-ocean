@@ -19,6 +19,8 @@ import {
     DatabaseRTTable,
     subscribeRTTable,
 } from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
+import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
+import { useNavigate } from "react-router-dom";
 
 interface AppointmentUI {
     appointment: Appointment;
@@ -26,6 +28,7 @@ interface AppointmentUI {
 }
 
 export function AppointmentTable() {
+    const navigate = useNavigate();
     const [appointments, setAppointments] = useState<AppointmentUI[]>([]);
 
     useEffect(() => {
@@ -81,7 +84,6 @@ export function AppointmentTable() {
         borderRadius: "32px",
         height: "100%",
         width: "100%",
-        minWidth: "350px",
         whiteSpace: "nowrap",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     };
@@ -92,7 +94,18 @@ export function AppointmentTable() {
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
-        height: "300px",
+        height: "100%",
+    };
+
+    const addButtonStyle: SxProps<Theme> = {
+        color: "white",
+        width: "30px",
+        height: "30px",
+        ":hover": {
+            color: "cyan",
+        },
+        alignSelf: "center",
+        justifySelf: "center",
     };
 
     return (
@@ -119,14 +132,25 @@ export function AppointmentTable() {
                         Appointments:
                     </Typography>
 
-                    <Typography
-                        variant="h5"
-                        fontWeight={"bold"}
-                        color={"white"}
-                        padding={"16px"}
-                    >
-                        {appointments.length}
-                    </Typography>
+                    <Stack direction={"row"} spacing={"4px"}>
+                        <AddCircleOutline
+                            onClick={() => {
+                                navigate(
+                                    "/appointment/create-new-appointment/"
+                                );
+                            }}
+                            sx={addButtonStyle}
+                        />
+
+                        <Typography
+                            variant="h5"
+                            fontWeight={"bold"}
+                            color={"white"}
+                            padding={"16px"}
+                        >
+                            {appointments.length}
+                        </Typography>
+                    </Stack>
                 </Stack>
                 <TableContainer sx={useTableContainerStyle}>
                     <Table>
@@ -158,7 +182,7 @@ export function AppointmentTable() {
                         <TableBody>
                             {appointments.map((data) => {
                                 return (
-                                    <TableRow>
+                                    <TableRow key={data.appointment.id}>
                                         <TableCell
                                             sx={(theme) => ({
                                                 borderRight:

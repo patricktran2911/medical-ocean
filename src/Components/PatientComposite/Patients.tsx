@@ -46,8 +46,9 @@ interface PatientInfo {
 export function Patients() {
     const { patientId } = useParams();
     const [patientInfos, setPatientInfos] = useState<PatientInfo[]>([]);
-    const [selectedPatientInfo, setSelectedPatientInfo] =
-        useState<PatientInfo | null>(null);
+    const [selectedPatientInfo, setSelectedPatientInfo] = useState<
+        PatientInfo | undefined
+    >(undefined);
 
     useEffect(() => {
         fetchPatients(patientId);
@@ -66,7 +67,6 @@ export function Patients() {
 
     async function fetchPatients(patientId?: string) {
         const patients = await getAllPatients();
-        console.log(patients.map((patient) => patient.id).join(", "));
         const promises = patients.map(async (patient) => {
             const appointments = await getPatientAppointments(patient.id);
             const emergencyContact = await getEmergencyContact(patient.id);
@@ -91,9 +91,11 @@ export function Patients() {
         });
         const patientInfos = await Promise.all(promises);
         setPatientInfos(patientInfos);
-        if (patientId) {
+        if (patientId || selectedPatientInfo) {
             const patient = patientInfos.find(
-                (p) => p.patient.id === patientId
+                (p) =>
+                    p.patient.id === patientId ||
+                    p.patient.id === selectedPatientInfo?.patient.id
             );
             if (patient) {
                 setSelectedPatientInfo(patient);
@@ -128,7 +130,7 @@ export function Patients() {
                 />
 
                 <DefaultMotion
-                    key={selectedPatientInfo?.patient.id}
+                    key={selectedPatientInfo?.patient.id ?? undefined}
                     style={{
                         display: "flex",
                         justifyContent: "center",

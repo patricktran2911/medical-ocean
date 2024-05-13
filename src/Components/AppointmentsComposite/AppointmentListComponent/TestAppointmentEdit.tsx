@@ -24,8 +24,8 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import React from "react";
 import AutoComplete from "../../ReusableComponent/CustomAutoComplete";
 
-const modalStyle = {
-    position: "absolute",
+const modalStyle: SxProps<Theme> = {
+    position: "relative",
     top: "50%",
     left: "38%",
     transform: "translate(-50%, -50%)",
@@ -34,7 +34,7 @@ const modalStyle = {
     boxShadow: 24,
     p: 4,
     width: "40%",
-    height: 750,
+    height: 150,
 };
 
 const ContainerStyle: SxProps<Theme> = {
@@ -83,7 +83,6 @@ export function TestAppointmentEdit({
     async function fetchRequireData() {
         const staffs = await getAllStaff();
         const doctors = staffs.filter((staff) => staff.title === "Doctor");
-        console.log(staffs, doctors);
         setIData({
             ...IData,
             allDoctor: doctors,
@@ -91,7 +90,6 @@ export function TestAppointmentEdit({
     }
 
     function handleDateChange(value: dayjs.Dayjs) {
-        console.log(value.toDate());
         setIData({
             ...IData,
             date: value.toDate(),
@@ -99,7 +97,6 @@ export function TestAppointmentEdit({
     }
 
     function handleSelectDoctor(doctor: Staff) {
-        const doctorName = `${doctor.f_name} ${doctor.l_name}`;
         setIData({
             ...IData,
             selectingDoctor: doctor,
@@ -107,7 +104,7 @@ export function TestAppointmentEdit({
         });
     }
 
-    const handleModalClose = async () => {
+    async function didTapSave() {
         await updateAppointmentTime(
             patient.id,
             IData.date,
@@ -115,7 +112,12 @@ export function TestAppointmentEdit({
         );
 
         setOpenModal(false);
-    };
+    }
+
+    function didTapClose() {
+        setOpenModal(false);
+    }
+
     return (
         <Box sx={ContainerStyle}>
             <ReusableButton color="info" onClick={handleModalOpen}>
@@ -123,66 +125,75 @@ export function TestAppointmentEdit({
             </ReusableButton>
             <Modal
                 open={openModal}
-                onClose={handleModalClose}
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
             >
                 <Box sx={modalStyle}>
-                    <Grid item xs={4}>
-                        <Stack direction={"column"} spacing={"5px"}>
-                            <Typography variant="h6" component="h2">
-                                Current Appointment Data and time
+                    <Grid
+                        container
+                        rowSpacing={"20px"}
+                        sx={{ width: "100%", height: "100%" }}
+                    >
+                        <Grid item xs={5}>
+                            <Typography variant="h5">
+                                Change Appointment Date
                             </Typography>
-                            <Typography
-                                variant={"h6"}
-                            >{`Time: ${format(appointment.time, "HH:mm aa")} • Date: ${format(appointment.time, "MMMM do, yyyy")}`}</Typography>
-                        </Stack>
-                    </Grid>
-
-                    <Grid item xs={3}>
-                        <Typography variant="h5">
-                            Change Appointment Date
-                        </Typography>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimePicker
-                                name="date"
-                                defaultValue={dayjs(appointment.time)}
-                                onAccept={(e) => {
-                                    if (e) {
-                                        handleDateChange(e);
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    name="date"
+                                    defaultValue={dayjs(appointment.time)}
+                                    onAccept={(e) => {
+                                        if (e) {
+                                            handleDateChange(e);
+                                        }
+                                    }}
+                                />
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography variant="h5">Change Doctor</Typography>
+                            <AutoComplete
+                                selected={{
+                                    id: staff.id,
+                                    text: `${staff.f_name} ${staff.l_name}`,
+                                }}
+                                options={IData.allDoctor.map((value) => ({
+                                    id: value.id,
+                                    text: `${value.f_name} ${value.l_name}`,
+                                }))}
+                                onSelected={(option) => {
+                                    const selectedDoctors =
+                                        IData.allDoctor.filter(
+                                            (doctor) => doctor.id === option.id
+                                        );
+                                    if (selectedDoctors.length > 0) {
+                                        handleSelectDoctor(selectedDoctors[0]);
                                     }
                                 }}
                             />
-                        </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"space-between"}
+                            >
+                                <Button
+                                    variant="contained"
+                                    onClick={didTapClose}
+                                    color="error"
+                                >
+                                    Close
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    onClick={didTapSave}
+                                    color="primary"
+                                >
+                                    Save
+                                </Button>
+                            </Stack>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={3}>
-                        <Typography variant="h5">Change Doctor</Typography>
-                        <AutoComplete
-                            options={IData.allDoctor.map((value) => ({
-                                id: value.id,
-                                text: `${value.f_name} ${value.l_name}`,
-                            }))}
-                            onSelected={(option) => {
-                                const selectedDoctors = IData.allDoctor.filter(
-                                    (doctor) => doctor.id === option.id
-                                );
-                                if (selectedDoctors.length > 0) {
-                                    handleSelectDoctor(selectedDoctors[0]);
-                                }
-                            }}
-                        />
-                    </Grid>
-                    <Button
-                        variant="contained"
-                        onClick={handleModalClose}
-                        sx={{
-                            position: "absolute",
-                            top: "94%",
-                            left: "45%",
-                        }}
-                    >
-                        Close
-                    </Button>
                 </Box>
             </Modal>
         </Box>

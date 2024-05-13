@@ -21,3 +21,12 @@ export async function getAllLabReports(
     }
     return data;
 }
+
+export async function updateLabReport(patient_id: string, file_url: URL) {
+    const { data, error } = await supabase
+        .from("lab_reports")
+        .update({
+            file_url: file_url,
+        })
+        .eq("patient_id", patient_id);
+}

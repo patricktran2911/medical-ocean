@@ -144,7 +144,10 @@ export default function AppointmentList({
                 </TableHead>
                 <TableBody>
                     {filteredRows.map((row) => (
-                        <TableRow sx={TableStyleSx.bodyRow}>
+                        <TableRow
+                            key={row.appointment.id}
+                            sx={TableStyleSx.bodyRow}
+                        >
                             <TableCell
                                 id={`${row.patient.f_name} ${row.patient.l_name}`}
                                 sx={TableStyleSx.bodyCell}

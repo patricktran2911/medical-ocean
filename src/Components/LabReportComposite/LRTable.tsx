@@ -56,6 +56,7 @@ export default function LRTable({ labReports, sx }: ILRTable) {
                             <TableCell sx={TableStyleSx.bodyCell}>
                                 <Link
                                     href={lab.file_url.toString()}
+                                    target="_blank"
                                     sx={(theme) => ({
                                         fontSize: theme.typography.h6,
                                     })}

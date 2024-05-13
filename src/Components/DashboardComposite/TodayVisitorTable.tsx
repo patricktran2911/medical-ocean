@@ -23,32 +23,39 @@ import {
     DatabaseRTTable,
     subscribeRTTable,
 } from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
+import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 
 interface VisitorTableVM {
     visitor: PatientVisitor;
     patient: Patient;
 }
 
-export function TodayVisitorTable() {
+interface ITodayVisitorTable {
+    onTapCreateIcon?: () => void;
+    triggerUpdate?: boolean
+}
+
+export function TodayVisitorTable({ onTapCreateIcon, triggerUpdate }: ITodayVisitorTable) {
     const [visitors, setVisitors] = useState<VisitorTableVM[]>([]);
 
     useEffect(() => {
-        fetchRequireData();
-    }, []);
+        fetchRequireData()
+    }, [triggerUpdate]);
 
     subscribeRTTable(
         DatabaseRTTable.patientVisitor,
-        handleInsert,
-        handleInsert,
-        handleInsert
+        undefined,
+        onUpdatingFromServer,
+        onUpdatingFromServer
     );
 
-    async function handleInsert(_: any) {
+    function onUpdatingFromServer() {
         fetchRequireData();
     }
 
     async function fetchRequireData() {
         var today = new Date();
+        console.log('fetch')
 
         const visitors = await getPatientVisitors(today);
         const promises = visitors.map(async (visitor) => {
@@ -69,7 +76,6 @@ export function TodayVisitorTable() {
         width: "100%",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
         transition: "width 0.3s ease-in-out",
-        minWidth: "350px",
         whiteSpace: "nowrap",
     };
 
@@ -79,13 +85,24 @@ export function TodayVisitorTable() {
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
-        height: "300px",
+        height: "100%",
     };
 
     const useTableHeadStyle: SxProps<Theme> = {
         top: "0",
         position: "sticky",
         backgroundColor: "white",
+    };
+
+    const addButtonStyle: SxProps<Theme> = {
+        color: "white",
+        width: "30px",
+        height: "30px",
+        ":hover": {
+            color: "cyan",
+        },
+        alignSelf: "center",
+        justifySelf: "center",
     };
 
     return (
@@ -112,14 +129,21 @@ export function TodayVisitorTable() {
                         {visitors.length >= 0 ? "Visitor:" : "Visitors:"}
                     </Typography>
 
-                    <Typography
-                        variant="h5"
-                        fontWeight={"bold"}
-                        color={"white"}
-                        padding={"16px"}
-                    >
-                        {visitors.length}
-                    </Typography>
+                    <Stack direction={"row"} spacing={"4px"}>
+                        <AddCircleOutline
+                            onClick={onTapCreateIcon}
+                            sx={addButtonStyle}
+                        />
+
+                        <Typography
+                            variant="h5"
+                            fontWeight={"bold"}
+                            color={"white"}
+                            padding={"16px"}
+                        >
+                            {visitors.length}
+                        </Typography>
+                    </Stack>
                 </Stack>
                 <TableContainer sx={useTableContainerStyle}>
                     <Table>
@@ -163,7 +187,7 @@ export function TodayVisitorTable() {
                         <TableBody>
                             {visitors.map((visitor) => {
                                 return (
-                                    <TableRow>
+                                    <TableRow key={visitor.visitor.id}>
                                         <TableCell
                                             sx={{
                                                 borderRight:

@@ -21,6 +21,7 @@ import { PatientEditInfromation } from "./PatientEditInfromation";
 import { useNavigate } from "react-router-dom";
 import { ReusableButton } from "../../ReusableComponent/ButtonStyle";
 import { useEffect, useState } from "react";
+import { subscribeRTTable } from "../../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
 interface PatientInformationProps {
     patient: Patient;

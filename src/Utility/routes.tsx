@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "../Components/DashboardComposite/Dashboard";
 import Appointments from "../Components/AppointmentsComposite/AllAppointment";
 import { Patients } from "../Components/PatientComposite/Patients";
-import TeamMember from "../Components/Team_Member";
 import Login from "../Components/LoginComponent/Login";
 import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormComponents/AddNewPatient";
 import Staffs from "../Components/Staffs";
@@ -16,7 +15,6 @@ export const MainRoutes = () => (
         <Route path="appointment">
             <Route path="*" element={<AppointmentRoutes />} />
         </Route>
-        <Route path="team-members" element={<TeamMember />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="patients">
             <Route path="*" element={<PatientRoutes />} />

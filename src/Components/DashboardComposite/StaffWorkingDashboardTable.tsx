@@ -1,5 +1,6 @@
 import {
     Box,
+    Button,
     Stack,
     SxProps,
     Table,
@@ -23,6 +24,7 @@ import {
     DatabaseRTTable,
     subscribeRTTable,
 } from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
+import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 
 interface vm {
     listOfStaffWorking: StaffWorkingInterface[];
@@ -73,7 +75,6 @@ export function StaffWorkingDashboardTable() {
         borderRadius: "32px",
         height: "100%",
         width: "100%",
-        minWidth: "350px",
         whiteSpace: "nowrap",
         WebkitBoxShadow: "-1px 5px 10px 1px #000000",
     };
@@ -84,7 +85,6 @@ export function StaffWorkingDashboardTable() {
         overflowY: "auto",
         overflowX: "auto",
         scrollbarWidth: "none",
-        height: "300px",
     };
 
     return (
@@ -166,7 +166,7 @@ export function StaffWorkingDashboardTable() {
                                 const staffName = `${staffWorking.info.f_name} ${staffWorking.info.l_name}`;
 
                                 return (
-                                    <TableRow>
+                                    <TableRow key={staffWorking.info.id}>
                                         <TableCell
                                             key={staffName}
                                             sx={{

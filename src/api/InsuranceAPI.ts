@@ -25,13 +25,12 @@ export async function getInsurance(
         .from("insurance")
         .select(`*`)
         .eq("patient_id", patient_id)
-        .single();
 
     if (error) {
         return undefined;
     }
 
-    return data ?? undefined;
+    return data.length > 1 ? data[0] : undefined;
 }
 export async function createInsurance(
     insurance: CreateInsurance,

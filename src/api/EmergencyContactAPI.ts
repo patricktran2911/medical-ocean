@@ -21,14 +21,8 @@ export async function getEmergencyContact(
 ): Promise<EmergencyContact[]> {
     const { data, error } = await supabase
         .from("emergency_contact")
-        .select(
-            `
-        *
-    `
-        )
+        .select("*")
         .eq("patient_id", patient_id);
-
-    if (error) throw new Error(error.message);
 
     return data ?? [];
 }
@@ -50,26 +44,21 @@ export async function createEmergencyContact(
         .select(`*`)
         .single();
 
-    if (error) throw new Error(error.message);
-
     return data;
 }
 
 export async function updateEmergencyContact(
     emergencyContactId: string,
-    full_Name: string,
+    f_name: string,
+    l_name: string,
     relationship: string,
     phone_number: string
 ) {
-    const full_name = full_Name.split(" ");
-    const emergencyf_name = full_name[0];
-    const emergencyl_name = full_name[1];
-
     const { data, error } = await supabase
         .from("emergency_contact")
         .update({
-            f_name: emergencyf_name,
-            l_name: emergencyl_name,
+            f_name: f_name,
+            l_name: l_name,
             relationship: relationship,
             phone_number: phone_number,
         })

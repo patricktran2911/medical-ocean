@@ -14,7 +14,11 @@ interface IAutocomplete {
     options: IOption[];
     onSelected?: (option: IOption) => void;
 }
-export default function AutoComplete({ options, onSelected }: IAutocomplete) {
+export default function AutoComplete({
+    options,
+    selected,
+    onSelected,
+}: IAutocomplete) {
     const [IData, setIData] = useState<IAutocomplete>({
         filtered: [],
         options: options,
@@ -69,7 +73,6 @@ export default function AutoComplete({ options, onSelected }: IAutocomplete) {
             })}
         >
             <TextField
-                variant="standard"
                 onChange={handleTextChange}
                 sx={{ width: "100%" }}
                 value={textValue}
@@ -94,6 +97,7 @@ export default function AutoComplete({ options, onSelected }: IAutocomplete) {
                 >
                     {IData.filtered.map((value) => (
                         <ListItem
+                            key={value.id}
                             id={value.id}
                             sx={{
                                 width: "100%",
