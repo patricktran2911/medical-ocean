@@ -18,7 +18,7 @@ To set up this project locally, follow the steps below:
     ```bash
     node -v
     ```
-
+    <img width=350px height=350px src="https://img.freepik.com/premium-vector/doctor-profile-with-medical-service-icon_617655-48.jpg"/>
 2. Clone the repository from GitHub:
     ```bash
     git clone [https://github.com/patricktran2911/medical-ocean.git]
