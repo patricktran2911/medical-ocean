@@ -37,7 +37,7 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 			const filePath = `${staffID}.${fileExt}`;
 
 			const imageURL = await uploadProfileImage(staffID, filePath, file);
-
+			console.log(imageURL?.toString());
 			setImageUrl(
 				imageURL?.toString() ??
 					"https://img.freepik.com/premium-vector/doctor-profile-with-medical-service-icon_617655-48.jpg"

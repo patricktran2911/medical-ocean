@@ -85,10 +85,10 @@ export async function uploadProfileImage(
 		return undefined;
 	}
 
-	await updateStaff(staffId, {
-		profile_image_url: filePath,
-	});
 	const fileURL = await getProfileImageURL(filePath);
+	await updateStaff(staffId, {
+		profile_image_url: fileURL?.toString(),
+	});
 	return fileURL;
 }
 
