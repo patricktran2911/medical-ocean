@@ -7,6 +7,7 @@ import {
 	getStaffWithId,
 	uploadProfileImage,
 } from "../../api/StaffAPI";
+import { Circle } from "@mui/icons-material";
 
 interface IProfileImageUpload {
 	staffID: string;
@@ -59,6 +60,11 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 				width: "150px",
 				height: "150px",
 				position: "relative",
+				borderRadius: "50%",
+				":hover": {
+					border: "solid",
+					borderColor: "blue",
+				},
 			}}>
 			<label htmlFor="upload-button">
 				{uploading ? (
@@ -95,7 +101,8 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 					opacity: "0",
 					":hover": {
 						color: "blue",
-						backgroundColor: "gray",
+						fontWeight: "bold",
+						bgcolor: "lightgray",
 						opacity: "0.7",
 					},
 				}}>
