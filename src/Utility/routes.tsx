@@ -1,14 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "../Components/DashboardComposite/Dashboard";
-import Appointments from "../Components/AppointmentsComposite/AllAppointment";
 import { Patients } from "../Components/PatientComposite/Patients";
 import Login from "../Components/LoginComponent/Login";
 import { AddingNewPatient } from "../Components/PatientComposite/NewPatientFormComponents/AddNewPatient";
-import Staffs from "../Components/Staffs";
 import AllAppointments from "../Components/AppointmentsComposite/AllAppointment";
 import LabReport from "../Components/LabReportComposite/LabReport";
 import CreateNewAppointment from "../Components/AppointmentsComposite/CreateNewAppointmentComponents/CreateNewAppointment";
+import { StaffPage } from "../Components/StaffComposite/StaffPage";
 export const MainRoutes = () => (
     <Routes>
         <Route path="login" element={<Login />} />
@@ -19,7 +18,7 @@ export const MainRoutes = () => (
         <Route path="patients">
             <Route path="*" element={<PatientRoutes />} />
         </Route>
-        <Route path="staffs" element={<Staffs />} />
+        <Route path="staffs" element={<StaffPage />} />
     </Routes>
 );
 
