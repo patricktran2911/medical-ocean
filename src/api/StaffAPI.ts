@@ -86,6 +86,8 @@ export async function uploadProfileImage(
 	}
 
 	const fileURL = await getProfileImageURL(filePath);
+	console.log(fileURL?.toString());
+
 	await updateStaff(staffId, {
 		profile_image_url: fileURL?.toString(),
 	});

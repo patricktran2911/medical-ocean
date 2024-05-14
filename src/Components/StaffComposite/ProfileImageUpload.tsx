@@ -2,7 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, CircularProgress, Avatar, Box } from "@mui/material";
 import { supabase } from "../../api/supabaseInterface";
-import { getProfileImageURL, uploadProfileImage } from "../../api/StaffAPI";
+import {
+	getProfileImageURL,
+	getStaffWithId,
+	uploadProfileImage,
+} from "../../api/StaffAPI";
 
 interface IProfileImageUpload {
 	staffID: string;
@@ -17,9 +21,9 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 	}, []);
 
 	async function fetchProfileImage() {
-		const url = await getProfileImageURL(staffID);
+		const staff = await getStaffWithId(staffID);
 		setImageUrl(
-			url?.toString() ??
+			staff.profile_image_url ??
 				"https://img.freepik.com/premium-vector/doctor-profile-with-medical-service-icon_617655-48.jpg"
 		);
 	}

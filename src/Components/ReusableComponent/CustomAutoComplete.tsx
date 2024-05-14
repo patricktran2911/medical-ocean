@@ -26,13 +26,16 @@ export default function AutoComplete({
 	const [textValue, setTextValue] = useState("");
 
 	useEffect(() => {
+		setTextValue(selected?.text ?? "");
+	}, []);
+
+	useEffect(() => {
 		setIData({
 			...IData,
 			options: options,
 			selected: selected,
 		});
-		setTextValue(selected?.text ?? "");
-	}, [options, selected]);
+	}, [options]);
 
 	function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const value = e.target.value;
