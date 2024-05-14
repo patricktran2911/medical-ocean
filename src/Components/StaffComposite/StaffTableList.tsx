@@ -17,6 +17,10 @@ import {
 import fuzzysearch from "fuzzysearch-ts";
 import { TableStyleSx } from "../ReusableComponent/TableStyle";
 import { mergeSx } from "merge-sx";
+import {
+	DatabaseRTTable,
+	subscribeRTTable,
+} from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
 interface IStaffTableList {
 	onSelect?: (staff: Staff) => void;
@@ -35,13 +39,20 @@ export function StaffTableList({ onSelect, sx }: IStaffTableList) {
 		fetchRequireData();
 	}, []);
 
+	subscribeRTTable(
+		DatabaseRTTable.staff,
+		fetchRequireData,
+		fetchRequireData,
+		fetchRequireData
+	);
+
 	async function fetchRequireData() {
 		const staffs = await getAllStaff();
 		const sortedStaff = staffs.sort((a, b) =>
 			a.f_name > b.f_name ? 1 : -1
 		);
-		setStaff(staffs);
-		setFilteredStaffs(staffs);
+		setStaff(sortedStaff);
+		setFilteredStaffs(sortedStaff);
 	}
 
 	return (

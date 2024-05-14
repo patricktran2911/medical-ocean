@@ -4,8 +4,12 @@ import { PatientInformation } from "../PatientComposite/PatientInformationCompon
 import { PatientTable } from "../PatientComposite/PatientTable";
 import { StaffTableList } from "./StaffTableList";
 import { useState } from "react";
-import { Staff } from "../../api/StaffAPI";
+import { Staff, getStaffWithId } from "../../api/StaffAPI";
 import { StaffInformation } from "./StaffInformation";
+import {
+	DatabaseRTTable,
+	subscribeRTTable,
+} from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
 const BoxStyle: SxProps<Theme> = {
 	display: "flex",
@@ -30,6 +34,20 @@ export function StaffPage() {
 	const [selectedStaff, setSelectedStaff] = useState<Staff | undefined>(
 		undefined
 	);
+
+	subscribeRTTable(
+		DatabaseRTTable.staff,
+		refreshSelectedStaff,
+		refreshSelectedStaff,
+		refreshSelectedStaff
+	);
+
+	async function refreshSelectedStaff() {
+		if (selectedStaff) {
+			const staff = await getStaffWithId(selectedStaff.id);
+			setSelectedStaff(staff);
+		}
+	}
 
 	return (
 		<Box sx={BoxStyle}>
