@@ -39,7 +39,7 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 
 			const file = event.target.files[0];
 			const fileExt = file.name.split(".").pop();
-			const filePath = `${staffID}.${fileExt}`;
+			const filePath = `${Math.random()}_${staffID}.${fileExt}`;
 
 			const imageURL = await uploadProfileImage(staffID, filePath, file);
 			console.log(imageURL?.toString());
@@ -80,7 +80,7 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 			<input
 				id="upload-button"
 				type="file"
-				accept="image/*"
+				accept=".jpg"
 				style={{ display: "none" }}
 				onChange={uploadImage}
 			/>

@@ -77,9 +77,7 @@ export async function uploadProfileImage(
 ): Promise<URL | undefined> {
 	const { data, error } = await supabase.storage
 		.from("profile_images")
-		.upload(filePath, file, {
-			upsert: true,
-		});
+		.upload(filePath, file);
 	if (error) {
 		console.log(error);
 		return undefined;
