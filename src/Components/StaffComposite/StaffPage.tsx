@@ -54,7 +54,7 @@ export function StaffPage() {
 						alignItems: "center",
 						width: "98%",
 						height: "98%",
-						minWidth: "1250px",
+						minWidth: "1150px",
 					}}>
 					{selectedStaff && (
 						<StaffInformation staff={selectedStaff} />

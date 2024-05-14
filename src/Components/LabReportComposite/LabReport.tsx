@@ -37,8 +37,7 @@ export default function LabReport() {
 	});
 
 	useEffect(() => {
-		console.log(patientId);
-		fetchRequireData(patientId);
+		fetchRequireData();
 	}, [patientId]);
 
 	subscribeRTTable(
@@ -48,7 +47,7 @@ export default function LabReport() {
 		fetchRequireData
 	);
 
-	async function fetchRequireData(patientId?: string) {
+	async function fetchRequireData() {
 		if (patientId) {
 			const result = await getPatient(patientId);
 			const insurance = await getInsurance(patientId);
@@ -57,7 +56,7 @@ export default function LabReport() {
 			setPatientInfo({
 				patient: result,
 				emergencyContact:
-					emergencyContact.length > 1
+					emergencyContact.length > 0
 						? emergencyContact[0]
 						: undefined,
 				insurance: insurance ?? undefined,
