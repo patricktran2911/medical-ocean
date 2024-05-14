@@ -8,6 +8,10 @@ import {
 	uploadProfileImage,
 } from "../../api/StaffAPI";
 import { Circle } from "@mui/icons-material";
+import {
+	DatabaseRTTable,
+	subscribeRTTable,
+} from "../../api/RealTimeDatabaseSubscribe/RTDatabaseTable";
 
 interface IProfileImageUpload {
 	staffID: string;
@@ -20,6 +24,13 @@ export function ProfileImageUpload({ staffID }: IProfileImageUpload) {
 	useEffect(() => {
 		fetchProfileImage();
 	}, []);
+
+	subscribeRTTable(
+		DatabaseRTTable.staff,
+		fetchProfileImage,
+		fetchProfileImage,
+		fetchProfileImage
+	);
 
 	async function fetchProfileImage() {
 		const staff = await getStaffWithId(staffID);
