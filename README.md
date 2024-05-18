@@ -12,6 +12,13 @@ This website is developed as a student project by CSUS Sacramento students for m
 
 To set up this project locally, follow the steps below:
 
+1. Installing Git:
+   - Download and install Git from [here](https://git-scm.com/downloads)
+    - Verify the installation by running the following command in the terminal:
+    ```bash
+    git -v
+    ```
+
 1. Installing Nodejs:
     - Download and install Nodejs from [here](https://nodejs.org/en/)
     - Verify the installation by running the following command in the terminal:
