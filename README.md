@@ -38,6 +38,6 @@ To set up this project locally, follow the steps below:
 ## Team Members
 - [Patrick Tran](https://github.com/patricktran2911)
 - [Lupe Herrera](https://github.com/lupeherreracsus)
-- [Cristian Magallom](https://github.com/Cris4110)
+- [Cristian Magallon](https://github.com/Cris4110)
 - [Daniel Torres](https://github.com/Dtorres1121)
 - [Mandee Jauregui](https://github.com/mandeejauregui)
